@@ -1,0 +1,278 @@
+#!/usr/bin/python2.7
+import numpy as np
+import signal
+import rospy
+import cv2
+from dynamic_reconfigure.client import Client
+from collections import deque, defaultdict
+from sensor_msgs.msg import CompressedImage
+
+import detect
+import enhancement as e
+import preprocess as p
+from Frame import Frame
+from constant import Logger
+from enhancement import shadegrey, finlaynorm, iace, chromanorm, hybrid_clahe, showWMaps, novel_color_correct
+from detect import show_superpixels, superpixel_slic
+from preprocess import norm_illum_color
+from vision.utils.ros_util import create_ros_options, get_config
+from vision.srv import DetectorResponse, Detector
+from vision.msg import DetectedObject, CameraInfo
+from config import Config
+from core import rosimg2cv, writeCompressed, get_channels
+
+
+MAX_QUEUE_SIZE = 20
+
+
+class VisionPipeline(object):
+    """ Vision processing pipeling for raw image stream """
+
+    def __init__(self, argv):
+        # Initialization
+        signal.signal(signal.SIGINT, self.handle_SIGINT)
+        self.config = Config('vision_pipeline')
+        self.vision_config = get_config('pipelineConfig.yaml')
+        self.objects = {k: self.vision_config[k]['tracking'] for k in self.vision_config.keys()}
+        # Command-line options
+        self.options = self.init_cmd_options(self.config.name, argv)
+        self.logger = Logger(self.options.verbose)
+        self.logger.options(self.options)
+        # Data
+        self.data = {'depth': None, 'prev_frame': None, 'config': self.vision_config}
+        self.bot_imgs = deque(maxlen=MAX_QUEUE_SIZE)
+        self.front_imgs = deque(maxlen=MAX_QUEUE_SIZE)
+
+        # Camera information
+        self.camera_info = CameraInfo()
+        self.camera_client = self.init_camera_client()
+
+        # Publishers
+        self.image_stats = rospy.Publisher('/vision/image_stats', CameraInfo, queue_size=10)
+        if self.options.debug:
+            self.preprocessed = {'bot': rospy.Publisher('/vision/bot/preprocessed/compressed',
+                                                        CompressedImage, queue_size=10),
+                                 'front': rospy.Publisher('/vision/front/preprocessed/compressed',
+                                                          CompressedImage, queue_size=10)}
+            self.enhanced = {'bot': rospy.Publisher('/vision/bot/enhanced/compressed',
+                                                    CompressedImage, queue_size=10),
+                             'front': rospy.Publisher('/vision/front/enhanced/compressed',
+                                                      CompressedImage, queue_size=10)}
+            self.channels = {'bot': rospy.Publisher('/vision/bot/channels/compressed',
+                                                    CompressedImage, queue_size=10),
+                             'front': rospy.Publisher('/vision/front/channels/compressed',
+                                                      CompressedImage, queue_size=10)}
+            self.segmented = {'bot': rospy.Publisher('/vision/bot/segmented/compressed',
+                                                     CompressedImage, queue_size=10),
+                              'front': rospy.Publisher('/vision/front/segmented/compressed',
+                                                       CompressedImage, queue_size=10)}
+        # Subscribers
+        rospy.Subscriber(self.config.topics['bottomcam'][0],
+                         self.config.topics['bottomcam'][1], self.bottomcam_cb)
+        rospy.Subscriber(self.config.topics['frontcam'][0],
+                         self.config.topics['frontcam'][1], self.frontcam_cb)
+        rospy.Subscriber(self.config.topics['depth'][0],
+                         self.config.topics['depth'][1], self.depth_cb)
+
+        # Services
+        self.detector_server = rospy.Service('/vision/detector', Detector, self.detector_cb)
+
+        self.debug = defaultdict(dict)
+        self.detected = defaultdict(dict)
+        self.wait_for_sensors()
+
+    def wait_for_sensors(self):
+        """ Wait for sensors to be populated before running pipeline """
+        if not self.options.debug:
+            self.logger.wait("sensors")
+            while not self.data['depth']:
+                rospy.sleep(rospy.Duration(1.0))
+            self.logger.success("sensors populated")
+
+    def start_tracking(self, obj_id):
+        if obj_id in self.objects:
+            self.objects[obj_id] = True
+
+    def init_detected_object(self, name):
+        detected_object = DetectedObject()
+        detected_object.name = name
+        return detected_object
+
+    def init_camera_client(self):
+        try:
+            camera_client = {'bot': Client(self.config.reconf_nodes['bot_camera'], timeout=1,
+                                           config_callback=self.bot_camera_reconf_cb),
+                             'front': Client(self.config.reconf_nodes['front_camera'], timeout=1,
+                                             config_callback=self.front_camera_reconf_cb)}
+            return camera_client
+        except Exception as e:
+            self.logger.fail(str(e))
+            return None
+
+    def publish_object_info(self, img, info, obj_id, camera):
+        """ Publishes debug image and info for tracked object """
+        if obj_id not in self.detected:
+            self.detected[obj_id]['front'] = rospy.Publisher('/vision/front/detected/{}'.format(obj_id),
+                                                             DetectedObject, queue_size=10)
+            self.detected[obj_id]['bot'] = rospy.Publisher('/vision/bot/detected/{}'.format(obj_id),
+                                                           DetectedObject, queue_size=10)
+        if obj_id not in self.debug:
+            self.debug[obj_id]['bot'] = rospy.Publisher('/vision/bot/debug/{}/compressed'.format(obj_id),
+                                                        CompressedImage, queue_size=10)
+            self.debug[obj_id]['front'] = rospy.Publisher('/vision/front/debug/{}/compressed'.format(obj_id),
+                                                          CompressedImage, queue_size=10)
+        self.detected[obj_id][camera].publish(info)
+        self.debug[obj_id][camera].publish(img)
+
+    def init_cmd_options(self, name, argv):
+        parser, args = create_ros_options(name, argv)
+        parser.add_option("-v", "--verbose", dest="verbose", default=False,
+                          action="store_true",
+                          help="prints log message")
+        parser.add_option("-d", "--debug", dest="debug", default=False,
+                          action="store_true",
+                          help="running without vehicle")
+        parser.add_option("-t", "--target", dest="target", default=None,
+                          help="set initial object to be tracked")
+        parser.add_option("-c", "--config", dest="config", default=None,
+                          help="config filename used")
+        parser.add_option("-m", "--mode", dest="mode", default=None,
+                          help="preset environment which vehicle is operating i.e night")
+        options = parser.parse_args(args)[0]
+        # Options processing
+        if options.target:
+            self.start_tracking(options.target)
+        if options.config:
+            self.vision_config = get_config(options.config)
+        if options.mode:
+            if options.mode == 'night':
+                self.vision_config = get_config('pipelineConfigNight.yaml')
+        return options
+
+    ''' Image processing '''
+
+    def preprocess(self, img):
+        preprocessed = norm_illum_color(img, self.vision_config['generic']['gamma'])
+        return preprocessed
+
+    def enhance(self, img):
+        return shadegrey(img)
+
+    def get_cvimg(self, rawimg):
+        rawimg = rosimg2cv(rawimg)
+        cvimg = cv2.resize(rawimg, self.config.processed_img_size)
+        return cvimg
+
+    def process_cvimg(self, cvimg, camera):
+        """ Preprocess and enhance image before detection """
+        preprocessed = self.preprocess(cvimg)
+        enhanced = self.enhance(preprocessed)
+        current_frame = self.bot_imgs[-1] if camera is 'bot' else self.front_imgs[-1]
+        for obj_id, is_tracking in self.objects.items():
+            if is_tracking:
+                detector = getattr(detect, obj_id)
+                debug_img, infos = detector(enhanced, self.data)
+                if infos:
+                    current_frame.add_object(infos[0])
+                    self.publish_object_info(writeCompressed(debug_img),
+                                             current_frame.get_object(obj_id), obj_id, camera)
+
+        # Publishes processed image
+        if self.options.debug:
+            self.preprocessed[camera].publish(writeCompressed(preprocessed))
+            self.enhanced[camera].publish(writeCompressed(enhanced))
+            self.channels[camera].publish(writeCompressed(get_channels(enhanced)))
+            # self.segmented[camera].publish(writeCompressed(show_superpixels(
+            #                                           enhanced, superpixel_slic(enhanced, compactness=0.1))))
+
+    ''' Dynamic reconfigure '''
+
+    def update_image_stats(self, img, camera):
+        mean_v = detect.mean_value(img)
+        '''
+        if camera is 'bot':
+            if mean_v < 5:
+                self.update_shutter(4000, camera)
+            elif mean_v > 250:
+                self.update_shutter(10, camera)
+            setattr(self.camera_info, '{}_mean_v'.format(camera), detect.mean_value(img))
+        '''
+        self.image_stats.publish(self.camera_info)
+
+    def update_white_balance(self, bu, rv, camera='bot'):
+        """ Update white balance of camera """
+        setattr(self.camera_info, '{}_bu'.format(camera), bu)
+        setattr(self.camera_info, '{}_rv'.format(camera), rv)
+        if self.camera_client:
+            self.camera_client[camera].update_configuration({'white_balance_BU': bu, 'white_balance_RV': rv})
+
+    def update_shutter(self, shutter_val, camera='bot'):
+        """ Update shutter value of camera """
+        setattr(self.camera_info, '{}_shutter'.format(camera), shutter_val)
+        if self.camera_client:
+            self.camera_client[camera].update_configuration({'shutter': shutter_val})
+
+    def update_objects(self, req):
+        for obj_id in self.objects.keys():
+            is_tracking = getattr(req, obj_id)
+            self.objects[obj_id] = is_tracking
+            if not is_tracking and obj_id in self.debug:
+                self.debug[obj_id]['bot'].unregister()
+                self.debug[obj_id]['front'].unregister()
+                self.detected[obj_id]['bot'].unregister()
+                self.detected[obj_id]['front'].unregister()
+                del self.debug[obj_id]
+                del self.detected[obj_id]
+
+    def bot_camera_reconf_cb(self, config):
+        setattr(self.camera_info, 'bot_shutter', config['shutter'])
+        setattr(self.camera_info, 'bot_bu', config['white_balance_BU'])
+        setattr(self.camera_info, 'bot_rv', config['white_balance_RV'])
+
+    def front_camera_reconf_cb(self, config):
+        setattr(self.camera_info, 'front_shutter', config['shutter'])
+        setattr(self.camera_info, 'front_bu', config['white_balance_BU'])
+        setattr(self.camera_info, 'front_rv', config['white_balance_RV'])
+
+    ''' Callbacks '''
+
+    def handle_SIGINT(self, signal, frame):
+        rospy.signal_shutdown("Terminated by user")
+
+    def depth_cb(self, data):
+        self.data['depth'] = data.data
+
+    def bottomcam_cb(self, rosimg):
+        cvimg = self.get_cvimg(rosimg)
+        self.bot_imgs.append(Frame(cvimg))
+        self.update_image_stats(cvimg, 'bot')
+        self.process_cvimg(cvimg, 'bot')
+
+    def frontcam_cb(self, rosimg):
+        cvimg = self.get_cvimg(rosimg)
+        self.front_imgs.append(Frame(cvimg))
+        self.update_image_stats(cvimg, 'front')
+        self.process_cvimg(cvimg, 'front')
+
+    def detector_cb(self, req):
+        try:
+            self.update_objects(req)
+            return DetectorResponse(True)
+        except Exception as e:
+            self.logger.logfail(str(e))
+            return DetectorResponse(False)
+
+if __name__ == '__main__':
+    import sys
+    rospy.init_node('vision_pipeline')
+    rospy.loginfo('Starting vision pipeline')
+    VisionPipeline(sys.argv)
+    rospy.spin()
+    '''
+    path = '/home/batumon/Desktop/figs/robosub16_buoy_hazy'
+    raw = cv2.imread('{}.png'.format(path))
+    processed = e.dark_channel(raw)
+    cv2.imshow('p', processed)
+    cv2.waitKey(0)
+    cv2.imwrite('{}_redchannel.png'.format(path), processed)
+    '''
