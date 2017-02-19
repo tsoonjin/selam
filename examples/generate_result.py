@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-""" Generates result for validation from a dummy detector """
+""" Generates detection result in csv from a dummy detector """
 import json
 import random
 from selam.utils import img, io
