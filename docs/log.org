@@ -1,0 +1,46 @@
+* Feb: Week 3: *13-19*
+** Smarter image annotation [[file:~/github/selam/examples/meanshift_annotator.py][Source]]
+Convert to LAB colorspace and apply meanshift on initialized bounding box. Camshift does not 
+work as well as changing the scale seems to include too much of the background. Shade of grey is applied
+to normalize the color
+** Data Preprocessing <2017-02-18 Sat>
+*** [[https://stackoverflow.com/questions/21370087/how-to-preprocess-data-for-machine-learning][How to preprocess data for machine learning]]
+*** [[https://www.datacamp.com/community/tutorials/the-importance-of-preprocessing-in-data-science-and-the-machine-learning-pipeline-i-centering-scaling-and-k-nearest-neighbours#gs.eE=F3Pk][Importance of preprocessing]]
+**** Feature scaling / normalization to certain range  is important to ensure equal weights and unit-independent
+**** Feature standardization centering the data around 0 and scale according to standard deviation
+**** Should not be done blindly if there is significance in the scale of the data
+**** Samplewise normalization can be important as it imitates how our human vision works
+**** Using small image size for training helps
+**** Can explore using gradient information for training also
+*** [[http://ufldl.stanford.edu/wiki/index.php/Data_Preprocessing][Stanford Unsupervised Feature Learning Preprocessing]] 
+*** [[http://mccormickml.com/2014/06/03/deep-learning-tutorial-pca-and-whitening/][More about whitening]]
+**** First decorrelate data by projecting to eigenvectors
+**** Normalize to have same variance by dividing by square root of eigenvalues
+*** TODO [[http://ufldl.stanford.edu/wiki/index.php/Whitening][Whitening]] aims to remove redundancy since adjacent pixels are similar with large epsilon
+*** Avoid example-wise normalization if color image since distribution not stationary for different channels
+*** Rescale pixel values to [0 - 1] for numerical stability and work with higher precision
+*** Be careful when choosing size of image as too large will increase the weight for the DNN 
+*** [[https://stats.stackexchange.com/questions/117427/what-is-the-difference-between-zca-whitening-and-pca-whitening][Choosing between PCA or ZCA whitening]] 
+*** *AVOID* PCA Whitening when image too big since covariance matrix will be too big 
+*** [[http://eric-yuan.me/ufldl-exercise-pca-image/][Implementation of PCA Whitening 
+*** ]][[https://gist.github.com/JBed/5673060beac474805e38][Implementation of 1 / f whitening for large images]] 
+*** [[https://stackoverflow.com/questions/31528800/how-to-implement-zca-whitening-python][UFDL Solution for Whitening]]
+**** Must zero mean example wise for whitening 
+** Data Augmentation <2017-02-18 Sat>
+*** [[https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html][Keras Data Augmentation to work with little data]]  
+*** TODO [[http://www.kdnuggets.com/2016/03/must-know-tips-deep-learning-part-1.html][Fancy PCA]]
+**** alters intensity of RGB levels used in AlexNet to capture invariance of object to illumination [[https://stats.stackexchange.com/questions/251892/implementing-fancy-pca-augmentaiton][Possible implementation]]
+*** Color jittering (chaning some values of saturation and value within a range)
+*** TODO Cropping smaller patches of images while keeping aspect-ratios
+** Limit with scikit-learning <2017-02-18 Sat>
+*** [[http://scikit-learn.org/stable/modules/scaling_strategies.html][Scaling strategies]]
+*** Need to do incremental learning to prevent out of memory error
+*** [[http://scikit-learn.org/stable/developers/performance.html][Improve performance by profiling your code. Scikit-learn]] 
+** Batch-Normalization <2017-02-19 Sun>
+*** [[https://www.youtube.com/watch?v=gYpoJMlgyXA&feature=youtu.be&list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC&t=3078][CS231n: Batch-Normalization]] 
+Basically, zero mean unit variance on mini-batch to ensure unit gaussian. Extra step where each feature allowed to, shift by certain constant.
+Network can essentially recover its original values where \[x' = normalized(x) * y + k\] where $y can be the standard deviation and 
+$k can be the mean. It will recover its identity
+*** [[https://www.quora.com/How-should-input-data-be-normalized-when-training-an-SVM-with-an-online-algorithm][Batch-Normalization for online SVM]]
+Buffer the examples as they come in to get an estimate of the mean and standard deviation 
+*** [[https://arxiv.org/pdf/1305.6646.pdf][Normalizing Online Algorithms]]
