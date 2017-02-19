@@ -4,9 +4,12 @@ import os
 import numpy as np
 
 
-def get_jpgs(dirpath, skip=0):
+# Input / Output
+
+def get_jpgs(dirpath, skip=0, resize=None):
     """ Returns all images located in given dirpath
         skip : number of frames skip to reduce computation time
+        resize: scale factor for resize
 
     """
     filenames = os.listdir(dirpath)
@@ -18,6 +21,9 @@ def get_jpgs(dirpath, skip=0):
               for filename in filenames]
     out = frames[0::skip] if skip > 0 else frames
     print('Read {} images from {}'.format(len(out), dirpath))
+    if resize:
+        new_size = (out[0].shape[1] / resize, out[0].shape[0] / resize)
+        return map(lambda x: cv2.resize(x, new_size), out)
     return out
 
 
@@ -27,6 +33,13 @@ def write_jpgs(dirpath, jpgs):
             filename = dirpath + str(i) + ".jpg"
             cv2.imwrite(filename, jpgs[i])
         print('Wrote {} images to {}'.format(len(jpgs), dirpath))
+
+
+# Image Formatting
+
+def cv2others(img):
+    """ Returns RGB channel image given BGR OpenCV image """
+    return cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 
 def draw_str(dst, target, s):
