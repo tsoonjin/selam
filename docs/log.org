@@ -43,4 +43,32 @@ Network can essentially recover its original values where \[x' = normalized(x) *
 $k can be the mean. It will recover its identity
 *** [[https://www.quora.com/How-should-input-data-be-normalized-when-training-an-SVM-with-an-online-algorithm][Batch-Normalization for online SVM]]
 Buffer the examples as they come in to get an estimate of the mean and standard deviation 
-*** [[https://arxiv.org/pdf/1305.6646.pdf][Normalizing Online Algorithms]]
+*** [[https://arxiv.org/pdf/1305.6646.pdf][Normalizing Online Algorithms]] 
+** Object Proposals <2017-02-19 Sun>
+*** [[https://github.com/dculibrk/edge_boxes_with_python][Python Wrapper Edge Boxes]]
+*** [[https://github.com/pdollar/toolbox][Piotr Dollar Matlab Toolbox]] 
+* Feb: Week 4: *20-26*
+** Object Proposals <2017-02-20 Mon>
+*** Edge Box does not seemed to work well because of lack of clear edges
+*** [[https://github.com/torrvision/Objectness][BING: Objectness Estimation at 300 FPS]] [[http://mmcheng.net/mftp/Papers/ObjectnessBING.pdf][Original paper]]
+**** Resized image into multiple quantized size (8 x 8)
+**** Calculate norm gradient and its binarized form (Binarized Norm Gradient, BING)
+**** Insensitive to scaling, translation and aspect ration because whole image is used
+*** [[https://github.com/AlpacaDB/selectivesearch][Selective Search]]  [[http://koen.me/research/pub/vandesande-iccv2011.pdf][Original paper]]
+**** Rely on segmentation and it is very slow.
+**** Hierarchical search using size and appearance features in all scales. Then greedily combine them
+**** Uses Hue color space as most insensitive to shadow and shading as base for segmentation
+**** HOG: OpponentSIFT and RGB-SIFT 
+** Hard Negative Mining <2017-02-20 Mon>
+*** Generate a bunch of random patches that does not overlap with bounding box as negative examples
+*** Using false positive as negative examples in subsequent training
+** Determine an appropriate tracking methodoloy <2017-02-20 Mon>
+*** [[https://pdfs.semanticscholar.org/e2b0/daf08b5fb360c15894b05b354b66ddb2a27f.pdf][Compare PSO and Particle Filter]] PSO is slower and cannot handle local occlusions as well 
+** How to compare different classification algorithms ? <2017-02-20 Mon>
+*** [[https://www.researchgate.net/publication/237145103_Data_analysis_advances_in_marine_science_for_fisheries_management_Supervised_classification_applications][Comparing algorithm using paired-t test]]
+*** [[http://jmlr.org/papers/volume15/delgado14a/delgado14a.pdf][Comparison of different classifiers]]
+Random Forest requires more data but not much tuning of parameters compared to SVM. SVM works well with 
+small datasets with few outliers. 
+** Measuring quality of an image
+*** [[http://neelj.com/projects/lbiq/576_iqa.pdf][Learning a blind measure of image quality]]
+Just need to ensure that the raw image is not too terrible
