@@ -141,3 +141,31 @@ def get_roi(img, top_left, bot_right):
     y = [max(top_left[1], 0), min(bot_right[1], img.shape[0] - 1)]
     x = [max(top_left[0], 0), min(bot_right[0], img.shape[1] - 1)]
     return img[y[0]:y[1], x[0]:x[1]]
+
+
+def hist_info(chan):  # For iace
+    done_low = True
+    hist, bins = np.histogram(chan, 256, [0, 256])
+    cdf = hist.cumsum()
+    low = int(chan.size * 0.04)
+    hi = int(chan.size * 0.96)
+    for h, i in enumerate(cdf):
+        if i > low and done_low:
+            low_thresh = h
+            done_low = False
+        if i > hi:
+            high_thresh = h
+            break
+    return (low_thresh, high_thresh)
+
+
+def blockiter(img, func, blksize=(30, 30)):
+    mask = np.zeros(img.shape[:2], dtype=np.float32)
+    y, x = img.shape[:2]
+    for i in xrange(0, y, 5):
+        dy = blksize[1] - 1 if i + blksize[1] < y else y - i - 1
+        for j in xrange(0, x, 5):
+            dx = blksize[0] - 1 if j + blksize[0] < x else x - j - 1
+            view = img[i:i + dy, j:j + dx]
+            mask[i:i + dy, j:j + dx] = func(view)
+    return mask

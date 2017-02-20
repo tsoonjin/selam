@@ -1,9 +1,10 @@
 #!/usr/bin/python2.7
 import cv2
 import numpy as np
-import core
 import preprocess
 import scipy
+
+from selam.utils.img import blockiter, hist_info
 
 
 def novel_color_correct(img):
@@ -17,7 +18,7 @@ def novel_color_correct(img):
 def meanFilter(chan):
     y, x = chan.shape[:2]
     chan = cv2.resize(chan, (x / 2, y / 2))
-    return np.uint8(core.blockiter(chan, np.mean, blksize=(10, 10)))
+    return np.uint8(blockiter(chan, np.mean, blksize=(10, 10)))
 
 
 def log_chroma(img):
@@ -53,7 +54,7 @@ def enhance_tan(img):
 
 def util_iace(channel):
     min__val, max__val, min_loc, max_loc = cv2.minMaxLoc(channel)
-    min_val, max_val = core.hist_info(channel)
+    min_val, max_val = hist_info(channel)
     channel_ = (channel - min__val) / (max__val - min__val) * 255.0
     return channel_
 
@@ -201,9 +202,9 @@ def redchannelprior(img):
     g = np.float32(g) / 255.0
     r = np.float32(r) / 255.0
     t_bound = np.full(img.shape[:2], 1)
-    r_min = core.blockiter(1 - r, np.min) / float(1 - A[2])
-    g_min = core.blockiter(g, np.min) / float(A[1])
-    b_min = core.blockiter(b, np.min) / float(A[0])
+    r_min = blockiter(1 - r, np.min) / float(1 - A[2])
+    g_min = blockiter(g, np.min) / float(A[1])
+    b_min = blockiter(b, np.min) / float(A[0])
     tMap = t_bound - np.min([r_min, b_min, g_min], axis=0)
     tMap = cv2.GaussianBlur(tMap, (11, 11), 0)
     # return VUtil.toBGR(np.uint8(tMap*255), 'gray')
@@ -216,7 +217,7 @@ def redchannel_util(img, A, t):
     t_bound = np.full(img.shape[:2], 0.1)
     additive = [(1 - i) * i for i in A]
     J = [(i - A[x]) / np.maximum(t, t_bound) + additive[x] for x, i in enumerate(bgr)]
-    J = [np.uint8(core.z_norm(j) * 255) for j in J]
+    J = [np.uint8(z_norm(j) * 255) for j in J]
     print(np.max(J[0]))
     print(np.max(J[1]))
     print(np.max(J[2]))

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import numpy as np
 import cv2
-import core
 
 
 def DoG(img, kern1=(3, 3), kern2=(5, 5)):
