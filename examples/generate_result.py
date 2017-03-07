@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """ Generates detection result in csv from a dummy detector """
-import json
 import random
 from selam.utils import img, io
 from selam.detector import detector

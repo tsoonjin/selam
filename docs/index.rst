@@ -9,7 +9,6 @@ Contents:
    readme
    installation
    usage
-   contributing
 
 Indices and tables
 ==================

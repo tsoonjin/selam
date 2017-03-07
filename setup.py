@@ -6,9 +6,6 @@ from setuptools import setup
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
-
 requirements = [
     'Click>=6.0',
     # TODO: put package requirements here
@@ -22,7 +19,7 @@ setup(
     name='selam',
     version='0.1.0',
     description="rwater object tracking framework for Robosub",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author="Ray Tan",
     author_email='jinified@gmail.com',
     url='https://github.com/jinified/selam',
