@@ -72,3 +72,7 @@ small datasets with few outliers.
 ** Measuring quality of an image
 *** [[http://neelj.com/projects/lbiq/576_iqa.pdf][Learning a blind measure of image quality]]
 Just need to ensure that the raw image is not too terrible
+* Mar: Week 8: *6-12*
+** Setting up Python project
+*** tests, docs, setup.py (using setuptools)
+*** versioneer to link git tag to version number in setup.py

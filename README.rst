@@ -3,12 +3,6 @@ Selam
 ===============================
 
 
-.. image:: https://img.shields.io/pypi/v/selam.svg
-        :target: https://pypi.python.org/pypi/selam
-
-.. image:: https://img.shields.io/travis/jinified/selam.svg
-        :target: https://travis-ci.org/jinified/selam
-
 .. image:: https://readthedocs.org/projects/selam/badge/?version=latest
         :target: https://selam.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
