@@ -1,0 +1,106 @@
+\chapter{Object Tracking}
+
+\section{Current benchmarks result}
+
+\subsection{PAMI 15: Object Tracking Benchmark} \cite{wu2015object}
+
+\begin{enumerate}
+
+  \item \textbf{Representation Scheme}
+    \begin{enumerate}
+        \item Eigenspace basis functions \cite{black1998eigentracking}
+        \item Sparse representation \cite{zhong2012robust}
+        \item Sparse templates and outlier detection \cite{mei2011robust}
+        \item Local sensitivity histogram that captures spatial contribution of each pixels \cite{he2013visual}
+        \item Covariance descriptor \cite{tuzel2006region}
+        \item Online Structured Output SVM \cite{hare2016struck}
+    \end{enumerate}  
+
+    \item \textbf{Search Mechanism}
+        \begin{enumerate}
+            \item Particle filter with effective observation model
+            \item Distribution Fields \cite{sevilla2012distribution}
+        \end{enumerate}
+        
+    \item \textbf{Model Update: Account for appearance variation}
+        \begin{enumerate}
+            \item Online AdaBoost \cite{grabner2006real}
+        \end{enumerate}
+    
+    \item \textbf{Context \& Fusion of Trackers}
+        \begin{enumerate}
+            \item Mining auxiliary objects for verification \cite{yang2009context}
+            \item Identify distractors and supporters as random forest \cite{dinh2011context}
+            \item Choosing best trackers based on MCMC \cite{kwon2011tracking}
+            \item Fallback models to handle different situation \cite{santner2010prost}
+        \end{enumerate}
+        
+    \item \textbf{Evaluation methodology}
+        \begin{enumerate}
+            \item Precision plot: percentage of frames in which the estimated locations are within a given threshold distance of the ground-truth positions (20 pixels euclidean distance).
+            \item Success plot: intersection over union (average overlap score) with t = 0.5
+            \item AUC: Area Under Curve of success plots
+            \item TRE (Temporal robustness evaluation): average result over different initial frame
+            \item SPE (Spatial robustness evaluation): shifting or scaling grund truth bounding box
+            \item Evaluate with restart
+        \end{enumerate}
+    
+    \item \textbf{Conclusion}
+        \begin{enumerate}
+            \item STRUCK \cite{hare2016struck}
+            \item SCM \cite{zhong2012robust}
+            \item ASLA \cite{jia2012visual}
+            \item CSK \cite{henriques2012exploiting}
+            \item L1APG \cite{bao2012real}
+            \item OAB \cite{grabner2006real}
+        \end{enumerate}
+\end{enumerate}
+
+\subsection{VOT 2015} \cite{kristan2015visual}
+
+    \begin{enumerate}
+        \item \textbf{Performanc measure}
+            \begin{enumerate}
+                \item Accuracy: average overlap score
+                \item Robustness: average failure rate
+            \end{enumerate}
+        \item \textbf{Top-performing trackers}
+            \begin{enumerate}
+                \item MDNet \cite{nam2015learning}
+                \item SRDCF \cite{danelljan2015learning}
+                \item EBT \cite{zhu2015tracking}
+                \item sPST \cite{hua2015online}
+                \item LDP \cite{lukevzivc2016deformable}
+            \end{enumerate}
+    \end{enumerate}
+
+\subsection{MOT 2016} \cite{milan2016mot16}
+
+    \begin{enumerate}
+        \item \textbf{Performancre measures}
+            \begin{enumerate}
+                \item MOTA (Multiple Object Tracking Accuracy)
+                    \[MOTA = \sum_{t} \frac{FN_t + FP_t + IDSW_t}{\sum_{t} GT}\]
+                    \begin{description}
+                        \item[IDSW] Number of mismatch target
+                    \end{description}
+                \item MOTP (Multiple Object Tracking Precision) measures localization precision
+                    \[MOTP = \frac{\sum_{t,i} d_{t,i}}{\sum_t c_t}\]
+                    \begin{description}
+                        \item[$c_t$] number of matches in frame t
+                        \item[$d_{t,i}$] bounding box overlap
+                    \end{description}
+                \item Track quality measurement
+                    \begin{description}
+                        \item[Mostly Tracked] Detected 80\% of the time
+                        \item[Partially tracked] Detected 20\% of the time
+                    \end{description}
+            \end{enumerate}
+        
+        \item \textbf{Accuracy ranking}
+            \begin{enumerate}
+                \item NOMT \cite{choi2015near}
+                \item Online Strong and Weak PHT-PF \cite{sanchez2016online}
+                \item DP NMS \cite{pirsiavash2011globally}
+            \end{enumerate}
+    \end{enumerate}

@@ -18,7 +18,7 @@ Selam
      :alt: Updates
 
 
-rwater object tracking framework for Robosub
+Underwater object tracking framework for Robosub
 
 
 * Free software: MIT license

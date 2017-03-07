@@ -1,0 +1,39 @@
+\documentclass[fypca]{socreport}
+
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\graphicspath{{./figs/}}
+
+%%% Begin document
+\begin{document}
+\pagenumbering{roman}
+\title{Underwater Real-Time Object Recognition and Tracking for Autonomous Underwater Vehicle}
+\author{Tan Soon Jin}
+\projyear{2016/17}
+\projnumber{H021400}
+\advisor{Prof. Terrence Sim Mong Cheng}
+\deliverables{
+    \item Report: 1 Volume}
+
+\maketitle
+
+\include{chap0_abstract}
+
+\listoffigures
+\listoftables
+
+\include{chap1_intro}
+\include{chap2_literature}
+\include{chap3_design}
+\include{chap4_timeline}
+\include{chap5_object_tracking}
+\include{chap6_automl}
+\include{chap7_planning}
+
+\bibliographystyle{socreport}
+\bibliography{fyp}{}
+
+%%% End document
+\end{document}

@@ -60,6 +60,10 @@ target/
 
 # pyenv python configuration file
 .python-version
+
+# resources
 benchmark
 examples/dataset
 examples/output
+media
+*.pdf
