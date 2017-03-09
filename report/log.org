@@ -76,3 +76,14 @@ Just need to ensure that the raw image is not too terrible
 ** Setting up Python project
 *** tests, docs, setup.py (using setuptools)
 *** versioneer to link git tag to version number in setup.py
+** MSER object detection <2017-03-08 Wed>
+*** Works well using Saturation channel if there is distinct color
+** Encoding shape
+*** Shape descriptor often considered global descriptor which allows for only object classfication
+*** [[http://www.ijcsits.org/papers/vol3no12013/9vol3no1.pdf][Survey of Shape Descriptors]] 
+*** [[https://www.math.uci.edu/icamp/summer/research_11/park/shape_descriptors_survey_part3.pdf][Shape Descriptors Techniques]]
+** Diagnosing bias vs variance <2017-03-08 Wed>
+*** Plotting the training error and cross-validation error
+*** Bias: high training and cross-validation error
+*** Variance: low training and high cross-validation error
+
