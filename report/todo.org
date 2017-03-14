@@ -1,10 +1,11 @@
 * FYP Timeline
-** Implement rapid ground truth generation
-*** TODO interpolation of bounding box
+** DONE Implement rapid ground truth generation
+   CLOSED: [2017-03-10 Fri 12:38]
 *** DONE using detection free tracking to generate ground truth
     CLOSED: [2017-02-20 Mon 10:22]
 *** TODO using object proposal to suggest bounding box
-** Implement data augmentation
+** DONE Implement data augmentation
+   CLOSED: [2017-03-10 Fri 12:39]
 *** DONE Scale
     CLOSED: [2017-02-20 Mon 10:21]
 *** DONE Rotation
@@ -13,7 +14,8 @@
 *** DONE horizontal flipping
     CLOSED: [2017-02-20 Mon 10:22]
 *** TODO random cropping
-** Performs pre-processing before training
+** DONE Performs pre-processing before training
+   CLOSED: [2017-03-10 Fri 12:39]
   [[http://www.kdnuggets.com/2016/03/must-know-tips-deep-learning-part-1.html][KD-Nugget Augmentation]]
   [[http://machinelearningmastery.com/image-augmentation-deep-learning-keras/][Keras Augmentation]]
 *** DONE Zero-center and normalize image
@@ -27,7 +29,8 @@
 *** DONE Batch normalization if using deep learning
     CLOSED: [2017-02-20 Mon 10:22]
 *** TODO [[https://en.wikipedia.org/wiki/Color_normalization#Comprehensive_Color_Normalization][Color Normalization]]
-** Implement validation framework
+** DONE Implement validation framework
+   CLOSED: [2017-03-10 Fri 12:39]
 *** TODO Visualization of tracker's result using [[https://github.com/jinified/TBD-evaluation][TBD-Evaluation]]
 *** DONE Using MOT Devkit to validate tracker performance
 ** Implement object proposals

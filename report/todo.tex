@@ -1,0 +1,343 @@
+% Created 2017-03-10 Fri 12:32
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{batumon}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={batumon},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 24.5.1 (Org mode 9.0.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{FYP Timeline}
+\label{sec:org96a25df}
+\subsection{Implement rapid ground truth generation}
+\label{sec:orgdd1e9c7}
+\subsubsection{{\bfseries\sffamily TODO} interpolation of bounding box}
+\label{sec:orgd2ffe9c}
+\subsubsection{{\bfseries\sffamily DONE} using detection free tracking to generate ground truth}
+\label{sec:org412cdad}
+\subsubsection{{\bfseries\sffamily TODO} using object proposal to suggest bounding box}
+\label{sec:org861e916}
+\subsection{Implement data augmentation}
+\label{sec:org7180648}
+\subsubsection{{\bfseries\sffamily DONE} Scale}
+\label{sec:org2028ef1}
+\subsubsection{{\bfseries\sffamily DONE} Rotation}
+\label{sec:orgc87f01d}
+\subsubsection{{\bfseries\sffamily TODO} fancy PCA}
+\label{sec:org0137a29}
+\subsubsection{{\bfseries\sffamily DONE} horizontal flipping}
+\label{sec:org6184c84}
+\subsubsection{{\bfseries\sffamily TODO} random cropping}
+\label{sec:orge43d2af}
+\subsection{Performs pre-processing before training}
+\label{sec:org1041e48}
+\href{http://www.kdnuggets.com/2016/03/must-know-tips-deep-learning-part-1.html}{KD-Nugget Augmentation}
+\href{http://machinelearningmastery.com/image-augmentation-deep-learning-keras/}{Keras Augmentation}
+\subsubsection{{\bfseries\sffamily DONE} Zero-center and normalize image}
+\label{sec:org3844004}
+\begin{verbatim}
+X -= np.mean(X, axis = 0) # zero-center
+X /= np.std(X, axis = 0) # normalize
+\end{verbatim}
+\subsubsection{{\bfseries\sffamily DONE} \href{http://ufldl.stanford.edu/wiki/index.php/Data\_Preprocessing}{UFDL Stanford Data Preprocessing}}
+\label{sec:org043e34f}
+\subsubsection{{\bfseries\sffamily DONE} Batch normalization if using deep learning}
+\label{sec:orge203ca7}
+\subsubsection{{\bfseries\sffamily TODO} \href{https://en.wikipedia.org/wiki/Color\_normalization\#Comprehensive\_Color\_Normalization}{Color Normalization}}
+\label{sec:org6c49e15}
+\subsection{Implement validation framework}
+\label{sec:org2fa6e11}
+\subsubsection{{\bfseries\sffamily TODO} Visualization of tracker's result using \href{https://github.com/jinified/TBD-evaluation}{TBD-Evaluation}}
+\label{sec:orgf836833}
+\subsubsection{{\bfseries\sffamily DONE} Using MOT Devkit to validate tracker performance}
+\label{sec:org753701e}
+\subsection{Implement object proposals}
+\label{sec:orgcc3824a}
+\href{https://pdollar.wordpress.com/2013/12/22/generating-object-proposals/}{PDollar Objectness}
+\href{https://rodrigob.github.io/documents/2014\_bmvc\_selective\_search\_with\_supplementary\_material.pdf}{Evaluation of object proposals}
+\subsubsection{{\bfseries\sffamily TODO} Validate effectiveness of MSER}
+\label{sec:org233addc}
+\subsubsection{{\bfseries\sffamily TODO} Implement \href{https://arxiv.org/pdf/1511.04511.pdf}{BING++}}
+\label{sec:orgc5210e2}
+\subsubsection{{\bfseries\sffamily TODO} Implement \href{http://web.bii.a-star.edu.sg/\~zhangxw/files/EdgeBoxes\_ECCV2014.pdf}{EdgeBoxes}}
+\label{sec:orgb347ebb}
+\subsubsection{{\bfseries\sffamily TODO} Implement \href{https://ivi.fnwi.uva.nl/isis/publications/2013/UijlingsIJCV2013/UijlingsIJCV2013.pdf}{SelectiveSearch}}
+\label{sec:orga86954d}
+\subsubsection{{\bfseries\sffamily TODO} Implement \href{http://www.shengfenghe.com/uploads/1/5/1/3/15132160/oop\_iccv15.pdf}{OrientedObjectProposal}}
+\label{sec:org58169ba}
+\subsubsection{{\bfseries\sffamily TODO} Implement saliency-based objectness, \href{http://ivrl.epfl.ch/research/saliency/fast\_saliency}{FASA}}
+\label{sec:org6ce6ff0}
+\subsection{Implement object detection}
+\label{sec:org868c660}
+\subsubsection{HOG better at describing shape. Rectangular feature better at shading}
+\label{sec:org10d6a62}
+\subsubsection{SIFT captures local interest point and lack contrast normalization}
+\label{sec:orgb0b21b0}
+\subsubsection{CNN learned features is another popular one}
+\label{sec:org96b19d8}
+\subsubsection{\href{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.308.1785\&rep=rep1\&type=pdf}{Survey of Moment Invariant}}
+\label{sec:org126924f}
+\subsubsection{\href{http://www.indjst.org/index.php/indjst/article/viewFile/95209/70254}{Choosing moment based function}}
+\label{sec:org57604bd}
+\subsubsection{\href{https://pdfs.semanticscholar.org/5849/88271268671bb7442221a40a17ee909c04e7.pdf}{Shape based object recognition}}
+\label{sec:org62d5c69}
+\subsubsection{{\bfseries\sffamily TODO} Implement \href{https://vision.cornell.edu/se3/wp-content/uploads/2014/09/dollarBMVC09ChnFtrs\_0.pdf}{Integral Channel Feature}}
+\label{sec:org41c1b21}
+\subsubsection{{\bfseries\sffamily TODO} Implement \href{https://pdfs.semanticscholar.org/4f23/a446f1f15d0ac65e4e50232531f8eb404a7b.pdf}{Pedestrian Detection at 100 fps}}
+\label{sec:org9fe88c2}
+\subsubsection{{\bfseries\sffamily TODO} Implement \href{https://pdollar.github.io/files/papers/DollarPAMI14pyramids.pdf}{ACF}}
+\label{sec:org01d7f42}
+\subsubsection{{\bfseries\sffamily TODO} Experment with various descriptors, AKAZE, FAST, SURF}
+\label{sec:org280ab0b}
+\subsubsection{{\bfseries\sffamily TODO} Implement \href{http://vc.cs.nthu.edu.tw/home/paper/codfiles/hkchiu/201205170946/Histograms\%20of\%20Oriented\%20Gradients\%20for\%20Human\%20Detection.pdf}{HOG}}
+\label{sec:orgf435f3a}
+\subsubsection{{\bfseries\sffamily TODO} Using \href{http://people.cs.uchicago.edu/\~pff/papers/lsvm-pami.pdf}{DPM} approach}
+\label{sec:orgd45ae86}
+\subsubsection{{\bfseries\sffamily TODO} Implement local color histogram}
+\label{sec:orgbc9d890}
+\subsubsection{{\bfseries\sffamily TODO} Implement Color rectangle}
+\label{sec:org26dba10}
+\subsubsection{{\bfseries\sffamily TODO} Combine local and global features}
+\label{sec:orgf85450d}
+\subsubsection{{\bfseries\sffamily TODO} Explore weaker moment based descriptor, Zernike, Hu}
+\label{sec:org2b39308}
+\subsection{Selecting object representation scheme}
+\label{sec:orgc7a6703}
+\subsubsection{{\bfseries\sffamily TODO} \href{http://web.cs.hacettepe.edu.tr/\~pinar/courses/CMP719/lectures/representation.pdf}{Windows vs part based}}
+\label{sec:orgc6d9eb1}
+\subsubsection{{\bfseries\sffamily TODO} \href{http://eeeweba.ntu.edu.sg/computervision/Research\%20Papers/2016/Invariant\%20Multi-Scale\%20Shape\%20Descriptor\%20for\%20Object\%20Matching\%20and\%20Recognition.pdf}{Invariant Multiscale Shapre Descriptor}}
+\label{sec:orgaac59cd}
+\subsection{Implement probabilistic object tracking}
+\label{sec:org3d32657}
+\subsubsection{\href{https://arxiv.org/pdf/1603.00831.pdf}{MOT2016: Benchmark}}
+\label{sec:orgb1dbb31}
+\subsubsection{\href{https://arxiv.org/pdf/1604.00970.pdf}{Extended Object Tracking}}
+\label{sec:orgf974e2d}
+\subsubsection{\href{http://www.cv-foundation.org/openaccess/content\_cvpr\_2013/papers/Wu\_Online\_Object\_Tracking\_2013\_CVPR\_paper.pdf}{Online Object Tracking A Benchmark}}
+\label{sec:org74ab8bf}
+\subsubsection{\href{https://arxiv.org/pdf/1409.7618.pdf}{Multiple Object Tracking: Literature Review}}
+\label{sec:org28e1680}
+\subsubsection{{\bfseries\sffamily TODO} Particle Filter}
+\label{sec:org98fdc6c}
+\subsubsection{{\bfseries\sffamily TODO} Particle Swarm Optimization}
+\label{sec:org6cd06dd}
+\subsubsection{{\bfseries\sffamily TODO} Nearest-neigbour}
+\label{sec:orgcd6c2ff}
+\subsubsection{{\bfseries\sffamily TODO} Camshift}
+\label{sec:org58fa6a2}
+\subsection{Implement automatic machine learning}
+\label{sec:org6eeb702}
+\subsubsection{{\bfseries\sffamily TODO} Automatic parameter optimization}
+\label{sec:orgd9493c3}
+\subsubsection{{\bfseries\sffamily TODO} Automatic algorithm suggestion (Offline)}
+\label{sec:orgc074c48}
+\subsubsection{{\bfseries\sffamily TODO} Automatic online preprocessing}
+\label{sec:orga7ccaef}
+\subsection{Validate ensemble approach}
+\label{sec:org1a354b8}
+\subsubsection{{\bfseries\sffamily TODO} Bagging}
+\label{sec:orgd895ac3}
+\subsubsection{{\bfseries\sffamily TODO} Boosting}
+\label{sec:org544550b}
+\subsubsection{{\bfseries\sffamily TODO} Multiple-algorithm detection}
+\label{sec:org6dcec2e}
+\subsubsection{{\bfseries\sffamily TODO} Multiple-cue detections}
+\label{sec:org5003475}
+\subsection{Implement color transformation methods}
+\label{sec:org053d095}
+\subsubsection{{\bfseries\sffamily TODO} Illumination-invariant}
+\label{sec:org6c1c03a}
+\subsubsection{{\bfseries\sffamily TODO} Shadow-invariant}
+\label{sec:orgb883ba3}
+\subsection{Implement a way to add prior knowledge to tracker}
+\label{sec:org1e4bde5}
+\subsubsection{{\bfseries\sffamily TODO} Encoding visual prior using sparse representation}
+\label{sec:orgb9d248e}
+\subsubsection{{\bfseries\sffamily TODO} Geometric constraints}
+\label{sec:org7f156d8}
+\subsection{Adapt online learning approach}
+\label{sec:orgcfbe7b9}
+\subsubsection{{\bfseries\sffamily TODO} \href{http://cmp.felk.cvut.cz/\~matas/papers/kalal-pn\_learning-cvpr10.pdf}{P-N Learning}}
+\label{sec:org4abd578}
+\subsubsection{{\bfseries\sffamily TODO} \href{http://vision.ucsd.edu/\~bbabenko/data/miltrack\_cvpr09.pdf}{Multiple Instance Learning}}
+\label{sec:orgf163555}
+\subsubsection{{\bfseries\sffamily TODO} \href{http://cvgl.stanford.edu/papers/xiang\_iccv15.pdf}{Tracking by Decision Making}}
+\label{sec:org4512a70}
+\subsection{Use detection free tracking technique}
+\label{sec:orgfac0155}
+\subsubsection{{\bfseries\sffamily TODO} Correlation-filter}
+\label{sec:org7c969b1}
+\subsubsection{{\bfseries\sffamily TODO} TLD}
+\label{sec:org18835da}
+\subsubsection{{\bfseries\sffamily TODO} \href{http://www.vision.ee.ethz.ch/\~hegrabne/papers/Stalder2012DynamicObjectnessAdaptive.pdf}{Dynamic objectness for Adaptation Tracking}}
+\label{sec:orgf923708}
+\subsubsection{{\bfseries\sffamily TODO} \href{http://www.cv-foundation.org/openaccess/content\_cvpr\_2015/papers/Possegger\_In\_Defense\_of\_2015\_CVPR\_paper.pdf}{In Defense of Color based Model Free Tracking}}
+\label{sec:org1dc7896}
+\subsection{Apply domain adaptation}
+\label{sec:org50ec531}
+\subsubsection{{\bfseries\sffamily TODO} Implement efficient learning of domain invariant represantation}
+\label{sec:org15d4136}
+\subsubsection{{\bfseries\sffamily TODO} Unsupervised manifold method}
+\label{sec:org795b923}
+\subsubsection{{\bfseries\sffamily TODO} Dictionary learning: Sparse \& Low Rank Models}
+\label{sec:org3a34556}
+\subsubsection{{\bfseries\sffamily TODO} Transfer learning from DNN}
+\label{sec:org13074be}
+\subsubsection{{\bfseries\sffamily TODO} Unsupervised learning}
+\label{sec:org62107bf}
+\begin{enumerate}
+\item Autoencoders
+\label{sec:org595bff7}
+\item Sparse Coding
+\label{sec:org85cb829}
+\item Clustering
+\label{sec:org50e909a}
+\end{enumerate}
+\subsection{Improve process of training and testing tracker}
+\label{sec:orga286c24}
+\subsubsection{{\bfseries\sffamily TODO} Active Learning to suggest what kind of data to collect}
+\label{sec:orgf5e90d7}
+\subsubsection{{\bfseries\sffamily TODO} Allow for human intervention to aid in data collection}
+\label{sec:org8ba8875}
+\subsection{Experiment with Gaussian Process \& Feature Selection}
+\label{sec:org5f013b0}
+\subsection{Explore unsupervised feature learning}
+\label{sec:org63a4498}
+\subsubsection{{\bfseries\sffamily TODO} RBM}
+\label{sec:orgf020aed}
+\subsubsection{{\bfseries\sffamily TODO} Autoencoder}
+\label{sec:org0049608}
+\subsubsection{{\bfseries\sffamily TODO} CNN}
+\label{sec:orgbffbfb3}
+
+\section{Objectives}
+\label{sec:org7e68de3}
+\subsection{Robustness}
+\label{sec:org5061a75}
+\subsubsection{Different environment i.e pool, ocean, lake}
+\label{sec:orgb80577d}
+\subsubsection{Different illuminations i.e cloudy, bright, shadow}
+\label{sec:orgd48aa62}
+\subsubsection{Different viewpoint}
+\label{sec:org2191073}
+\subsection{Automation}
+\label{sec:orgd18eca5}
+\subsubsection{Hyperparamters optimization:}
+\label{sec:org8aa9cb5}
+\begin{enumerate}
+\item Preprocessing
+\label{sec:org188af79}
+\item Object Detection
+\label{sec:orgd1e02f7}
+\item Camera parameters
+\label{sec:org5b3e168}
+\end{enumerate}
+\subsubsection{Features selection}
+\label{sec:orgbc1c694}
+\subsubsection{Model Selection}
+\label{sec:orge9a6585}
+\subsection{Efficiency}
+\label{sec:orgdbc366f}
+\subsubsection{Low detection latency}
+\label{sec:org1d482a3}
+\subsubsection{Decent performance with small amount of data}
+\label{sec:orgb02590a}
+\subsubsection{Active learning approach to data collection}
+\label{sec:orgeed8acf}
+\subsection{Ease of use}
+\label{sec:orgfefffd7}
+\subsubsection{Rapid ground truth generation}
+\label{sec:org2bc8d3c}
+\subsubsection{Able to encode prior knowledge easily}
+\label{sec:orgdf25fcd}
+\subsubsection{Ease of human intervention to speedup}
+\label{sec:orga2b0745}
+
+\section{Questions}
+\label{sec:orgc296475}
+\subsection{Problem with high detection latency}
+\label{sec:orge41188b}
+\subsubsection{Preprocessing \& Object Proposals major culprit}
+\label{sec:org63a356d}
+\subsubsection{Convert code to use cython or c++}
+\label{sec:orgf3064f2}
+\subsection{Weaknesses of baseline method}
+\label{sec:orgc70d52f}
+\subsubsection{Rely too much on appearance model using geometric constraints (prior knowledge)}
+\label{sec:org74e2485}
+\subsubsection{Generate binary mask instead of confidence score}
+\label{sec:org45d58ac}
+\subsection{Slow annotation during competition to incorporate data}
+\label{sec:orgbb26ff0}
+\subsubsection{Unsupervised learning or semi-supervised learning approach}
+\label{sec:orgbb066b9}
+\subsubsection{Transfer learning with data collected from previous years}
+\label{sec:orga20dead}
+\subsection{Whether automatic machine learning is necessary ?}
+\label{sec:orgac65793}
+\subsubsection{Best method proven for a niche field instead of choosing}
+\label{sec:org58efc64}
+\subsubsection{Using non-parametric method such as Gaussian Process}
+\label{sec:org910a1b1}
+\subsection{Should group detection and tracking together ?}
+\label{sec:org7ad0ea9}
+\subsubsection{Added benefit of saving computation}
+\label{sec:org664879f}
+\subsection{Ensemble approach}
+\label{sec:orgac22fd3}
+\subsubsection{Tend to yield better accuracy but slow.}
+\label{sec:org396389a}
+\subsubsection{Consider exploring boosting}
+\label{sec:org6eb2762}
+\subsection{Should consider deep learning approach ?}
+\label{sec:org023f09a}
+\subsubsection{Access to GPU for training}
+\label{sec:orgb1722c8}
+\subsection{Recommended features for tracking ?}
+\label{sec:orgf593b5d}
+\subsubsection{HOG, SURF, Binary Feature Descriptor}
+\label{sec:org3849751}
+\subsection{Domain adaptation}
+\label{sec:orgaf1f0fb}
+\subsubsection{Using a feature that is invariant to that causes difference in source and target distribution}
+\label{sec:orgf533557}
+\subsection{Best way to encode shape of the object ?}
+\label{sec:org50aea90}
+\subsection{Image statistics that can be used to map different type of environment}
+\label{sec:org14ff2d3}
+\section{Discussion \textit{<2017-02-09 Thu>}}
+\label{sec:org5eb5c06}
+\subsection{Be careful when performing zero mean unit variance}
+\label{sec:orga6edece}
+\subsubsection{Multiply by some constant, standard deviation + constant mean}
+\label{sec:org4a65b5b}
+\subsection{Synthesize more data for training. Remember to learn from Robosub condition}
+\label{sec:org7876ab2}
+\subsubsection{Uses MMDA to break down to different subspaces to learn invariant representation}
+\label{sec:orgcc43c53}
+\subsection{Correlation filter is very fast but not robust against illuminations}
+\label{sec:org992ed90}
+\subsection{HOG not suitable for object without much edge}
+\label{sec:org8ae7980}
+\end{document}
