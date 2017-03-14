@@ -6,6 +6,11 @@ import numpy as np
 
 # Input / Output
 
+def norm(img, max=255.0):
+    """ Normalizes image to 0 - 1 assuming max to be 255 """
+    return img / max
+
+
 def get_jpgs(dirpath, skip=0, resize=None):
     """ Returns all images located in given dirpath
         skip : number of frames skip to reduce computation time
@@ -15,7 +20,7 @@ def get_jpgs(dirpath, skip=0, resize=None):
     filenames = os.listdir(dirpath)
     # Only attempt to parse and sort files that end with .jpg
     filenames = [filename for filename in filenames
-                 if filename.endswith(".jpg")]
+                 if filename.endswith(".jpg") or filename.endswith(".png")]
     filenames.sort(key=lambda x: int(x.split('.', 1)[0]))
     frames = [cv2.imread('{}/{}'.format(dirpath, filename))
               for filename in filenames]
@@ -169,3 +174,17 @@ def blockiter(img, func, blksize=(30, 30)):
             view = img[i:i + dy, j:j + dx]
             mask[i:i + dy, j:j + dx] = func(view)
     return mask
+
+
+def sort_by_chan(image, chan):
+    """ Sorts by the specified channel
+        Returns the sorted image.
+    """
+    # Reshape to 2D array
+    flat = np.reshape(image, (-1, 1, image.shape[2])).squeeze()
+    # Get specified Channel
+    channel = image[:, :, chan].flatten()
+    # Calculate sort indicies then sort by them
+    sort_indices = np.argsort(channel)
+    return flat[sort_indices]
+    # return flat[sort_indices].reshape(image.shape)

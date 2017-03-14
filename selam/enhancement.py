@@ -2,9 +2,8 @@
 import cv2
 import numpy as np
 import preprocess
-import scipy
 
-from selam.utils.img import blockiter, hist_info
+from selam.utils import img
 
 
 def novel_color_correct(img):
@@ -15,61 +14,10 @@ def novel_color_correct(img):
     return cv2.cvtColor(cv2.merge((l, np.uint8(a), np.uint8(b))), cv2.COLOR_LAB2BGR)
 
 
-def meanFilter(chan):
-    y, x = chan.shape[:2]
-    chan = cv2.resize(chan, (x / 2, y / 2))
-    return np.uint8(blockiter(chan, np.mean, blksize=(10, 10)))
-
-
-def log_chroma(img):
-    """Log-chromacity"""
-    b, g, r = cv2.split(img)
-    b = np.float32(b)
-    g = np.float32(g)
-    r = np.float32(r)
-    sum = cv2.pow(b + g + r + 0.1, 1 / 3.0)
-    b = b / sum
-    g = g / sum
-    r = r / sum
-    b = cv2.log(b)
-    g = cv2.log(g)
-    r = cv2.log(r)
-    b = cv2.normalize(b, 0, 255, cv2.NORM_MINMAX) * 255
-    g = cv2.normalize(g, 0, 255, cv2.NORM_MINMAX) * 255
-    r = cv2.normalize(r, 0, 255, cv2.NORM_MINMAX) * 255
-    out = cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
-    return out
-
-
-def enhance_tan(img):
-    """Tan's method to enhance image"""
-    gamma = preprocess.gamma_correct(img)
-    b, g, r = cv2.split(gamma)
-    b = cv2.equalizeHist(b)
-    g = cv2.equalizeHist(g)
-    r = cv2.equalizeHist(r)
-    out = cv2.merge((b, g, r))
-    return out
-
-
-def util_iace(channel):
-    min__val, max__val, min_loc, max_loc = cv2.minMaxLoc(channel)
-    min_val, max_val = hist_info(channel)
-    channel_ = (channel - min__val) / (max__val - min__val) * 255.0
-    return channel_
-
-
-def iace(img):
-    b, g, r = cv2.split(img)
-    b_ = util_iace(b)
-    g_ = util_iace(g)
-    r_ = util_iace(r)
-    out = cv2.merge((np.uint8(b_), np.uint8(g_), np.uint8(r_)))  # scale up to 255 range
-    return out
-
-
-def french_preprocess(img):
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+def frenchPreprocess(img):
+    """ Automatic Underwater Image Pre-processing
+    https://www.ensta-bretagne.fr/jaulin/paper_bazeille_CMM06.pdf
+    """
     y, cr, cb = cv2.split(cv2.cvtColor(img, cv2.COLOR_BGR2YCR_CB))
     homo = preprocess.deilluminate_single(y)
     ansio = cv2.GaussianBlur(homo, (5, 5), 1)
@@ -80,6 +28,40 @@ def french_preprocess(img):
     r = cv2.equalizeHist(r)
     out = cv2.merge((b, g, r))
     return out
+
+
+def iace(img):
+    """ Performs Image Adaptive Contrast Enhancement """
+
+    def util_iace(channel):
+        min__val, max__val, min_loc, max_loc = cv2.minMaxLoc(channel)
+        min_val, max_val = hist_info(channel)
+        channel_ = (channel - min__val) / (max__val - min__val) * 255.0
+        return channel_
+
+    b, g, r = cv2.split(img)
+    b_ = util_iace(b)
+    g_ = util_iace(g)
+    r_ = util_iace(r)
+    out = cv2.merge((np.uint8(b_), np.uint8(g_), np.uint8(r_)))  # scale up to 255 range
+    return out
+
+
+def enhanceTan(img):
+    """ Tan's method to enhance image """
+    gamma = preprocess.gamma_correct(img)
+    b, g, r = cv2.split(gamma)
+    b = cv2.equalizeHist(b)
+    g = cv2.equalizeHist(g)
+    r = cv2.equalizeHist(r)
+    out = cv2.merge((b, g, r))
+    return out
+
+
+def meanFilter(chan):
+    y, x = chan.shape[:2]
+    chan = cv2.resize(chan, (x / 2, y / 2))
+    return np.uint8(img.blockiter(chan, np.mean, blksize=(10, 10)))
 
 
 def hybrid_clahe(img):
@@ -97,46 +79,6 @@ def hybrid_clahe(img):
     rgb = cv2.merge((b, g, r))
     out = cv2.addWeighted(hls2bgr, 0.4, rgb, 0.4, 0)
     return out
-
-
-def grayworld(img):
-    b, g, r = cv2.split(img)
-    r_mean = np.mean(r)
-    g_mean = np.mean(g)
-    b_mean = np.mean(b)
-    gray = np.mean([r_mean, b_mean, g_mean])
-    gray = 0.5 + 0.2 * gray
-    b = gray / b_mean * b
-    g = gray / g_mean * g
-    r = gray / r_mean * r
-    b = b.clip(max=255)
-    g = g.clip(max=255)
-    r = r.clip(max=255)
-    return cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
-
-
-def sod_minkowski(img):
-    """Minkowski P-Norm Shades of Grey"""
-    b, g, r = cv2.split(img)
-    gray = np.mean([np.mean(b), np.mean(g), np.mean(r)])
-    gray = np.power(gray, 1 / 6.0)
-    r = gray / np.mean(r) * r
-    r = np.uint8(cv2.normalize(r, 0, 255, cv2.NORM_MINMAX) * 255)
-    g = gray / np.mean(g) * g
-    g = np.uint8(cv2.normalize(g, 0, 255, cv2.NORM_MINMAX) * 255)
-    b = gray / np.mean(b) * b
-    b = np.uint8(cv2.normalize(b, 0, 255, cv2.NORM_MINMAX) * 255)
-    return cv2.merge((b, g, r))
-
-
-def sodnorm1(img):
-    """Shades of gray norm 1"""
-    b, g, r = cv2.split(img)
-    gray = np.max([np.mean(b), np.mean(g), np.mean(r)])
-    r = cv2.normalize(gray / np.mean(r) * r, 0, 255, cv2.NORM_MINMAX) * 255
-    b = cv2.normalize(gray / np.mean(b) * b, 0, 255, cv2.NORM_MINMAX) * 255
-    g = cv2.normalize(gray / np.mean(g) * g, 0, 255, cv2.NORM_MINMAX) * 255
-    return cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
 
 
 def dark_channel(img):
@@ -202,9 +144,9 @@ def redchannelprior(img):
     g = np.float32(g) / 255.0
     r = np.float32(r) / 255.0
     t_bound = np.full(img.shape[:2], 1)
-    r_min = blockiter(1 - r, np.min) / float(1 - A[2])
-    g_min = blockiter(g, np.min) / float(A[1])
-    b_min = blockiter(b, np.min) / float(A[0])
+    r_min = img.blockiter(1 - r, np.min) / float(1 - A[2])
+    g_min = img.blockiter(g, np.min) / float(A[1])
+    b_min = img.blockiter(b, np.min) / float(A[0])
     tMap = t_bound - np.min([r_min, b_min, g_min], axis=0)
     tMap = cv2.GaussianBlur(tMap, (11, 11), 0)
     # return VUtil.toBGR(np.uint8(tMap*255), 'gray')
@@ -316,142 +258,3 @@ def getLuminance(img):
 def laplacian(img):
     return cv2.cvtColor(np.uint8(
         cv2.Laplacian(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY), cv2.CV_64F)), cv2.COLOR_GRAY2BGR)
-
-
-def chromaiter(img, cycle=2):
-    b, g, r = cv2.split(img)
-    b = np.float32(b)
-    g = np.float32(g)
-    r = np.float32(r)
-    for i in xrange(cycle):
-        b = b / (b + g + r) * 255
-        g = g / (b + g + r) * 255
-        r = r / (b + g + r) * 255
-    out = cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
-    return out
-
-
-def finlayiter(img, cycle=2):
-    b, g, r = cv2.split(img)
-    b = np.float32(b)
-    g = np.float32(g)
-    r = np.float32(r)
-    for i in xrange(cycle):
-        b = b / (b + g + r) * 255
-        g = g / (b + g + r) * 255
-        r = r / (b + g + r) * 255
-        bmean = np.mean(b)
-        gmean = np.mean(g)
-        rmean = np.mean(r)
-        b = b / bmean
-        g = g / gmean
-        r = r / rmean
-        b = cv2.normalize(b, 0, 255, cv2.NORM_MINMAX) * 255
-        g = cv2.normalize(g, 0, 255, cv2.NORM_MINMAX) * 255
-        r = cv2.normalize(r, 0, 255, cv2.NORM_MINMAX) * 255
-    out = cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
-    return out
-
-
-def finlaynorm(img, cycle=2):
-    b, g, r = cv2.split(img)
-    b = np.float32(b)
-    g = np.float32(g)
-    r = np.float32(r)
-    # Prevent division by 0
-    b = b / (b + g + r + 0.001) * 255
-    g = g / (b + g + r + 0.001) * 255
-    r = r / (b + g + r + 0.001) * 255
-    bmean = np.mean(b)
-    gmean = np.mean(g)
-    rmean = np.mean(r)
-    b = b / bmean
-    g = g / gmean
-    r = r / rmean
-    b = cv2.normalize(b, 0, 255, cv2.NORM_MINMAX) * 255
-    g = cv2.normalize(g, 0, 255, cv2.NORM_MINMAX) * 255
-    r = cv2.normalize(r, 0, 255, cv2.NORM_MINMAX) * 255
-    b = b.clip(max=255)
-    g = g.clip(max=255)
-    r = r.clip(max=255)
-    out = cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
-    return out
-
-
-def perfectnorm(img, cycle=2):
-    b, g, r = cv2.split(img)
-    b = np.float32(b)
-    g = np.float32(g)
-    r = np.float32(r)
-    b = b / (b + g + r) * 255
-    g = g / (b + g + r) * 255
-    r = r / (b + g + r) * 255
-    bmean = np.mean(b)
-    gmean = np.mean(g)
-    rmean = np.mean(r)
-    b = b / bmean
-    g = g / gmean
-    r = r / rmean
-    b = cv2.normalize(b, 0, 255, cv2.NORM_MINMAX) * 255
-    g = cv2.normalize(g, 0, 255, cv2.NORM_MINMAX) * 255
-    r = cv2.normalize(r, 0, 255, cv2.NORM_MINMAX) * 255
-    b = np.float32(b)
-    g = np.float32(g)
-    r = np.float32(r)
-    b = b / (b + g + r) * 255
-    g = g / (b + g + r) * 255
-    r = r / (b + g + r) * 255
-    out = cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
-    return out
-
-
-def chromanorm(img):
-    b, g, r = cv2.split(img)
-    b = np.float32(b)
-    g = np.float32(g)
-    r = np.float32(r)
-    b = b / (b + g + r) * 255
-    g = g / (b + g + r) * 255
-    r = r / (b + g + r) * 255
-    out = cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
-    return out
-
-
-def noniternorm(img):
-    b, g, r = cv2.split(img)
-    b = np.float32(b)
-    g = np.float32(g)
-    r = np.float32(r)
-    log_b = cv2.log(b)
-    log_g = cv2.log(g)
-    log_r = cv2.log(r)
-    b = cv2.exp(log_b - cv2.mean(log_b)[0])
-    g = cv2.exp(log_g - cv2.mean(log_g)[0])
-    r = cv2.exp(log_r - cv2.mean(log_r)[0])
-    b = cv2.normalize(b, 0, 255, cv2.NORM_MINMAX) * 255
-    g = cv2.normalize(g, 0, 255, cv2.NORM_MINMAX) * 255
-    r = cv2.normalize(r, 0, 255, cv2.NORM_MINMAX) * 255
-    b = b.clip(max=255)
-    g = g.clip(max=255)
-    r = r.clip(max=255)
-    return cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
-
-
-def shade_grey_est(grayimg):
-    size = grayimg.size
-    power = np.power(np.float32(grayimg), 6)
-    normalized_p_norm = np.power(np.sum(power) / size, 1 / 6.0)
-    return normalized_p_norm
-
-
-def shadegrey(img):
-    """Minkowski P-Norm Shades of Grey"""
-    b, g, r = cv2.split(img)
-    illumination_est = np.mean([shade_grey_est(x) for x in [b, g, r]]) + 0.0001
-    b_corrected = illumination_est / float(np.mean(b) + 0.001) * b
-    b_corrected = b_corrected.clip(max=240)
-    g_corrected = illumination_est / float(np.mean(g) + 0.001) * g
-    g_corrected = g_corrected.clip(max=240)
-    r_corrected = illumination_est / float(np.mean(r) + 0.001) * r
-    r_corrected = r_corrected.clip(max=240)
-    return cv2.merge((np.uint8(b_corrected), np.uint8(g_corrected), np.uint8(r_corrected)))

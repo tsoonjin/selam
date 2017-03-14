@@ -2,6 +2,15 @@
 import numpy as np
 import cv2
 
+from selam.utils import img
+
+
+def sRGB(im):
+    """ Converts Linear RGB to sRGB with gamma correction """
+    im = img.norm(im)
+    corrected = np.where(im > 0.0031308, 1.055 * im**(1/2.4) - 0.055, im * 12.92)
+    return np.uint8(corrected * 255)
+
 
 def DoG(img, kern1=(3, 3), kern2=(5, 5)):
     """Difference of Gaussian using diff kernel size"""
