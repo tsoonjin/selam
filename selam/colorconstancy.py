@@ -8,6 +8,88 @@ from selam.utils import img
 from scipy.ndimage import filters
 
 
+def colorRabbit(im, N=5, n=100, upperBound=1.0, rowsStep=50, colsStep=50, ksize=(9, 9), f=1/3, d=0.05):
+    """ Color Rabbit:
+    http://www.fer.unizg.hr/_download/repository/Color_Rabbit_-_Guiding_the_Distance_of_Local_Maximums_in_Illumination_Estimation.pdf
+        :param N:          Number of per pixel estimations.
+        :param n:          Number of circle checking points.
+        :param upperBound: Maximal value for a pixel channel.
+        :param rowsStep:   Rows counting step.
+        :param colsStep:   Columns counting step.
+        :param ksize:      Size of the averaging kernel to be used.
+        :param R:          Maximal radius length.
+        :param d:          Distribution control parameter.
+        :return:           normalized estimated illumination
+    """
+
+    def isInBound(x, y, xlim, ylim):
+        return x >= 0 and x < xlim and y >= 0 and y < ylim
+
+    def getNextPoint(row, col, r, j, n):
+        newRow = int(row + r * np.sin(2 * j * np.pi / n))
+        newCol = int(col + r * np.sin(2 * j * np.pi / n))
+        return [newRow, newCol]
+
+    def angularError(pixel):
+        """ Calculate angular error of a (b, g, r) vector """
+        angle = np.clip(np.sum(pixel) / (3 * (pixel[0]**2 + pixel[1]**2 + pixel[2]**2)), -1.0, 1.0)
+        return np.arccos(angle)
+
+    im = img.norm(im)
+    rows, cols = im.shape[:-1]
+    outRows = int(rows / rowsStep)
+    outCols = int(cols / colsStep)
+    resized = np.zeros((outRows, outCols, 3), dtype=np.float64)
+    dest = np.zeros((outRows, outCols, 3), dtype=np.float64)
+    R = np.sqrt(rows**2 + cols**2) * f
+    errors = []
+
+    for outRow in xrange(0, outRows):
+        for outCol in xrange(0, outCols):
+            row = outRow * rowsStep
+            col = outCol * colsStep
+            current_pt = im[row, col]
+            final_pt = np.zeros((1, 3), dtype=np.float64)
+            for ti in xrange(N):
+                p = random.uniform(0.0, 1.0)
+                p = p**d
+                r = p * R
+                new_indices = [getNextPoint(row, col, r, j, n) for j in xrange(n)]
+                new_pixels = np.array([im[y, x] for y, x in new_indices if isInBound(y, x, rows, cols)])
+                if new_pixels.size is not 0:
+                    max_pixel = np.max(new_pixels, axis=0)
+                    errors.append(max_pixel)
+
+            # Sort pixels by error
+            sorted_pixels = sorted(errors, key=lambda e: angularError(e))
+            max_pixel = sorted_pixels[int(N / 2)]
+            max_pixel[max_pixel == 0] = 1.0
+            final_pt += (current_pt / max_pixel)
+            final_pt[(final_pt > 1.0)] = 1.0
+            resized[outRow, outCol] = current_pt
+            dest[outRow, outCol] = final_pt
+            if (final_pt == 0).any():
+                final_pt = 1.0
+                resized = 0.0
+
+    # Apply average filter
+    # resized = filters.generic_filter(resized, function=np.mean, size=ksize)
+    # dest = filters.generic_filter(dest, function=np.mean, size=ksize)
+    illumination = resized / dest
+    b_est = np.mean(illumination[..., 0])
+    g_est = np.mean(illumination[..., 1])
+    r_est = np.mean(illumination[..., 2])
+
+    b = im[..., 0]
+    g = im[..., 1]
+    r = im[..., 2]
+
+    b_corrected = np.uint8(b / (b_est * np.sqrt(3)) * 255)
+    g_corrected = np.uint8(g / (g_est * np.sqrt(3)) * 255)
+    r_corrected = np.uint8(r / (r_est * np.sqrt(3)) * 255)
+    return cv2.merge((b_corrected, g_corrected, r_corrected))
+
+
 def bgr2ill(im):
     """ Converts BGR image to illumination invariant
     https://www.cs.harvard.edu/~sjg/papers/cspace.pdf
