@@ -33,7 +33,8 @@
    CLOSED: [2017-03-10 Fri 12:39]
 *** TODO Visualization of tracker's result using [[https://github.com/jinified/TBD-evaluation][TBD-Evaluation]]
 *** DONE Using MOT Devkit to validate tracker performance
-** Implement object proposals
+** DONE Implement object proposals
+   CLOSED: [2017-03-18 Sat 08:21]
    [[https://pdollar.wordpress.com/2013/12/22/generating-object-proposals/][PDollar Objectness]]
    [[https://rodrigob.github.io/documents/2014_bmvc_selective_search_with_supplementary_material.pdf][Evaluation of object proposals]]
 *** TODO Validate effectiveness of MSER 
@@ -42,7 +43,15 @@
 *** TODO Implement [[https://ivi.fnwi.uva.nl/isis/publications/2013/UijlingsIJCV2013/UijlingsIJCV2013.pdf][SelectiveSearch]]
 *** TODO Implement [[http://www.shengfenghe.com/uploads/1/5/1/3/15132160/oop_iccv15.pdf][OrientedObjectProposal]]
 *** TODO Implement saliency-based objectness, [[http://ivrl.epfl.ch/research/saliency/fast_saliency][FASA]]
-** Implement object detection  
+** DONE Implement color transformation methods
+   CLOSED: [2017-03-18 Sat 08:22]
+*** TODO Illumination-invariant
+*** TODO Shadow-invariant
+** TODO Implement automatic machine learning    
+*** TODO Automatic parameter optimization
+*** TODO Automatic algorithm suggestion (Offline)
+*** TODO Automatic online preprocessing
+** TODO Implement object detection  
 *** HOG better at describing shape. Rectangular feature better at shading
 *** SIFT captures local interest point and lack contrast normalization
 *** CNN learned features is another popular one
@@ -59,9 +68,25 @@
 *** TODO Implement Color rectangle
 *** TODO Combine local and global features
 *** TODO Explore weaker moment based descriptor, Zernike, Hu
-** Selecting object representation scheme
+*** TODO Consider if bagging or boosting may help
+** TODO Selecting object representation scheme
 *** TODO [[http://web.cs.hacettepe.edu.tr/~pinar/courses/CMP719/lectures/representation.pdf][Windows vs part based]]
 *** TODO [[http://eeeweba.ntu.edu.sg/computervision/Research%20Papers/2016/Invariant%20Multi-Scale%20Shape%20Descriptor%20for%20Object%20Matching%20and%20Recognition.pdf][Invariant Multiscale Shapre Descriptor]]
+** TODO Apply domain adaptation
+*** TODO Implement efficient learning of domain invariant represantation
+*** TODO Unsupervised manifold method
+*** TODO Dictionary learning: Sparse & Low Rank Models
+*** TODO Unsupervised learning
+**** Autoencoders
+**** Sparse Coding
+**** Clustering
+** TODO Adding prior to detection
+*** background/context prior, shape prior
+** TODO Use detection free tracking technique
+*** TODO Correlation-filter
+*** TODO TLD
+*** TODO [[http://www.vision.ee.ethz.ch/~hegrabne/papers/Stalder2012DynamicObjectnessAdaptive.pdf][Dynamic objectness for Adaptation Tracking]]
+*** TODO [[http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Possegger_In_Defense_of_2015_CVPR_paper.pdf][In Defense of Color based Model Free Tracking]]
 ** Implement probabilistic object tracking
 *** [[https://arxiv.org/pdf/1603.00831.pdf][MOT2016: Benchmark]]
 *** [[https://arxiv.org/pdf/1604.00970.pdf][Extended Object Tracking]]
@@ -71,43 +96,13 @@
 *** TODO Particle Swarm Optimization
 *** TODO Nearest-neigbour
 *** TODO Camshift
-** Implement automatic machine learning    
-*** TODO Automatic parameter optimization
-*** TODO Automatic algorithm suggestion (Offline)
-*** TODO Automatic online preprocessing
-** Validate ensemble approach 
-*** TODO Bagging
-*** TODO Boosting
-*** TODO Multiple-algorithm detection
-*** TODO Multiple-cue detections
-** Implement color transformation methods
-*** TODO Illumination-invariant
-*** TODO Shadow-invariant
-** Implement a way to add prior knowledge to tracker
-*** TODO Encoding visual prior using sparse representation
-*** TODO Geometric constraints
 ** Adapt online learning approach
 *** TODO [[http://cmp.felk.cvut.cz/~matas/papers/kalal-pn_learning-cvpr10.pdf][P-N Learning]] 
 *** TODO [[http://vision.ucsd.edu/~bbabenko/data/miltrack_cvpr09.pdf][Multiple Instance Learning]]
 *** TODO [[http://cvgl.stanford.edu/papers/xiang_iccv15.pdf][Tracking by Decision Making]]
-** Use detection free tracking technique
-*** TODO Correlation-filter
-*** TODO TLD
-*** TODO [[http://www.vision.ee.ethz.ch/~hegrabne/papers/Stalder2012DynamicObjectnessAdaptive.pdf][Dynamic objectness for Adaptation Tracking]]
-*** TODO [[http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Possegger_In_Defense_of_2015_CVPR_paper.pdf][In Defense of Color based Model Free Tracking]]
-** Apply domain adaptation
-*** TODO Implement efficient learning of domain invariant represantation
-*** TODO Unsupervised manifold method
-*** TODO Dictionary learning: Sparse & Low Rank Models
-*** TODO Transfer learning from DNN
-*** TODO Unsupervised learning
-**** Autoencoders
-**** Sparse Coding
-**** Clustering
 ** Improve process of training and testing tracker
 *** TODO Active Learning to suggest what kind of data to collect
 *** TODO Allow for human intervention to aid in data collection
-** Experiment with Gaussian Process & Feature Selection
 ** Explore unsupervised feature learning
 *** TODO RBM
 *** TODO Autoencoder

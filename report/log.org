@@ -86,4 +86,116 @@ Just need to ensure that the raw image is not too terrible
 *** Plotting the training error and cross-validation error
 *** Bias: high training and cross-validation error
 *** Variance: low training and high cross-validation error
-
+* Mar: Week 9: *12-20*
+** Color constancy implementation <2017-03-13 Mon>
+*** Still have some issue when using an image with large size (weird patches)
+*** Statistical methods work very well
+** Object Proposals
+*** Edge boxes needed to be trained on specific training classes to be more effective
+*** FASA (Fast Accurate Size Aware) saliency does not work well for underwater images
+*** MSER worked best among the object proposals algorithm
+*** Resources:
+**** [[https://www.robots.ox.ac.uk/~vgg/rg/papers/hosang_pami15.pdf][What Makes Effective Object Proposals ?]] 
+***** Grouping method (Superpixel, Graph Cut, Edge Contour). Higher accuracy
+***** Window method (score candidate window). Need to have dense window for high accuracy. Faster 
+***** Repeatability potential
+****** Generate several pertubated versions (blur, illumination, rotation, scale)
+****** BING works well for small scale changes
+****** Illumination affects those that rely on superpixel
+****** WINNER: BING and EdgeBox uses SVM for scoring and random forest for feature computation
+***** Recall potential
+****** WINNER: SelectiveSearch, EdgeBox, Geodesic
+**** [[http://vision.unipv.it/CV/materiale2016-17/4th%20Choice/0014.pdf][Comprehensive survey of object proposal methods for vehicle detection]] 
+**** [[http://rodrigob.github.io/documents/2014_bmvc_selective_search_with_supplementary_material.pdf][How Good Are Object Proposals ? ]] 
+**** [[http://homes.cs.washington.edu/~shapiro/yao-aaai.pdf][Closing the loop for object proposal]] 
+**** [[https://pdollar.wordpress.com/2013/12/22/generating-object-proposals/][PDollar thoughts on effective proposals ?]] 
+***** [[http://groups.inf.ed.ac.uk/calvin/objectness/][Objectness]] scores likelihood of containing object using multiple cues such as saliency, edge and superpixel 
+***** [[http://vision.cs.uiuc.edu/proposals/][CPMC]] uses graph cut to generate foreground and background separation 
+***** [[http://koen.me/research/selectivesearch/][Selective Search]] use hierarchical superpixel segmentation with 8 sec per image
+***** [[http://www.vision.ee.ethz.ch/~smanenfr/rp/index.html][Randomized Prim's]] randomized greedy algorithm to generate set of superpixels
+**** [[https://pdollar.wordpress.com/2013/12/10/a-seismic-shift-in-object-detection/][A seismic shift in object detection]] 
+***** Design better feature (deep learned feature)
+***** Use linear SVM instead of parts based model
+***** Use segmentation instead of sliding window except for fixed size
+**** [[https://github.com/caocuong0306/awesome-object-proposals][Awesome object proposals]] 
+**** [[http://mp7.watson.ibm.com/ICCV2015/slides/iccv_hosang.pdf][Region Proposal]]  
+*** Experiment with MSER
+**** YUV's V color space works well for yellow and green detection
+** Object Proposals cont'd <2017-03-17 Fri>
+*** Using canny edge and detect inner contours of each contour to simulate effect of edge box
+**** [[https://www.quora.com/How-do-I-set-the-upper-and-lower-threshold-in-canny-edge-detection][Determine the best threshold]]
+***** Using the mean and scale around it 
+***** Using Otsu to give the upper threshold
+**** [[http://www.kerrywong.com/2009/05/07/canny-edge-detection-auto-thresholding/][Kerry wong auto threshold]] 
+**** [[http://www.pyimagesearch.com/2015/04/06/zero-parameter-automatic-canny-edge-detection-with-python-and-opencv/][PyImageSearch using median]] 
+**** Best color space: HSV and XYZ
+*** Using superpixel segmentation with SLIC and SEED workws well too
+** Saliency benchmarks. How to make it work for underwater condition ?
+*** [[https://github.com/yhenon/pyimgsaliency][Python saliency tools]]
+*** [[http://saliency.mit.edu/results_mit300.html][MIT Saliency Benchmark]] 
+**** Saliecy model produces saliency value at each pixel tested against human attention
+**** Evaluated using 8 different metrics
+***** AUC (Area under ROC curve)
+****** Receiver Operating Characteristics (ROC) investigate trade off between true and false positives at different threshold
+****** ROC curve visualizes all possible thresholds
+****** AUC. perfect = 1. random guess = 0.5
+****** low value false positive not penalized by AUC
+***** Shuffled AUC
+****** Compensates for center bias by sampling fixation location of negatives rather than randomly
+***** Normalized Scanpath Saliency
+****** penalizes false positives
+***** Pearson's Correlation Coefficient
+***** Earth Mover Distance
+***** Histogram intersection
+****** affected by blurring of gaussian used when generating saliency map
+****** penalizes false negatives
+***** KL-divergence
+***** Information Gain
+**** 
+*** [[http://saliency.mit.edu/ECCVTutorial/ECCV_saliency.htm][New direction in saliency research]] 
+*** [[https://arxiv.org/pdf/1501.02741.pdf][Salient object detection a benchmark]]
+**** Essentially a figure/ground seperation problem
+**** Applications: object recognition, video summarization, object discovery, compression
+**** Analysis of segmentation methods
+***** Fixed threshold, adaptive threshold, saliency cut
+**** Handling background images as most algorithms assume some objects there
+***** Fixation prediction that produce sparse activation works better like COV and IT
+**** Challenges in saliency detection
+***** Object size
+***** Clutter of background (complex scene)
+***** Contrast (similarity to background) 
+**** Top performing models
+***** [[https://pdfs.semanticscholar.org/13a7/e1b536fc4a57b814ce49aa4082ac3b2e6163.pdf][Saliency Detection via high dimension color transform]]
+** Enhancement
+*** Dark channel prior does not work well. No difference
+*** [[https://www.researchgate.net/post/Can_anyone_help_me_with_enhancing_underwater_images_and_videos_by_fusion][Underwater image enhancement]] 
+*** No noticeable difference using [[https://www.youtube.com/watch?v=B_TiVX7zN8U][anisotropic diffusion]]
+*** [[https://www.youtube.com/watch?v=3kSW7pzpDvM][Homomorphic filtering]] 
+**** Quite effective but slow python implementation
+*** [[http://www.ijarcce.com/upload/2016/si/SITES-16/IJARCCE-SITES%2034.pdf][Review Underwater Image 2016]]
+**** Homomorphic filter
+***** Corrects non-uniform lighting and sharpen image. High frequency consists of true reflectance
+**** Anisotropic filter
+***** smoothes homogeneous area while shapening edge. done after denoising (homomorphic filter)
+***** edge sensitive extension of average filter
+**** Wavelet filter
+***** suppress noise. does not assume independence of coefficient
+**** Adaptive histogram equalization
+***** medium scattering and light distortion causes poor visibility
+***** Use CLAHE
+*** [[https://arxiv.org/pdf/1702.03600.pdf][Underwater Optical Image Processing]]
+**** Wavelength compensation methods for sediment scattering
+***** dark channel prior
+***** wavelenght compensation and dehazing
+***** underwater median dark channel
+**** Color reconstruction for light absorption
+**** Underwater image quality assessment (very important)
+***** [[http://ieeexplore.ieee.org/document/7305804/][Human inspired Underwater Image Quality Measure (UiQm)]]
+***** [[https://www.researchgate.net/publication/283326087_An_Underwater_Color_Image_Quality_Evaluation_Metric][Underwater Colour Image Quality Evaluation]]
+*** [[http://www.iosrjournals.org/iosr-jvlsi/papers/vol6-issue2/Version-1/G0602013033.pdf][Comparative study of various methods for underwater image enhancement]] 
+*** [[http://rspublication.com/ijca/2015/june15/19.pdf][A survey on various underwater image enhancement techniques]]
+*** [[http://research.ijcaonline.org/volume87/number13/pxc3893743.pdf][2014 survey]]
+*** [[https://www.ijarcsse.com/docs/papers/Volume_5/5_May2015/V5I5-0174.pdf][2015 survey]] 
+*** Fusion method works great. Need to increase illumination after fusion
+** Illumination / Exposure correction (Face detection) inspire a lot of ideas
+*** [[https://www.math.utah.edu/~gustafso/s2014/3150/pdeNotes/Artigo_Stockham_01450712.pdf][Logarithm curve brightness correction instead of gamma]]
