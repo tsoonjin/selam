@@ -258,3 +258,12 @@ def getLuminance(img):
 def laplacian(img):
     return cv2.cvtColor(np.uint8(
         cv2.Laplacian(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY), cv2.CV_64F)), cv2.COLOR_GRAY2BGR)
+
+
+def claheColor(img, clip=1.0, size=(3, 3)):
+    a, b, c = cv2.split(img)
+    clahe = cv2.createCLAHE(clipLimit=clip, tileGridSize=size)
+    a = clahe.apply(a)
+    b = clahe.apply(b)
+    c = clahe.apply(c)
+    return cv2.merge((a, b, c))

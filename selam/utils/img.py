@@ -6,6 +6,13 @@ import numpy as np
 
 # Input / Output
 
+def normUnity(img):
+    """ Normalizes image to unity """
+    min = np.min(img)
+    max = np.max(img)
+    return (img - min) / (max - min)
+
+
 def norm(img, max=255.0):
     """ Normalizes image to 0 - 1 assuming max to be 255 """
     return img / max
@@ -41,6 +48,23 @@ def write_jpgs(dirpath, jpgs):
 
 
 # Image Formatting
+
+def quantizeColor(img, K=8):
+    Z = img.reshape((-1, 3))
+
+    # convert to np.float32
+    Z = np.float32(Z)
+
+    # define criteria, number of clusters(K) and apply kmeans()
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+    ret, label, center = cv2.kmeans(Z, K, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+
+    # Now convert back into uint8, and make original image
+    center = np.uint8(center)
+    res = center[label.flatten()]
+    res2 = res.reshape((img.shape))
+    return res2
+
 
 def cv2others(img):
     """ Returns RGB channel image given BGR OpenCV image """
@@ -188,3 +212,54 @@ def sort_by_chan(image, chan):
     sort_indices = np.argsort(channel)
     return flat[sort_indices]
     # return flat[sort_indices].reshape(image.shape)
+
+
+def clearborder(imgBW, radius):
+
+    # Given a black and white image, first find all of its contours
+    imgBWcopy = imgBW.copy()
+    _, contours, hierarchy = cv2.findContours(imgBWcopy.copy(), cv2.RETR_LIST,
+                                              cv2.CHAIN_APPROX_SIMPLE)
+
+    # Get dimensions of image
+    imgRows, imgCols = imgBW.shape
+
+    contourList = []  # ID list of contours that touch the border
+
+    # For each contour...
+    for idx in np.arange(len(contours)):
+        # Get the i'th contour
+        cnt = contours[idx]
+
+        # Look at each point in the contour
+        for pt in cnt:
+            rowCnt = pt[0][1]
+            colCnt = pt[0][0]
+
+            # If this is within the radius of the border
+            # this contour goes bye bye!
+            check1 = (rowCnt >= 0 and rowCnt < radius) or (rowCnt >= imgRows-1-radius and rowCnt < imgRows)
+            check2 = (colCnt >= 0 and colCnt < radius) or (colCnt >= imgCols-1-radius and colCnt < imgCols)
+
+            if check1 or check2:
+                contourList.append(idx)
+                break
+
+    for idx in contourList:
+        cv2.drawContours(imgBWcopy, contours, idx, (0, 0, 0), -1)
+
+    return imgBWcopy
+
+
+def bwareaopen(imgBW, areaPixels):
+    # Given a black and white image, first find all of its contours
+    imgBWcopy = imgBW.copy()
+    _, contours, hierarchy = cv2.findContours(imgBWcopy.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+
+    # For each contour, determine its total occupying area
+    for idx in np.arange(len(contours)):
+        area = cv2.contourArea(contours[idx])
+        if (area >= 0 and area <= areaPixels):
+            cv2.drawContours(imgBWcopy, contours, idx, (0, 0, 0), -1)
+
+    return imgBWcopy

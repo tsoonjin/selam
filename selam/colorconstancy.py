@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """ Color constancy algorithm to achieve illuminance-invariance """
 import math
+import random
 import cv2
 import numpy as np
 
@@ -424,24 +425,25 @@ def spatialColorConstancy(im):
     return ei, corrected
 
 
+def whitePatchRetinex(im):
+    """ Color correct image based on Retinex algorithm by Land and McCann """
+    b, g, r = cv2.split(im)
+    # Estimated white point for each channels
+    b_max = np.max(b)
+    g_max = np.max(g)
+    r_max = np.max(r)
+
+    b_corrected = np.uint8(np.float32(b) / b_max * 255.0)
+    g_corrected = np.uint8(np.float32(g) / g_max * 255.0)
+    r_corrected = np.uint8(np.float32(r) / r_max * 255.0)
+    return cv2.merge((b_corrected, g_corrected, r_corrected))
+
+
 def colorConstancyGamma(im):
     """ Performs color constancy and gamma correction
     http://www.aacademica.org/jcepedanegrete/3.pdf
         :return: retinex corrected, grey world corrected
     """
-
-    def whitePatchRetinex(im):
-        """ Color correct image based on Retinex algorithm by Land and McCann """
-        b, g, r = cv2.split(im)
-        # Estimated white point for each channels
-        b_max = np.max(b)
-        g_max = np.max(g)
-        r_max = np.max(r)
-
-        b_corrected = np.uint8(np.float32(b) / b_max * 255.0)
-        g_corrected = np.uint8(np.float32(g) / g_max * 255.0)
-        r_corrected = np.uint8(np.float32(r) / r_max * 255.0)
-        return cv2.merge((b_corrected, g_corrected, r_corrected))
 
     def greyWorld(img):
         b, g, r = cv2.split(img)
