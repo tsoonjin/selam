@@ -10,6 +10,14 @@ from examples import config
 from selam.utils import img
 from selam import colorconstancy as cc
 from selam import enhancement as en
+from lib.DCP import DarkChannelRecover as dcp
+
+
+def darkChannelPrior(im, display=True):
+    radiance = dcp.getRecoverScene(im)
+    if display:
+        cv2.imshow('dehazed', np.hstack((im, radiance)))
+        cv2.waitKey(0)
 
 
 def taiwanLightCompensation(im, theta=0.5, thresh=0.2, B=[10, 30]):
@@ -361,10 +369,7 @@ def anisodiff(img, niter=1, kappa=50, gamma=0.1, step=(1., 1.),
 
 
 if __name__ == '__main__':
-    path = './examples/dataset/robosub16/tower/9'
-    path = config.TEST_DATA['dark'][0]
+    path = './examples/dataset/robosub16/torpedo/2'
     imgs = img.get_jpgs(path, resize=2)
     for i in imgs:
-        modified = taiwanLightCompensation(i)
-        cv2.imshow('fuse', np.hstack((i, modified)))
-        cv2.waitKey(0)
+        darkChannelPrior(i)

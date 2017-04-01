@@ -199,3 +199,334 @@ Just need to ensure that the raw image is not too terrible
 *** Fusion method works great. Need to increase illumination after fusion
 ** Illumination / Exposure correction (Face detection) inspire a lot of ideas
 *** [[https://www.math.utah.edu/~gustafso/s2014/3150/pdeNotes/Artigo_Stockham_01450712.pdf][Logarithm curve brightness correction instead of gamma]]
+** Object representation
+*** [[http://web.stanford.edu/class/cs331b/][Representation Learning in Computer Vision]]
+**** Classic low-level representation
+***** [[http://web.eecs.umich.edu/~silvio/teaching/EECS598_2010/slides/09_28_Grace.pdf][Histogram of Gradient]]
+***** [[http://web.mit.edu/vondrick/ihog/][HOGles: Visualize Object Detection Feature]]
+***** Affine-Sift (exhaustively transform images then apply SIFT)
+***** [[http://robotics.szpku.edu.cn/c/reasearch/publication/paper/SMC2009_XiaojiaYu.PDF][GLOH (Global localization orientation histogram)]]
+***** [[http://s3.amazonaws.com/academia.edu.documents/1951909/road_sign_detection_and_recognition_by_using_local_energy_based_shaped_histogram_lesh_1.pdf?AWSAccessKeyId=AKIAIWOWYYGZ2Y53UL3A&Expires=1489920836&Signature=0Ph9l63pZavzua0naiqWyEJu3Qk%3D&response-content-disposition=inline%3B%20filename%3DRoad_Sign_Detection_and_Recognition_by_u.pdf][Local energy-based shape histogram (LESH)]]
+***** [[https://papers.nips.cc/paper/1913-shape-context-a-new-descriptor-for-shape-matching-and-object-recognition.pdf][Shape Context]]
+**** 2D / 3D Representation
+***** Challenges: illumination, scale, viewpoint, intra-class, deformation, occlusion, background clutter
+***** Generative: infer a function that can explain your observations.
+****** Bayes, Autoencoder, RBM, LDA
+***** Discriminative: infer function that can separate obervations
+****** Nearest neighbor
+****** Neural Network
+****** SVM
+****** Structural SVM
+****** Boosting
+***** How to learn these functions
+****** Incremental, prior, level of supervision
+***** BoW (Bag of Words)
+***** Template-based (truncation, occlusions, deformation)
+****** Spatial pyramid matching
+****** HOG
+***** Part based
+****** sparse representation
+****** SVM with mixture components
+***** Hierarchical
+****** Pixels, Pixel grouping, Parts, Object
+***** Detect specific instance (don't care about inter-class variability)
+***** Object representation = feature + location
+***** Unsupervised learning representation
+****** sparse coding
+****** basic autoencoder
+****** rbm
+****** Generative Adversarial Network
+***** Supervised learning
+** 3D Object Recognition based on Image features
+*** SIFT, FAST, SURF, Bag of Features, ORB 
+** Survey on color, texture and shape features for person re-identification
+*** Need to reduce dimension of features using PCA or DCT
+*** Gabor, schmid filter useful for illumination variation
+*** Populat shape feature representation
+**** EHOG Feature context
+**** LBP
+**** Dense SIFT
+*** [[https://www.researchgate.net/publication/220932655_Multi-scale_Color_Local_Binary_Patterns_for_Visual_Object_Classes_Recognition][Multiscale Color LBP]]
+*** [[https://arxiv.org/pdf/1410.1035.pdf][Learning Invariant Color Feature]]
+** Survey Feature extraction technique
+*** angular radial partitioning
+*** Shape descriptor
+**** Contour global: farthest distance, centroid length, circularity, eccentricity, area
+**** Contour structural: chain code
+**** Region based
+** Moment-based representation
+*** Zernike, pseudo-Zernike the best
+*** Fourier descriptor
+** [[http://machinelearning.wustl.edu/uploads/Main/appearance_based_methods.pdf][Survey of Appearance based methods]]
+*** Corner-based for image with a lot of edge
+*** Region-based suited for uniform region
+**** Hessian and Harris-Affine
+**** Difference of Gaussian (DoG)
+**** Entropy-based salient region detector (slow)
+**** Edge-based region detector (EBR) (slow)
+*** Region of interest descriptor
+**** PCA-SIFT, LBP, SIFT, GLOH, Shape Context, Spin Image
+*** Moment-based
+**** Color moment, Gradient moment
+*** Subspace method
+**** eigenimages
+**** robust pca
+**** Independent Component Analysis (audio source separation)
+**** Linear Fischer Discriminant Analysis (LDA)
+** [[Paradigm in visual object tracking]] (important)
+*** Model-free tracking: target object not known and camera placement also
+*** Tracking with pre-learned object model: fixed object models too generic and hard to distinguish similar object
+**** local feature, region feature and temporal feature
+*** Adaptive object model: drifting, integrate new data without accumulating error
+*** Salient object model: requires stable resolution of object.
+** Color Learning and Illumination Invariance on Mobile Robots: A Survey
+*** Color Segmentation
+**** Non-parametric
+***** [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.76.8968&rep=rep1&type=pdf][Mean Shift]]
+***** [[https://people.eecs.berkeley.edu/~malik/papers/SM-ncut.pdf][Normalized cut]]
+**** Active contour: parametric active contour (PAC) and geometric active contour (GAC) 
+***** [[http://www.dtic.upf.edu/~vcaselles/papers_v/GAC_article.pdf][Geodesic Active Contour]]
+***** [[https://vision.ece.ucsb.edu/sites/vision.ece.ucsb.edu/files/publications/03ICIPBaris.pdf][Image Segmentation using Multi-region stability and edge strength]]
+**** Graph-partioning [29, 45, 80]: normalized cut
+***** [[https://cs.brown.edu/~pff/papers/seg-ijcv.pdf][Efficient Graph Based Image Segmentation]]
+**** Color-map
+***** [[https://pdfs.semanticscholar.org/e7f2/b90a9d78d43f38a06ebc011d7ee9f219c9e1.pdf][Real time vision on mobile robot platform]]
+*** Color Learning [39, 57, 85, 49, 83, 84]
+**** [[http://nichol.as/papers/Gevers/Color-based%20object%20recognition.pdf][Color based object recognition]]
+**** [[http://isl.ecst.csuchico.edu/DOCS/darpa2005/DARPA%202005%20Stanley.pdf][The Robot that won the Darpa Grand Challenge]]
+**** [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.9.5748&rep=rep1&type=pdf][Using Layered Color Precision for a self-calibrating vision system]]
+**** [[https://pdfs.semanticscholar.org/c3d9/ef37adf2e1bc3fcb6c8c1046fd53f2a697f4.pdf][Autonomous Color Learning on Mobile Robot]]
+*** Illumination Invariance
+**** [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.67.103&rep=rep1&type=pdf][A Novel Algorithm for Color Constancy Gamut Mapping]]
+**** [[http://www.cs.cmu.edu/~mmv/papers/03icra-scott.pdf][Automatic detection and response to environmental change]]
+**
+* Mar: Week 10: *21-26*
+** Shape Descriptors
+*** [[http://www.cs.umd.edu/~djacobs/pubs_files/ID-pami-8.pdf][Shape Classification using inner distance]]
+*** [[http://eeeweba.ntu.edu.sg/computervision/Research%20Papers/2016/Invariant%20Multi-Scale%20Shape%20Descriptor%20for%20Object%20Matching%20and%20Recognition.pdf][Invariant Multi-scale Descriptors (IMD)]] (best)
+*** [[https://www.researchgate.net/profile/Luis_Sucar/publication/269334651_LISF_An_invariant_local_shape_features_descriptor_robust_to_occlusion/links/54ed8c6f0cf28f3e6535a238/LISF-An-invariant-local-shape-features-descriptor-robust-to-occlusion.pdf][LISF: Invariant Local Shape Descriptor]]
+**** Region based like zernike, legrende and fourier lack discrminative power
+**** [[https://pdfs.semanticscholar.org/807a/418a129828bad4ab1946f387ad27c0571977.pdf][Generic Fourier Descriptor]]
+**** [[http://repository.um.edu.my/2538/1/Translation%20and%20scale%20invariants%20of%20Legendre%20moments.pdf][Legrende Moment]]
+*** [[https://github.com/torrvision/straighttoshapes][Straight to Shape]]
+**** Learning a shape embedding using autoencoder
+*** [[http://www.image.ece.ntua.gr/courses_static/dip/advanced/material/retrieval/Curvature%20scale%20space%20image%20in%20shape%20similarity%20retrieval.pdf][Curvature Scale Space]]
+*** Geometric Features for Shape Descriptors
+**** average binding energy
+**** eccentricity: measure of aspect ratio
+**** circularity
+**** ellipse variance
+**** convexity
+**** hole area ratio
+*** Shape signatures
+**** contour curvature
+**** triangle area representation
+** [[http://www.kdnuggets.com/2016/04/deep-learning-vs-svm-random-forest.html][When does deep learning work better than SVM or Random Forest]]
+*** SVM more hyperparameters to tune
+*** Random forest is simpler
+*** Both grow with number of training data unlike parametric model
+*** SVM useful for small datasets and fewer outliers. Super-quadratic training data
+*** Random Forest requires more training data but robust. Linear with training data
+*** Deep learning don't need worry about feature engineering
+** [[https://www.researchgate.net/post/Is_random_forest_better_than_support_vector_machines][Is SVM better than Random Forest]]
+*** Small number of classes with few outliers than SVM works well
+*** Random forest need more training instances.
+** [[https://www.quora.com/What-are-the-advantages-of-different-classification-algorithms][What are advantages of different classfication algorithms ?]]
+*** SVM
+**** Painfully slow to train. Not useful for industry scale application
+*** Tree Ensembles
+**** Can handle data of varying scales better
+**** Gradient Boosted Tree performs better but more tuning needed and prone to overfitting compared to Random Forest
+**** Underperform when dimensionality is very high with respect to number of training 
+** [[https://www.quora.com/When-should-I-use-Boosting-instead-of-SVM][When should I use boosting over SVM]]
+*** Boosting is slow
+*** Dense feature set = boosting
+*** Sparse feature set = SVM
+*** SVM does not handle class imbalance and assume training and test from same distribution
+** Feature Descriptors Survey
+*** [[http://www.jatit.org/volumes/Vol87No1/12Vol87No1.pdf][A Survey of Feature Extraction Techniques in Content-based Image Detection]]
+**** [[https://www.robots.ox.ac.uk/~vgg/research/affine/det_eval_files/tuytelaars_ijcv2004.pdf][EBR]]
+**** [[https://www.researchgate.net/publication/221304077_Critical_Nets_and_Beta-Stable_Features_for_Image_Matching][Beta-stable features]]
+**** FAST
+**** AGHAST
+**** [[https://gjacopo.github.io/imtools/feature/fastcpda.html][Fast CPDA]]
+**** SURF is the best descriptor
+**** Binary descriptor: BRISK, FREAK
+*** [[http://www.ijarcce.com/upload/2016/april-16/IJARCCE%20126.pdf][A Brief History of Feature Detector]]
+**** SIFT, SURF, HOG, MSER, BRISK, FREAK and ORB
+*** [[http://www.ijser.org/researchpaper/A-Literature-Survey-of-Image-Descriptors-in-Content-Based-Image-Retrieval.pdf][Survey of Image Descriptor]]
+**** Color descriptor
+***** Dominant Color Descriptor (DCD)
+***** Scalable Color Descriptor (SCD)
+***** Color Structure Descriptor (CSD)
+***** Color moment, color set, color histogram
+**** Texture descriptor
+***** Edge Histogram Descriptor (EHD)
+***** Homogeneous Texture Descriptor (HTD)
+**** Shape
+***** Shape distribution
+***** Fourier centroid histogram
+*** [[https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A80C3E52CE3D92443DEF40EA44B82DE7/S2048770316000135a.pdf/div-class-title-a-survey-on-compact-features-for-visual-content-analysis-div.pdf][A survey on compact features for visual content analysis]]
+**** Blob
+***** [[http://www.cs.utexas.edu/~grauman/papers/bplr_CVPR2011.pdf][Boundary Preserving Dense Local Region (BPLR)]]
+***** [[https://www.doc.ic.ac.uk/~ajd/Publications/alcantarilla_etal_eccv2012.pdf][KAZE]]
+**** Keypoint descriptor
+***** [[http://imagine.enpc.fr/~monasse/Stereo/Projects/TolaFuaLepetit08.pdf][DAISY]]
+*** [[http://ocean.kisti.re.kr/downfile/volume/ieek/E1STIF/2016/v5n3/E1STIF_2016_v5n3_153.pdf][Recent advances in feature detectors]]
+*** [[https://arxiv.org/pdf/1607.06178v1.pdf][Feature Descriptors for Tracking by Detection]]
+**** Distinct: AKAZE and SIFT
+**** BRISK or ORB less senstivie to change in scale compared to AKAZE
+*** [[https://www.researchgate.net/publication/273841042_A_survey_of_recent_advances_in_visual_feature_detection][Survey of recent advances in visual feature detection]]
+*** [[http://blog.annaphilips.com/feature-detectors-descriptors-opencv/][Feature Detectors and Descriptor in OpenCV]]
+*** [[http://www.cnblogs.com/lvpengms/p/4122504.html][List of CV Projects]]
+** Color descriptors
+*** CS-LBP + Gabor for each component of HSV
+*** variable kernel density estimation
+**** arctan R/G, arctan B/G, normalized rgb
+*** c1 = arctan(R / max(G, B))
+*** c2 = arctan(G / max(R, B))
+*** c3 = arctan(B / max(R, G))
+*** o1 = (R - G) / 2
+*** o2 = (R + G) / (4 - B/2)
+*** Use Gaussian derivative on all these channels
+*** Using Gaussian color model which can be converted from XYZ color space
+*** SIFT for different power-law transform (different gamma)
+*** m1 = canny edge on ln(R/G), ln (R/B), ln(G/B). Need to determine threshold to prevent break down at black point
+*** RGB FREAK
+*** any linear combination of RGB is illumination invariant for SIFT
+*** O1 = (R - G) / sqrt(2), O2 = (R + G - 2B) / sqrt(6), O3 = R + G +B / sqrt(3)
+*** Transformed color: R = (R - mean(R)) / std(R)
+*** Color moment invariant
+*** W1 = O1 / O3, W2 = O2 / O3
+*** rgSIFT, OpponentSIFT, WSIFT
+*** Quaternionic Weber Local Descriptor (QWLD)
+*** quaternion-Michelson descriptor (QMD)
+*** Color LBP
+*** Those using SIFT works better than traditional method
+*** Detecting salient cue using color ratio
+**** Mask out low intensity value. (1/10 of maximum of the channel or sum of rgb must be 30)
+**** get normalized r, g, b
+**** r` = r / (3 * mean(r)), g` = g / (3 * mean(g)), b` = b / (3 * mean(b)) 
+**** Convert to opponent color space R = R - (G + B)/2, G = G - (R + B)/2, B = B - (R+G)/2, Y = (R + G)/2 - |R - G| - B
+**** Take ln(R/G) and ln(Y/B) to build spatial pyramid of 8 scales. 
+**** Take difference of logarithm to construct saliency map
+*** Color Invariant Signature
+**** log chromacity color space: ln (R/G) and ln(B/G)
+**** GMM to model color 
+**** l1 = (R - G)^2 / ((R-G)^2 + (R-B)^2 + (G-B)^2)
+**** l2 = (R - B)^2 / ((R-G)^2 + (R-B)^2 + (G-B)^2)
+**** l3 = (G - B)^2 / ((R-G)^2 + (R-B)^2 + (G-B)^2)
+** [[https://github.com/automl][Collection of AutoML repo]]
+** [[http://www.ml4aad.org/][ML4AAD Source Codes]]
+** Data Augmentation
+*** [[https://github.com/iacopomasi/face_specific_augm][Do we really need to collect millions of faces ]]
+** Robust Active Feature Selection
+*** MIL inspired online boosting algorithm
+*** Uses Haar-like feature
+*** Maximizing Fischer information loss function online manner
+*** Select weak classifier that maximizes positive bag and minimize negative bag
+*** Sample samples around target
+** Automatic Parameter Adaptation for Multiple-Object Tracking
+*** Learn contextual feature which influence tracking quality to learn appropriate parameters offline
+*** Contextual feature
+**** Density of mobile objects
+**** Occlusion level of mobile objects
+**** Contrast of mobile object
+**** Contrast variance of mobile object
+**** 2D area of mobile objects
+**** 2D area variance of mobile objects
+*** Learn context cluster
+*** Parameter change when context change
+** Color Model Selection and Adaptation in Dynamic Scene
+*** Gaussian Mixture Model of HS space 
+*** Model background besides the object to be tracked
+*** Adaptive color mixture model
+** Dynamic Feature Selection Processes
+*** Adaptive Color Tracking System
+**** adaptive correlation filter from multi-channel color
+**** use a set of 10 color names for each pixel in target box 
+** Automatic Tracker Selection wrt Object Detection Performance
+*** Use the following features
+**** 2D area, 2D aspect ratio -> for object with different size
+**** color covariance when lighting is not good
+**** color histogram and dominant color when lighting is good
+**** weightd combination of these features similarities
+**** Evaluate tracker based on predicted objects
+* Mar: Week 11: *27-2*
+** Augmentation
+*** [[https://arxiv.org/pdf/1703.03702.pdf][Data Driven Color Augmentation]]
+**** Illumination estimation using shade of grey on different images. Apply transformation on color corrected image to color cast.
+**** Apply random gamma correction with factor [0 - 2]
+**** Blurring image with varying sigma
+*** Fancy PCA
+*** Color Jittering
+*** Contrast manipulation
+*** Flicker generation
+*** Haze generation
+*** [[http://pure.qub.ac.uk/portal/files/16612194/AMMDS_camera_ready_v2.pdf][Data Augmentation for Person Re-identification]]
+**** Randomly add value to Hue Channel
+**** Replace background
+** Ground truth generation
+*** Shadow
+*** Flicker
+*** Low contrast / blur / haze
+*** Dark
+*** Bright
+** AutoML
+*** [[https://github.com/automl/HPOlib][HPOlib combines spearmint, smac and hyperopt]]
+*** [[https://github.com/automl/SMAC3][SMAC]]
+*** [[https://github.com/automl/RoBO][Robust Bayesian Optimization Framework]]
+*** [[https://github.com/automl/auto-sklearn][Auto sklearn]]
+*** [[http://scikit-learn.org/stable/modules/feature_selection.html][Sklearn feature selection]]
+*** Selecting best preprocessing parameters
+*** Selecting best features
+*** Selecting best models
+*** Change parameters based on context (Online)
+*** [[https://github.com/rhiever/tpot][TPOT Data Science Assistant]]
+** Adaptive Tracking
+*** [[www.nicta.com.au/pub?doc=5132][Real Time Tracking compressive sensing]]
+*** [[http://www4.comp.polyu.edu.hk/~cslzhang/paper/AFS.pdf][Robust Object Tracking via Active Feature Selection]]
+*** [[https://www.eecs.qmul.ac.uk/~andrea/papers/2016_ECCVW_MOT_OnlineMTTwithStrongAndWeakDetections_Sanchez-Matilla_Poiesi_Cavallaro.pdf][Online Multi-target tracking using strong and weak detection]]
+*** [[http://or.nsfc.gov.cn/bitstream/00001903-5/98246/1/1000008745384.pdf][Online Discriminative Structured Output SVM]]
+*** [[http://www.robots.ox.ac.uk/~tvg/publications/2015/struck-author.pdf][Structured Output Tracking with Kernels (STRUCK)]]
+**** [[https://github.com/gnebehay/STRUCK][Source Code]]
+*** [[https://pdfs.semanticscholar.org/fe2a/aad872a2cf08c09dd52ca972f323666306db.pdf][Sparsity based Collaborative (SCM)]]
+*** [[http://faculty.ucmerced.edu/mhyang/project/cvpr12_jia_project.htm][Visual Tracking via Adaptive Structural Local Sparse Appearance Model]] (ASLA)
+*** [[https://www.cvl.isy.liu.se/research/objrec/visualtracking/regvistrack/][Learning Spatially Regularized Correlation Filter (SRCF)]]
+*** [[https://arxiv.org/pdf/1507.08085.pdf][Edge Box Tracker (EBT) ]]
+**** Does not assume previous detection is accurate and trajectory is smooth
+**** Search scheme: window search, particle search (random sampling blind to spatial and edge), hard negatives (learn background and foreground online) 
+**** Linear combination of proposal score and detector score
+**** Motion model, observation model and model update model
+**** Current frame processed into edge map and use instance specific proposal 
+**** Proposals consists of : edge proposed and sampling around previous location in radius. Better to use those proposed by edge box only
+**** Using edge and sampled region as negative support vector
+**** Uses structured output svm to re-rank proposals because edge box miss cluttered background
+*** [[http://www.cv-foundation.org/openaccess/content_iccv_2015/papers/Hua_Online_Object_Tracking_ICCV_2015_paper.pdf][Simplified Proposal Selection Tracker]] (sPST)
+**** One positive sample using HOG
+**** 50& bounding box overlap hard negative mining from the frame
+**** Evaluated at diffrent scales 
+**** Using hough transform voting from optical flow correspondance next frame
+**** Score proposal using object edgeness (edge box)
+**** Consists of 5 top detector proposals and 5 top geometry estimated proposals
+**** Using new object proposals as positive examples
+*** [[https://arxiv.org/pdf/1404.7584.pdf][High Speed Tracking with Kernelized Correlation Filter]] (KCF)
+*** [[https://www.ri.cmu.edu/pub_files/2013/0/2013_ICCV_Kiani.pdf][Multi-channel Correlation Filter]] (MCCF)
+*** [[http://www.cs.colostate.edu/~draper/papers/bolme_cvpr10.pdf][Visual Object Tracking with Adaptive Correlation Filter (MOSSE)]]
+*** [[http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Possegger_In_Defense_of_2015_CVPR_paper.pdf][In Defense of Color-based model free tracking]]
+**** Distinguish object from current surrounding background
+**** Reduce risk of drifting towards region of similar appearance
+**** Bayes classfier on target object and its surrounding
+**** Train model of object distractor and object surrounding
+**** Weight with distance from previous object location
+**** Scale estimation
+** Object recognition
+*** [[https://pdollar.github.io/files/papers/DollarPAMI14pyramids.pdf][ACF Detector]]
+*** [[https://pdollar.github.io/files/papers/DollarBMVC09ChnFtrs.pdf][Integral Channel Feature]]
+*** [[https://pdfs.semanticscholar.org/4f23/a446f1f15d0ac65e4e50232531f8eb404a7b.pdf][Pedestrian Detection at 100 fps]]
+*** [[http://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf][Histogram of Oriented Gradient for Human Detection]]
+*** [[https://cs.brown.edu/~pff/papers/lsvm-pami.pdf][Deformable Part Model (DPM)]]
+*** Region Covariance descriptor
+** Using Saliency as proposal or feature
+** Including prior 
+

@@ -1,0 +1,36 @@
+\BOOKMARK [0][-]{Doc-Start}{Title}{}% 1
+\BOOKMARK [0][-]{Doc-Start}{Abstract}{}% 2
+\BOOKMARK [0][-]{Doc-Start}{Acknowledgement}{}% 3
+\BOOKMARK [0][-]{Doc-Start}{List of Figures}{}% 4
+\BOOKMARK [0][-]{chapter*.1}{List of Tables}{}% 5
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 6
+\BOOKMARK [1][-]{section.1.1}{Background on Robosub}{chapter.1}% 7
+\BOOKMARK [2][-]{subsection.1.1.1}{Information about the competition}{section.1.1}% 8
+\BOOKMARK [2][-]{subsection.1.1.2}{Description of vision tasks}{section.1.1}% 9
+\BOOKMARK [1][-]{section.1.2}{Challenges in Underwater Image Processing}{chapter.1}% 10
+\BOOKMARK [1][-]{section.1.3}{Project Requirements Analysis}{chapter.1}% 11
+\BOOKMARK [2][-]{subsection.1.3.1}{Nature of tasks}{section.1.3}% 12
+\BOOKMARK [0][-]{chapter.2}{Literature Review}{}% 13
+\BOOKMARK [1][-]{section.2.1}{Preprocessing}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.1.1}{Underwater Image Enhancement}{section.2.1}% 15
+\BOOKMARK [2][-]{subsection.2.1.2}{Color Constancy}{section.2.1}% 16
+\BOOKMARK [1][-]{section.2.2}{Saliency Region Detection}{chapter.2}% 17
+\BOOKMARK [1][-]{section.2.3}{Detection Proposals}{chapter.2}% 18
+\BOOKMARK [1][-]{section.2.4}{Object Detection and Tracking}{chapter.2}% 19
+\BOOKMARK [0][-]{chapter.3}{Design \046 Methodology}{}% 20
+\BOOKMARK [1][-]{section.3.1}{Proposed design}{chapter.3}% 21
+\BOOKMARK [2][-]{subsection.3.1.1}{Offline modules}{section.3.1}% 22
+\BOOKMARK [2][-]{subsection.3.1.2}{Online modules}{section.3.1}% 23
+\BOOKMARK [1][-]{section.3.2}{Methodology}{chapter.3}% 24
+\BOOKMARK [2][-]{subsection.3.2.1}{Generating datasets}{section.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.2.2}{Model Learning}{section.3.2}% 26
+\BOOKMARK [2][-]{subsection.3.2.3}{Online object detection and tracking}{section.3.2}% 27
+\BOOKMARK [0][-]{chapter.4}{Preprocessing}{}% 28
+\BOOKMARK [0][-]{chapter.5}{Object Proposals}{}% 29
+\BOOKMARK [0][-]{chapter.6}{Feature Design}{}% 30
+\BOOKMARK [0][-]{chapter.7}{Model}{}% 31
+\BOOKMARK [0][-]{chapter.8}{Object Tracking}{}% 32
+\BOOKMARK [0][-]{chapter.9}{Training Scheme}{}% 33
+\BOOKMARK [0][-]{chapter.10}{Automatic machine learning}{}% 34
+\BOOKMARK [0][-]{chapter.11}{Experimental results}{}% 35
+\BOOKMARK [0][-]{chapter*.3}{References}{}% 36

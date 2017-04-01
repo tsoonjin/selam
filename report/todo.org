@@ -47,11 +47,13 @@
    CLOSED: [2017-03-18 Sat 08:22]
 *** TODO Illumination-invariant
 *** TODO Shadow-invariant
-** TODO Implement automatic machine learning    
+** DONE Implement automatic machine learning    
+   CLOSED: [2017-03-29 Wed 17:53]
 *** TODO Automatic parameter optimization
 *** TODO Automatic algorithm suggestion (Offline)
 *** TODO Automatic online preprocessing
-** TODO Implement object detection  
+** DONE Implement object detection  
+   CLOSED: [2017-03-29 Wed 17:54]
 *** HOG better at describing shape. Rectangular feature better at shading
 *** SIFT captures local interest point and lack contrast normalization
 *** CNN learned features is another popular one
@@ -69,7 +71,8 @@
 *** TODO Combine local and global features
 *** TODO Explore weaker moment based descriptor, Zernike, Hu
 *** TODO Consider if bagging or boosting may help
-** TODO Selecting object representation scheme
+** DONE Selecting object representation scheme
+   CLOSED: [2017-03-29 Wed 17:54]
 *** TODO [[http://web.cs.hacettepe.edu.tr/~pinar/courses/CMP719/lectures/representation.pdf][Windows vs part based]]
 *** TODO [[http://eeeweba.ntu.edu.sg/computervision/Research%20Papers/2016/Invariant%20Multi-Scale%20Shape%20Descriptor%20for%20Object%20Matching%20and%20Recognition.pdf][Invariant Multiscale Shapre Descriptor]]
 ** TODO Apply domain adaptation
@@ -80,9 +83,11 @@
 **** Autoencoders
 **** Sparse Coding
 **** Clustering
-** TODO Adding prior to detection
+** DONE Adding prior to detection
+   CLOSED: [2017-03-29 Wed 17:54]
 *** background/context prior, shape prior
-** TODO Use detection free tracking technique
+** DONE Use detection free tracking technique
+   CLOSED: [2017-03-29 Wed 17:54]
 *** TODO Correlation-filter
 *** TODO TLD
 *** TODO [[http://www.vision.ee.ethz.ch/~hegrabne/papers/Stalder2012DynamicObjectnessAdaptive.pdf][Dynamic objectness for Adaptation Tracking]]
