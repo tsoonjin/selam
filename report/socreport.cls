@@ -488,7 +488,7 @@
   FYP CA Project Report \\
 \else
   \if@hyp
-     Honours Year Project Report \\
+     B.Comp. Dissertation \\
    \else
      \errmessage{Unknown project type. Please use option hyp or fypca in documentclass}
   \fi
@@ -512,7 +512,7 @@ National University of Singapore \\ \vspace{1cm}
   Final Year Project Continual Assessment Project Report \\
 \else
   \if@hyp
-    Honours Year Project Report \\
+     B.Comp. Dissertation \\
    \else
     
   \fi

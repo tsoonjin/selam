@@ -1,20 +1,35 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Aerial view of TRANSDEC. Operational depth of 16 ft for most vision tasks}}{1}{figure.1.1}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Robosub 2016 Vision Tasks. a) Scuttle Ship b) Navigate Channel c) Weigh Anchor d) Set Course e) Bury Treasure (Coins) f) Bury Treasure (Island)}}{2}{figure.1.2}
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Absorption of light at the surface}}{3}{figure.1.3}
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Different vision challenges. a) Haze formation b) Partial occlusion c) Non-uniform illumination d) Sunlight flickers e) Shadow}}{4}{figure.1.4}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Aerial view of TRANSDEC. Operational depth of 16 ft for most vision tasks\relax }}{1}{figure.caption.3}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Robosub 2016 Vision Tasks. a) Scuttle Ship b) Navigate Channel c) Weigh Anchor d) Set Course e) Bury Treasure (Coins) f) Bury Treasure (Island)\relax }}{2}{figure.caption.4}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Absorption of light at the surface\relax }}{3}{figure.caption.5}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Different vision challenges. a) Haze formation b) Partial occlusion c) Non-uniform illumination d) Sunlight flickers e) Shadow\relax }}{4}{figure.caption.6}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Proposed vision framework}}{10}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Main methodology}}{12}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Dataset generation methodology}}{12}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Model learning methodology}}{13}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Object tracking methodology}}{14}{figure.3.5}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Proposed vision framework\relax }}{10}{figure.caption.7}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Main methodology\relax }}{12}{figure.caption.8}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Dataset generation methodology\relax }}{12}{figure.caption.9}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Model learning methodology\relax }}{13}{figure.caption.10}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Object tracking methodology\relax }}{14}{figure.caption.11}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Color normalization results (left to right): \newline Top row: a) Raw input, b) Finlayson's comprehensive normalization, c) Grey-world \newline Bottom row: d) IACE, e) Finlayson's non-iterative normalization f) Shade of Gray\relax }}{16}{figure.caption.12}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Effect of applying gamma correction: (top row) no gamma correction, (bottom row) with gamma correction\relax }}{18}{figure.caption.15}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Applying novel grey pixel illumination estimation: a) Raw input, b) Color corrected\relax }}{19}{figure.caption.16}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Spatial domain based illumination estimation: a) Raw input, b) Color corrected\relax }}{19}{figure.caption.17}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Underwater image enhancement results (left to right): \newline Top row: a) Raw input, b) Dark channel prior, c) Single image fusion \newline Bottom row: d) CLAHE, e) Red channel prior\relax }}{20}{figure.caption.18}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Single underwater image enhancement by fusion\relax }}{21}{figure.caption.19}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Illumination compensation results (left to right): \newline Top row: a) Underexposed input, b) Chih's light compensation, c) Chen's light compensation \newline Bottom row: d) Flicker input, e) Homomorphic filter f) Gamma corrected\relax }}{22}{figure.caption.20}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison between logarithm curve and gamma curve\relax }}{23}{figure.caption.21}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Different object proposal paradigms\relax }}{25}{figure.caption.22}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Object proposals using MSER: a) Buoy task, b) Coin task, c) Set date task\relax }}{26}{figure.caption.23}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Object proposals using saliency approach\relax }}{27}{figure.caption.24}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Objects with similar colors\relax }}{30}{figure.caption.25}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Dashed lines denote shortest path withint the shape boundary\relax }}{32}{figure.caption.26}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Gaussian process\relax }}{34}{figure.caption.27}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Tracking pipeline\relax }}{38}{figure.caption.28}
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Dataset 1\relax }}{41}{figure.caption.29}
+\contentsline {figure}{\numberline {9.2}{\ignorespaces Dataset 2\relax }}{41}{figure.caption.30}
