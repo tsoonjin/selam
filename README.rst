@@ -21,8 +21,10 @@ Underwater object tracking framework for Robosub
 
 Features
 --------
-
-* TODO
+1. Underwater image preprocessing
+2. Object proposals
+3. Automatic machine learning
+4. Object tracking
 
 Credits
 ---------
