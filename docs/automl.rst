@@ -2,13 +2,7 @@
 Automatic machine learning
 ==========================
 
-Data Augmentation
-=================
+.. toctree::
 
-
-Feature Selection
-=================
-
-
-Model Selection
-===============
+    modules/featureselection.rst
+    modules/modelselection.rst

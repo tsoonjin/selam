@@ -2,18 +2,9 @@
 Object Proposal
 ===============
 
-
-Selective Search
-================
-
-
-Edge Box
-========
-
-
-Maximally Stable Extremal Region (MSER)
-=======================================
-
-
-Saliency
-========
+.. toctree::
+    
+    modules/groupingproposal.rst
+    modules/windowscoringproposal.rst
+    modules/blobproposal.rst
+    modules/saliencyproposal.rst

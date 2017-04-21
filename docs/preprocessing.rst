@@ -2,14 +2,7 @@
 Preprocessing
 ============
 
+.. toctree::
 
-Color Correction
-================
-
-
-Image enhancement
-=================
-
-
-Illumination compensation
-=========================
+    modules/colorcorrection.rst
+    modules/enhancement.rst

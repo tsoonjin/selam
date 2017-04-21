@@ -11,6 +11,7 @@ Contents:
    preprocessing
    objectproposal
    feature
+   model_learning
    automl
    objecttracking
 

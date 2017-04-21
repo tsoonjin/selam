@@ -2,15 +2,7 @@
 Object Tracking
 ===============
 
-How does the tracker works ?
-============================
+.. toctree::
 
-
-Online update
-=============
-
-
-Model-free tracking
-===================
-
-
+    modules/fixedmodel.rst
+    modules/onlineupdate.rst

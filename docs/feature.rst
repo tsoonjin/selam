@@ -2,17 +2,7 @@
 Feature Engineering
 ===================
 
-Illumination invariance
-=======================
+.. toctree::
 
-
-Color Descriptor
-================
-
-
-Shape Descriptor
-================
-
-
-Dimensionality reduction
-========================
+    modules/colorspace.rst
+    modules/descriptor.rst
