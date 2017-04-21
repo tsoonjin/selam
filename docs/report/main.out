@@ -1,0 +1,77 @@
+\BOOKMARK [0][-]{Doc-Start}{Title}{}% 1
+\BOOKMARK [0][-]{Doc-Start}{Abstract}{}% 2
+\BOOKMARK [0][-]{Doc-Start}{Acknowledgement}{}% 3
+\BOOKMARK [0][-]{Doc-Start}{List of Figures}{}% 4
+\BOOKMARK [0][-]{chapter*.1}{List of Tables}{}% 5
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 6
+\BOOKMARK [1][-]{section.1.1}{Background on Robosub}{chapter.1}% 7
+\BOOKMARK [2][-]{subsection.1.1.1}{Information about the competition}{section.1.1}% 8
+\BOOKMARK [2][-]{subsection.1.1.2}{Description of vision tasks}{section.1.1}% 9
+\BOOKMARK [1][-]{section.1.2}{Challenges in Underwater Image Processing}{chapter.1}% 10
+\BOOKMARK [1][-]{section.1.3}{Project Requirements Analysis}{chapter.1}% 11
+\BOOKMARK [2][-]{subsection.1.3.1}{Nature of tasks}{section.1.3}% 12
+\BOOKMARK [0][-]{chapter.2}{Literature Review}{}% 13
+\BOOKMARK [1][-]{section.2.1}{Preprocessing}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.1.1}{Underwater Image Enhancement}{section.2.1}% 15
+\BOOKMARK [2][-]{subsection.2.1.2}{Color Constancy}{section.2.1}% 16
+\BOOKMARK [1][-]{section.2.2}{Saliency Region Detection}{chapter.2}% 17
+\BOOKMARK [1][-]{section.2.3}{Detection Proposals}{chapter.2}% 18
+\BOOKMARK [1][-]{section.2.4}{Object Detection and Tracking}{chapter.2}% 19
+\BOOKMARK [0][-]{chapter.3}{Design \046 Methodology}{}% 20
+\BOOKMARK [1][-]{section.3.1}{Proposed design}{chapter.3}% 21
+\BOOKMARK [2][-]{subsection.3.1.1}{Offline modules}{section.3.1}% 22
+\BOOKMARK [2][-]{subsection.3.1.2}{Online modules}{section.3.1}% 23
+\BOOKMARK [1][-]{section.3.2}{Methodology}{chapter.3}% 24
+\BOOKMARK [2][-]{subsection.3.2.1}{Generating datasets}{section.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.2.2}{Model Learning}{section.3.2}% 26
+\BOOKMARK [2][-]{subsection.3.2.3}{Online object detection and tracking}{section.3.2}% 27
+\BOOKMARK [0][-]{chapter.4}{Preprocessing}{}% 28
+\BOOKMARK [1][-]{section.4.1}{Color Normalization}{chapter.4}% 29
+\BOOKMARK [2][-]{subsection.4.1.1}{Algorithm Implementation}{section.4.1}% 30
+\BOOKMARK [2][-]{subsection.4.1.2}{Improvements}{section.4.1}% 31
+\BOOKMARK [1][-]{section.4.2}{Underwater Image Enhancement}{chapter.4}% 32
+\BOOKMARK [2][-]{subsection.4.2.1}{Fusion-based image restoration}{section.4.2}% 33
+\BOOKMARK [2][-]{subsection.4.2.2}{Denoising \046 Illumination Compensation}{section.4.2}% 34
+\BOOKMARK [1][-]{section.4.3}{Conclusion}{chapter.4}% 35
+\BOOKMARK [0][-]{chapter.5}{Object Proposals}{}% 36
+\BOOKMARK [1][-]{section.5.1}{Algorithm Implementation}{chapter.5}% 37
+\BOOKMARK [2][-]{subsection.5.1.1}{Maximially Stable Extremal Regions \(MSER\)}{section.5.1}% 38
+\BOOKMARK [2][-]{subsection.5.1.2}{Saliency-based}{section.5.1}% 39
+\BOOKMARK [1][-]{section.5.2}{Conclusion}{chapter.5}% 40
+\BOOKMARK [0][-]{chapter.6}{Feature Design}{}% 41
+\BOOKMARK [1][-]{section.6.1}{Requirements}{chapter.6}% 42
+\BOOKMARK [2][-]{subsection.6.1.1}{Illumination invariance}{section.6.1}% 43
+\BOOKMARK [2][-]{subsection.6.1.2}{Scale \046 Rotation invariance}{section.6.1}% 44
+\BOOKMARK [2][-]{subsection.6.1.3}{Shape discriminability}{section.6.1}% 45
+\BOOKMARK [1][-]{section.6.2}{Color space: Implementation}{chapter.6}% 46
+\BOOKMARK [2][-]{subsection.6.2.1}{rg chromacity}{section.6.2}% 47
+\BOOKMARK [2][-]{subsection.6.2.2}{Normalized RGB}{section.6.2}% 48
+\BOOKMARK [2][-]{subsection.6.2.3}{Opponent color space}{section.6.2}% 49
+\BOOKMARK [2][-]{subsection.6.2.4}{Log color ratio}{section.6.2}% 50
+\BOOKMARK [2][-]{subsection.6.2.5}{RGBY opponent space}{section.6.2}% 51
+\BOOKMARK [2][-]{subsection.6.2.6}{DCD: Dominant color descriptor}{section.6.2}% 52
+\BOOKMARK [1][-]{section.6.3}{Shape descriptors}{chapter.6}% 53
+\BOOKMARK [2][-]{subsection.6.3.1}{Inner shape context}{section.6.3}% 54
+\BOOKMARK [2][-]{subsection.6.3.2}{Elliptic Fourier Feature of Closed Contour}{section.6.3}% 55
+\BOOKMARK [2][-]{subsection.6.3.3}{Moment-based descriptors}{section.6.3}% 56
+\BOOKMARK [0][-]{chapter.7}{Model Learning}{}% 57
+\BOOKMARK [1][-]{section.7.1}{Feature Selection}{chapter.7}% 58
+\BOOKMARK [1][-]{section.7.2}{Hyperparameters optimization: Implemetation}{chapter.7}% 59
+\BOOKMARK [1][-]{section.7.3}{Model Selection}{chapter.7}% 60
+\BOOKMARK [0][-]{chapter.8}{Object Tracking}{}% 61
+\BOOKMARK [1][-]{section.8.1}{Benchmarks}{chapter.8}% 62
+\BOOKMARK [1][-]{section.8.2}{Tracking by detection: Implementation}{chapter.8}% 63
+\BOOKMARK [1][-]{section.8.3}{Model-free tracking: Implementation}{chapter.8}% 64
+\BOOKMARK [0][-]{chapter.9}{Experimental results}{}% 65
+\BOOKMARK [1][-]{section.9.1}{Datasets}{chapter.9}% 66
+\BOOKMARK [2][-]{subsection.9.1.1}{Challenges}{section.9.1}% 67
+\BOOKMARK [2][-]{subsection.9.1.2}{Object classes}{section.9.1}% 68
+\BOOKMARK [1][-]{section.9.2}{Results}{chapter.9}% 69
+\BOOKMARK [2][-]{subsection.9.2.1}{Evaluation methodology}{section.9.2}% 70
+\BOOKMARK [2][-]{subsection.9.2.2}{Trackers}{section.9.2}% 71
+\BOOKMARK [2][-]{subsection.9.2.3}{Raw results}{section.9.2}% 72
+\BOOKMARK [1][-]{section.9.3}{Discussion}{chapter.9}% 73
+\BOOKMARK [2][-]{subsection.9.3.1}{Preprocessing}{section.9.3}% 74
+\BOOKMARK [2][-]{subsection.9.3.2}{Automatic machine learning}{section.9.3}% 75
+\BOOKMARK [2][-]{subsection.9.3.3}{Conclusion}{section.9.3}% 76
+\BOOKMARK [0][-]{chapter*.33}{References}{}% 77

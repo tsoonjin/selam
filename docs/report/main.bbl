@@ -1,0 +1,556 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citename{Achanta}{Hemami,
+  Estrada}{Susstrunk}{AchantaETAL}{2009}{achanta2009frequency}]{achanta2009frequency}
+Achanta, R., Hemami, S., Estrada, F., \& Susstrunk, S. (2009).
+\newblock Frequency-tuned salient region detection.
+\newblock {\em Computer vision and pattern recognition, 2009. cvpr 2009. ieee
+  conference on} (pp.\ 1597--1604), IEEE, 2009.
+
+\bibitem[\protect\citename{Agrawal}{Konolige}{Blas}{AgrawalETAL}{2008}{agrawal2008censure}]{agrawal2008censure}
+Agrawal, M., Konolige, K., \& Blas, M.~R. (2008).
+\newblock Censure: Center surround extremas for realtime feature detection and
+  matching.
+\newblock {\em European Conference on Computer Vision} (pp.\ 102--115),
+  Springer, 2008.
+
+\bibitem[\protect\citename{Alahi}{Ortiz}{Vandergheynst}{AlahiETAL}{2012}{alahi2012freak}]{alahi2012freak}
+Alahi, A., Ortiz, R., \& Vandergheynst, P. (2012).
+\newblock Freak: Fast retina keypoint.
+\newblock {\em Computer vision and pattern recognition (CVPR), 2012 IEEE
+  conference on} (pp.\ 510--517), Ieee, 2012.
+
+\bibitem[\protect\citename{Alcantarilla}{}{Solutions}{Alcantarilla-Solutions}{2011}{alcantarilla2011fast}]{alcantarilla2011fast}
+Alcantarilla, P.~F., \& Solutions, T. (2011).
+\newblock Fast explicit diffusion for accelerated features in nonlinear scale
+  spaces.
+\newblock {\em IEEE Trans. Patt. Anal. Mach. Intell}, {\em 34\/}(7), 2011,
+  1281--1298.
+
+\bibitem[\protect\citename{Ancuti}{}{Bekaert}{Ancuti-Bekaert}{2011}{Ancuti2011}]{Ancuti2011}
+Ancuti, C., \& Bekaert, P. (2011).
+\newblock {Enhancing Underwater Images by Fusion}.
+\newblock {\em Computer}, , 2011, 4503--4503.
+
+\bibitem[\protect\citename{Bani??}{}{Lon??ari??}{Bani??-Lon??ari??}{2014}{Bani??2014}]{Bani??2014}
+Bani??, N., \& Lon??ari??, S. (2014).
+\newblock {Color rabbit: Guiding the distance of local maximums in illumination
+  estimation}.
+\newblock {\em International Conference on Digital Signal Processing, DSP},
+  {\em 2014-Janua\/}(Cd), 2014, 345--350.
+
+\bibitem[\protect\citename{Bay}{Tuytelaars}{Van~Gool}{BayETAL}{2006}{bay2006surf}]{bay2006surf}
+Bay, H., Tuytelaars, T., \& Van~Gool, L. (2006).
+\newblock Surf: Speeded up robust features.
+\newblock {\em Computer vision--ECCV 2006}, , 2006, 404--417.
+
+\bibitem[\protect\citename{Benoit}{Goulet, Bouchard-d'Haese, Bouzidi, Carrier,
+  Couturier, Desjardins, Dozois, Fortier, Langlois,
+  Ritchie}{Pr{\'{e}}vost}{BenoitETAL}{2014}{Benoit2014}]{Benoit2014}
+Benoit, M., Goulet, M.-A.~B., Bouchard-d'Haese, F., Bouzidi, R., Carrier, J.,
+  Couturier, {\'{E}}., Desjardins, V., Dozois, A., Fortier, M., Langlois, F.,
+  Ritchie, K., \& Pr{\'{e}}vost, J. S.-J. (2014).
+\newblock {S.O.N.I.A - Autonomous Underwater Vehicle}.
+\newblock , 2014.
+
+\bibitem[\protect\citename{Bolme}{Beveridge,
+  Draper}{Lui}{BolmeETAL}{2010a}{Bolme2010}]{Bolme2010}
+Bolme, D., Beveridge, J.~R., Draper, B.~a., \& Lui, Y.~M. (2010a).
+\newblock {Visual object tracking using adaptive correlation filters}.
+\newblock {\em 2010 IEEE Computer Society Conference on Computer Vision and
+  Pattern Recognition}, , 2010, 2544--2550.
+
+\bibitem[\protect\citename{Bolme}{Beveridge,
+  Draper}{Lui}{BolmeETAL}{2010b}{bolme2010visual}]{bolme2010visual}
+Bolme, D.~S., Beveridge, J.~R., Draper, B.~A., \& Lui, Y.~M. (2010b).
+\newblock Visual object tracking using adaptive correlation filters.
+\newblock {\em Computer Vision and Pattern Recognition (CVPR), 2010 IEEE
+  Conference on} (pp.\ 2544--2550), IEEE, 2010.
+
+\bibitem[\protect\citename{Buchsbaum}{}{}{Buchsbaum}{1980}{buchsbaum1980spatial}]{buchsbaum1980spatial}
+Buchsbaum, G. (1980).
+\newblock A spatial processor model for object colour perception.
+\newblock {\em Journal of the Franklin institute}, {\em 310\/}(1), 1980, 1--26.
+
+\bibitem[\protect\citename{Canny}{}{}{Canny}{1986}{canny1986computational}]{canny1986computational}
+Canny, J. (1986).
+\newblock A computational approach to edge detection.
+\newblock {\em IEEE Transactions on pattern analysis and machine intelligence},
+  (6), 1986, 679--698.
+
+\bibitem[\protect\citename{Cao}{}{Cheikh}{Cao-Cheikh}{2010}{Cao2010}]{Cao2010}
+Cao, G., \& Cheikh, F.~A. (2010).
+\newblock {Salient region detection with opponent color boosting}.
+\newblock {\em 2010 2nd European Workshop on Visual Information Processing,
+  EUVIP2010}, , 2010, 13--18.
+
+\bibitem[\protect\citename{Cepeda-Negrete}{}{Sanchez-Yanez}{Cepeda-Negrete-Sanchez-Yanez}{2012}{cepeda2012combining}]{cepeda2012combining}
+Cepeda-Negrete, J., \& Sanchez-Yanez, R.~E. (2012).
+\newblock Combining color constancy and gamma correction for image enhancement.
+\newblock {\em Electronics, Robotics and Automotive Mechanics Conference
+  (CERMA), 2012 IEEE Ninth} (pp.\ 25--30), IEEE, 2012.
+
+\bibitem[\protect\citename{Chang}{}{}{Chang}{}{changlight}]{changlight}
+Chang, C.-F.
+\newblock
+\newblock Light compensation, .
+
+\bibitem[\protect\citename{Cheng}{Prasad}{Brown}{ChengETAL}{2014a}{cheng2014illuminant}]{cheng2014illuminant}
+Cheng, D., Prasad, D.~K., \& Brown, M.~S. (2014a).
+\newblock Illuminant estimation for color constancy: why spatial-domain methods
+  work and the role of the color distribution.
+\newblock {\em JOSA A}, {\em 31\/}(5), 2014, 1049--1058.
+
+\bibitem[\protect\citename{Cheng}{Zhang,
+  Lin}{Torr}{ChengETAL}{2014b}{cheng2014bing}]{cheng2014bing}
+Cheng, M.-M., Zhang, Z., Lin, W.-Y., \& Torr, P. (2014b).
+\newblock Bing: Binarized normed gradients for objectness estimation at 300fps.
+\newblock {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition} (pp.\ 3286--3293), 2014.
+
+\bibitem[\protect\citename{Chong}{Gortler}{Zickler}{ChongETAL}{2008}{chong2008perception}]{chong2008perception}
+Chong, H.~Y., Gortler, S.~J., \& Zickler, T. (2008).
+\newblock A perception-based color space for illumination-invariant image
+  processing.
+\newblock {\em ACM Transactions on Graphics (TOG)}, Vol.~27 (p.~61), ACM, 2008.
+
+\bibitem[\protect\citename{Comaniciu}{}{Meer}{Comaniciu-Meer}{2002}{comaniciu2002mean}]{comaniciu2002mean}
+Comaniciu, D., \& Meer, P. (2002).
+\newblock Mean shift: A robust approach toward feature space analysis.
+\newblock {\em IEEE Transactions on pattern analysis and machine intelligence},
+  {\em 24\/}(5), 2002, 603--619.
+
+\bibitem[\protect\citename{Dalal}{}{Triggs}{Dalal-Triggs}{2005}{dalal2005histograms}]{dalal2005histograms}
+Dalal, N., \& Triggs, B. (2005).
+\newblock Histograms of oriented gradients for human detection.
+\newblock {\em Computer Vision and Pattern Recognition, 2005. CVPR 2005. IEEE
+  Computer Society Conference on}, Vol.~1 (pp.\ 886--893), IEEE, 2005.
+
+\bibitem[\protect\citename{Fang}{Deng,
+  Cao}{Fang}{FangETAL}{2013}{fang2013effective}]{fang2013effective}
+Fang, S., Deng, R., Cao, Y., \& Fang, C. (2013).
+\newblock Effective single underwater image enhancement by fusion.
+\newblock {\em JCP}, {\em 8\/}(4), 2013, 904--911.
+
+\bibitem[\protect\citename{Feurer}{Klein, Eggensperger, Springenberg,
+  Blum}{Hutter}{FeurerETAL}{2015}{feurer2015efficient}]{feurer2015efficient}
+Feurer, M., Klein, A., Eggensperger, K., Springenberg, J., Blum, M., \& Hutter,
+  F. (2015).
+\newblock Efficient and robust automated machine learning.
+\newblock {\em Advances in Neural Information Processing Systems} (pp.\
+  2962--2970), 2015.
+
+\bibitem[\protect\citename{Finlayson}{Schiele}{Crowley}{FinlaysonETAL}{1998}{finlayson1998comprehensive}]{finlayson1998comprehensive}
+Finlayson, G., Schiele, B., \& Crowley, J. (1998).
+\newblock Comprehensive colour image normalization.
+\newblock {\em Computer Vision—ECCV'98}, , 1998, 475--490.
+
+\bibitem[\protect\citename{Finlayson}{}{Xu}{Finlayson-Xu}{2002}{finlayson2002non}]{finlayson2002non}
+Finlayson, G., \& Xu, R. (2002).
+\newblock Non-iterative comprehensive normalisation.
+\newblock {\em Conference on Colour in Graphics, Imaging, and Vision}, Vol.
+  2002 (pp.\ 159--163), Society for Imaging Science and Technology, 2002.
+
+\bibitem[\protect\citename{Finlayson}{}{Trezzi}{Finlayson-Trezzi}{2004}{finlayson2004shades}]{finlayson2004shades}
+Finlayson, G.~D., \& Trezzi, E. (2004).
+\newblock Shades of gray and colour constancy.
+\newblock {\em Color and Imaging Conference}, Vol. 2004 (pp.\ 37--41), Society
+  for Imaging Science and Technology, 2004.
+
+\bibitem[\protect\citename{Forss{\'e}n}{}{}{Forss{\'e}n}{2007}{forssen2007maximally}]{forssen2007maximally}
+Forss{\'e}n, P.-E. (2007).
+\newblock Maximally stable colour regions for recognition and matching.
+\newblock {\em Computer Vision and Pattern Recognition, 2007. CVPR'07. IEEE
+  Conference on} (pp.\ 1--8), IEEE, 2007.
+
+\bibitem[\protect\citename{Galdran}{Pardo,
+  Pic{\'{o}}n}{Alvarez-Gila}{GaldranETAL}{2015}{Galdran2015}]{Galdran2015}
+Galdran, A., Pardo, D., Pic{\'{o}}n, A., \& Alvarez-Gila, A. (2015).
+\newblock {Automatic Red-Channel underwater image restoration}.
+\newblock {\em Journal of Visual Communication and Image Representation}, {\em
+  26\/}, 2015, 132--145.
+
+\bibitem[\protect\citename{Gao}{Yang,
+  Li}{Li}{GaoETAL}{2013a}{Gao2013}]{Gao2013}
+Gao, S., Yang, K., Li, C., \& Li, Y. (2013a).
+\newblock {A Color Constancy Model with Double-Opponency Mechanisms}.
+\newblock {\em Computer Vision (ICCV), 2013 IEEE International Conference on},
+  , 2013, 929--936.
+
+\bibitem[\protect\citename{Gao}{Yang,
+  Li}{Li}{GaoETAL}{2013b}{gao2013color}]{gao2013color}
+Gao, S., Yang, K., Li, C., \& Li, Y. (2013b).
+\newblock A color constancy model with double-opponency mechanisms.
+\newblock {\em Proceedings of the IEEE International Conference on Computer
+  Vision} (pp.\ 929--936), 2013.
+
+\bibitem[\protect\citename{Garcia}{Nicosevici}{Cuf{\'\i}}{GarciaETAL}{2002}{garcia2002way}]{garcia2002way}
+Garcia, R., Nicosevici, T., \& Cuf{\'\i}, X. (2002).
+\newblock On the way to solve lighting problems in underwater imaging.
+\newblock {\em OCEANS'02 MTS/IEEE}, Vol.~2 (pp.\ 1018--1024), IEEE, 2002.
+
+\bibitem[\protect\citename{Gelbart}{Snoek}{Adams}{GelbartETAL}{2014}{gelbart2014bayesian}]{gelbart2014bayesian}
+Gelbart, M.~A., Snoek, J., \& Adams, R.~P. (2014).
+\newblock Bayesian optimization with unknown constraints.
+\newblock {\em arXiv preprint arXiv:1403.5607}, , 2014.
+
+\bibitem[\protect\citename{Gevers}{Gijsenij, Van~de
+  Weijer}{Geusebroek}{GeversETAL}{2012}{gevers2012color}]{gevers2012color}
+Gevers, T., Gijsenij, A., Van~de Weijer, J., \& Geusebroek, J.-M. (2012).
+\newblock {\em Color in computer vision: fundamentals and applications},
+  Vol.~23.
+\newblock John Wiley \& Sons.
+
+\bibitem[\protect\citename{Gijsenij}{Gevers}{{Van De
+  Weijer}}{GijsenijETAL}{2011a}{Gijsenij2011}]{Gijsenij2011}
+Gijsenij, A., Gevers, T., \& {Van De Weijer}, J. (2011a).
+\newblock {Computational color constancy: Survey and experiments}.
+\newblock {\em IEEE Transactions on Image Processing}, {\em 20\/}(9), 2011,
+  2475--2489.
+
+\bibitem[\protect\citename{Gijsenij}{Gevers}{Van
+  De~Weijer}{GijsenijETAL}{2011b}{gijsenij2011computational}]{gijsenij2011computational}
+Gijsenij, A., Gevers, T., \& Van De~Weijer, J. (2011b).
+\newblock Computational color constancy: Survey and experiments.
+\newblock {\em IEEE Transactions on Image Processing}, {\em 20\/}(9), 2011,
+  2475--2489.
+
+\bibitem[\protect\citename{Gracias}{Negahdaripour, Neumann,
+  Prados}{Garcia}{GraciasETAL}{2008}{Gracias2008}]{Gracias2008}
+Gracias, N., Negahdaripour, S., Neumann, L., Prados, R., \& Garcia, R. (2008).
+\newblock {A motion compensated filtering approach to remove sunlight flicker
+  in shallow water images}.
+\newblock {\em Oceans 2008}, , 2008, 1--7.
+
+\bibitem[\protect\citename{He}{Sun}{Tang}{HeETAL}{2011}{he2011single}]{he2011single}
+He, K., Sun, J., \& Tang, X. (2011).
+\newblock Single image haze removal using dark channel prior.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  {\em 33\/}(12), 2011, 2341--2353.
+
+\bibitem[\protect\citename{Henriques}{Caseiro,
+  Martins}{Batista}{HenriquesETAL}{2015}{henriques2015high}]{henriques2015high}
+Henriques, J.~F., Caseiro, R., Martins, P., \& Batista, J. (2015).
+\newblock High-speed tracking with kernelized correlation filters.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  {\em 37\/}(3), 2015, 583--596.
+
+\bibitem[\protect\citename{Hosang}{Benenson,
+  Doll{\'{a}}r}{Schiele}{HosangETAL}{2015}{Hosang2015}]{Hosang2015}
+Hosang, J., Benenson, R., Doll{\'{a}}r, P., \& Schiele, B. (2015).
+\newblock {What makes for effective detection proposals?}
+\newblock {\em Arxiv}, , 2015, 2014.
+
+\bibitem[\protect\citename{Hosang}{Benenson,
+  Doll{\'a}r}{Schiele}{HosangETAL}{2016}{hosang2016makes}]{hosang2016makes}
+Hosang, J., Benenson, R., Doll{\'a}r, P., \& Schiele, B. (2016).
+\newblock What makes for effective detection proposals?
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  {\em 38\/}(4), 2016, 814--830.
+
+\bibitem[\protect\citename{Hu}{}{}{Hu}{1962}{hu1962visual}]{hu1962visual}
+Hu, M.-K. (1962).
+\newblock Visual pattern recognition by moment invariants.
+\newblock {\em IRE transactions on information theory}, {\em 8\/}(2), 1962,
+  179--187.
+
+\bibitem[\protect\citename{Hutter}{Hoos}{Leyton-Brown}{HutterETAL}{2011}{hutter2011sequential}]{hutter2011sequential}
+Hutter, F., Hoos, H.~H., \& Leyton-Brown, K. (2011).
+\newblock Sequential model-based optimization for general algorithm
+  configuration.
+\newblock {\em International Conference on Learning and Intelligent
+  Optimization} (pp.\ 507--523), Springer, 2011.
+
+\bibitem[\protect\citename{Isard}{}{Blake}{Isard-Blake}{1998}{isard1998condensation}]{isard1998condensation}
+Isard, M., \& Blake, A. (1998).
+\newblock Condensation—conditional density propagation for visual tracking.
+\newblock {\em International journal of computer vision}, {\em 29\/}(1), 1998,
+  5--28.
+
+\bibitem[\protect\citename{Itti}{Koch}{Niebur}{IttiETAL}{1998}{Itti1998}]{Itti1998}
+Itti, L., Koch, C., \& Niebur, E. (1998).
+\newblock {A model of saliency-based visual attention for rapid scene
+  analysis}.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  {\em 20\/}(11), 1998, 1254--1259.
+
+\bibitem[\protect\citename{Kaiming}{Jian}{Xiaoou}{KaimingETAL}{2011}{Kaiming2011}]{Kaiming2011}
+Kaiming, H., Jian, S., \& Xiaoou, T. (2011).
+\newblock {Single Image Haze Removal Using Dark Channel Prior}.
+\newblock {\em IEEE Trans Pattern Anal Mach Intell}, {\em 33\/}(12), 2011,
+  2341--2353.
+
+\bibitem[\protect\citename{Kloss}{}{}{Kloss}{2009}{kloss2009colour}]{kloss2009colour}
+Kloss, G.~K. (2009).
+\newblock Colour constancy using von kries transformations: colour constancy"
+  goes to the lab".
+\newblock , 2009.
+
+\bibitem[\protect\citename{Kristan}{Leonardis, Matas, Felsberg, Pflugfelder,
+  \v{C}ehovin, Vojir, H\"{a}ger,
+  Luke\v{z}i\v{c}}{Fernandez}{KristanETAL}{2016}{Kristan2016a}]{Kristan2016a}
+Kristan, M., Leonardis, A., Matas, J., Felsberg, M., Pflugfelder, R.,
+  \v{C}ehovin, L., Vojir, T., H\"{a}ger, G., Luke\v{z}i\v{c}, A., \& Fernandez,
+  G. (2016).
+\newblock The visual object tracking vot2016 challenge results.
+\newblock Springer.
+
+\bibitem[\protect\citename{Kristan}{Matas, Leonardis, Felsberg, Cehovin,
+  Fernandez, Vojir, Hager,
+  Nebehay}{Pflugfelder}{KristanETAL}{2015}{kristan2015visual}]{kristan2015visual}
+Kristan, M., Matas, J., Leonardis, A., Felsberg, M., Cehovin, L., Fernandez,
+  G., Vojir, T., Hager, G., Nebehay, G., \& Pflugfelder, R. (2015).
+\newblock The visual object tracking vot2015 challenge results.
+\newblock {\em Proceedings of the IEEE International Conference on Computer
+  Vision Workshops} (pp.\ 1--23), 2015.
+
+\bibitem[\protect\citename{Kuhl}{}{Giardina}{Kuhl-Giardina}{1982}{kuhl1982elliptic}]{kuhl1982elliptic}
+Kuhl, F.~P., \& Giardina, C.~R. (1982).
+\newblock Elliptic fourier features of a closed contour.
+\newblock {\em Computer graphics and image processing}, {\em 18\/}(3), 1982,
+  236--258.
+
+\bibitem[\protect\citename{Kviatkovsky}{Adam}{Rivlin}{KviatkovskyETAL}{2013}{kviatkovsky2013color}]{kviatkovsky2013color}
+Kviatkovsky, I., Adam, A., \& Rivlin, E. (2013).
+\newblock Color invariants for person reidentification.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  {\em 35\/}(7), 2013, 1622--1634.
+
+\bibitem[\protect\citename{Land}{}{others}{LandETAL}{1977}{land1977retinex}]{land1977retinex}
+Land, E.~H., et~al. (1977).
+\newblock {\em The retinex theory of color vision}.
+\newblock Citeseer.
+
+\bibitem[\protect\citename{Lee}{Jeon,
+  Yoon}{Paik}{LeeETAL}{2016}{lee2016recent}]{lee2016recent}
+Lee, H., Jeon, S., Yoon, I., \& Paik, J. (2016).
+\newblock Recent advances in feature detectors and descriptors.
+\newblock {\em IEIE Transactions on Smart Processing \& Computing}, {\em
+  5\/}(3), 2016, 153--163.
+
+\bibitem[\protect\citename{Leutenegger}{Chli}{Siegwart}{LeuteneggerETAL}{2011}{leutenegger2011brisk}]{leutenegger2011brisk}
+Leutenegger, S., Chli, M., \& Siegwart, R.~Y. (2011).
+\newblock Brisk: Binary robust invariant scalable keypoints.
+\newblock {\em Computer Vision (ICCV), 2011 IEEE International Conference on}
+  (pp.\ 2548--2555), IEEE, 2011.
+
+\bibitem[\protect\citename{Ling}{}{Jacobs}{Ling-Jacobs}{2007}{ling2007shape}]{ling2007shape}
+Ling, H., \& Jacobs, D.~W. (2007).
+\newblock Shape classification using the inner-distance.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  {\em 29\/}(2), 2007.
+
+\bibitem[\protect\citename{Lowe}{}{}{Lowe}{1999}{lowe1999object}]{lowe1999object}
+Lowe, D.~G. (1999).
+\newblock Object recognition from local scale-invariant features.
+\newblock {\em Computer vision, 1999. The proceedings of the seventh IEEE
+  international conference on}, Vol.~2 (pp.\ 1150--1157), Ieee, 1999.
+
+\bibitem[\protect\citename{Luan}{Qi, Song, Chen,
+  Zhu}{Wang}{LuanETAL}{2010}{luan2010illumination}]{luan2010illumination}
+Luan, X., Qi, W., Song, D., Chen, M., Zhu, T., \& Wang, L. (2010).
+\newblock Illumination invariant color model for object recognition in robot
+  soccer.
+\newblock {\em International Conference in Swarm Intelligence} (pp.\ 680--687),
+  Springer, 2010.
+
+\bibitem[\protect\citename{M}{Abhilash}{Supriya}{METAL}{2016}{M2016}]{M2016}
+M, A. R.~S., Abhilash, S., \& Supriya, M.~H. (2016).
+\newblock {A Comparative Study of Various Methods for Underwater Image
+  Enhancement and Restoration}.
+\newblock {\em 6\/}(2), 2016, 30--33.
+
+\bibitem[\protect\citename{Maddern}{Stewart, McManus, Upcroft,
+  Churchill}{Newman}{MaddernETAL}{2014}{maddern2014illumination}]{maddern2014illumination}
+Maddern, W., Stewart, A., McManus, C., Upcroft, B., Churchill, W., \& Newman,
+  P. (2014).
+\newblock Illumination invariant imaging: Applications in robust vision-based
+  localisation, mapping and classification for autonomous vehicles.
+\newblock {\em Proceedings of the Visual Place Recognition in Changing
+  Environments Workshop, IEEE International Conference on Robotics and
+  Automation (ICRA), Hong Kong, China}, Vol.~2 (p.~3), 2014.
+
+\bibitem[\protect\citename{Ojala}{Pietikainen}{Maenpaa}{OjalaETAL}{2002}{ojala2002multiresolution}]{ojala2002multiresolution}
+Ojala, T., Pietikainen, M., \& Maenpaa, T. (2002).
+\newblock Multiresolution gray-scale and rotation invariant texture
+  classification with local binary patterns.
+\newblock {\em IEEE Transactions on pattern analysis and machine intelligence},
+  {\em 24\/}(7), 2002, 971--987.
+
+\bibitem[\protect\citename{Padmavathi}{Subashini,
+  Kumar}{Thakur}{PadmavathiETAL}{2010}{padmavathi2010comparison}]{padmavathi2010comparison}
+Padmavathi, G., Subashini, P., Kumar, M.~M., \& Thakur, S.~K. (2010).
+\newblock Comparison of filters used for underwater image pre-processing.
+\newblock {\em International Journal of Computer Science and Network Security},
+  {\em 10\/}(1), 2010, 58--65.
+
+\bibitem[\protect\citename{Perona}{}{Malik}{Perona-Malik}{1990}{perona1990scale}]{perona1990scale}
+Perona, P., \& Malik, J. (1990).
+\newblock Scale-space and edge detection using anisotropic diffusion.
+\newblock {\em IEEE Transactions on pattern analysis and machine intelligence},
+  {\em 12\/}(7), 1990, 629--639.
+
+\bibitem[\protect\citename{Pieropan}{Bj{\"o}rkman,
+  Bergstr{\"o}m}{Kragic}{PieropanETAL}{2016}{pieropan2016feature}]{pieropan2016feature}
+Pieropan, A., Bj{\"o}rkman, M., Bergstr{\"o}m, N., \& Kragic, D. (2016).
+\newblock Feature descriptors for tracking by detection: a benchmark.
+\newblock {\em arXiv preprint arXiv:1607.06178}, , 2016.
+
+\bibitem[\protect\citename{Rasmussen}{}{}{Rasmussen}{2006}{rasmussen2006gaussian}]{rasmussen2006gaussian}
+Rasmussen, C.~E. (2006).
+\newblock Gaussian processes for machine learning.
+\newblock , 2006.
+
+\bibitem[\protect\citename{Rublee}{Rabaud,
+  Konolige}{Bradski}{RubleeETAL}{2011}{rublee2011orb}]{rublee2011orb}
+Rublee, E., Rabaud, V., Konolige, K., \& Bradski, G. (2011).
+\newblock Orb: An efficient alternative to sift or surf.
+\newblock {\em Computer Vision (ICCV), 2011 IEEE International Conference on}
+  (pp.\ 2564--2571), IEEE, 2011.
+
+\bibitem[\protect\citename{Sabhara}{Lee}{Lim}{SabharaETAL}{2013}{sabhara2013comparative}]{sabhara2013comparative}
+Sabhara, R.~K., Lee, C.-P., \& Lim, K.-M. (2013).
+\newblock Comparative study of hu moments and zernike moments in object
+  recognition.
+\newblock {\em SmartCR}, {\em 3\/}(3), 2013, 166--173.
+
+\bibitem[\protect\citename{Sande}{}{others}{SandeETAL}{2011}{sande2011invariant}]{sande2011invariant}
+Sande, K. E.~A., et~al. (2011).
+\newblock {\em Invariant color descriptors for efficient object recognition}.
+
+\bibitem[\protect\citename{Snoek}{}{}{Snoek}{2013}{snoek2013bayesian}]{snoek2013bayesian}
+Snoek, J. (2013).
+\newblock {\em Bayesian optimization and semiparametric models with
+  applications to assistive technology}.
+\newblock PhD thesis, Citeseer.
+
+\bibitem[\protect\citename{Snoek}{Larochelle}{Adams}{SnoekETAL}{2012}{snoek2012practical}]{snoek2012practical}
+Snoek, J., Larochelle, H., \& Adams, R.~P. (2012).
+\newblock Practical bayesian optimization of machine learning algorithms.
+\newblock {\em Advances in neural information processing systems} (pp.\
+  2951--2959), 2012.
+
+\bibitem[\protect\citename{Snoek}{Swersky,
+  Zemel}{Adams}{SnoekETAL}{2014}{snoek2014input}]{snoek2014input}
+Snoek, J., Swersky, K., Zemel, R.~S., \& Adams, R.~P. (2014).
+\newblock Input warping for bayesian optimization of non-stationary functions.
+\newblock {\em ICML} (pp.\ 1674--1682), 2014.
+
+\bibitem[\protect\citename{Stalder}{van
+  Gool}{Avidan}{StalderETAL}{2012}{stalder2012paradigms}]{stalder2012paradigms}
+Stalder, S., van Gool, L., \& Avidan, S. (2012).
+\newblock {\em Paradigms in visual object tracking: Severin stalder}.
+\newblock ETH.
+
+\bibitem[\protect\citename{Suzuki}{}{others}{SuzukiETAL}{1985}{suzuki1985topological}]{suzuki1985topological}
+Suzuki, S., et~al. (1985).
+\newblock Topological structural analysis of digitized binary images by border
+  following.
+\newblock {\em Computer Vision, Graphics, and Image Processing}, {\em 30\/}(1),
+  1985, 32--46.
+
+\bibitem[\protect\citename{Swersky}{Snoek}{Adams}{SwerskyETAL}{2013}{swersky2013multi}]{swersky2013multi}
+Swersky, K., Snoek, J., \& Adams, R.~P. (2013).
+\newblock Multi-task bayesian optimization.
+\newblock {\em Advances in neural information processing systems} (pp.\
+  2004--2012), 2013.
+
+\bibitem[\protect\citename{Todt}{}{Torras}{Todt-Torras}{2004}{todt2004detecting}]{todt2004detecting}
+Todt, E., \& Torras, C. (2004).
+\newblock Detecting salient cues through illumination-invariant color ratios.
+\newblock {\em Robotics and Autonomous Systems}, {\em 48\/}(2), 2004, 111--130.
+
+\bibitem[\protect\citename{Tola}{Lepetit}{Fua}{TolaETAL}{2010}{tola2010daisy}]{tola2010daisy}
+Tola, E., Lepetit, V., \& Fua, P. (2010).
+\newblock Daisy: An efficient dense descriptor applied to wide-baseline stereo.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  {\em 32\/}(5), 2010, 815--830.
+
+\bibitem[\protect\citename{Uijlings}{van~de Sande,
+  Gevers}{Smeulders}{UijlingsETAL}{2013}{uijlings2013selective}]{uijlings2013selective}
+Uijlings, J.~R., van~de Sande, K.~E., Gevers, T., \& Smeulders, A.~W. (2013).
+\newblock Selective search for object recognition.
+\newblock {\em International journal of computer vision}, {\em 104\/}(2), 2013,
+  154--171.
+
+\bibitem[\protect\citename{Van De~Sande}{Gevers}{Snoek}{Van
+  De~SandeETAL}{2010}{van2010evaluating}]{van2010evaluating}
+Van De~Sande, K., Gevers, T., \& Snoek, C. (2010).
+\newblock Evaluating color descriptors for object and scene recognition.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  {\em 32\/}(9), 2010, 1582--1596.
+
+\bibitem[\protect\citename{{Van De Weijer}}{}{Gevers}{{Van De
+  Weijer}-Gevers}{2005}{VanDeWeijer2005}]{VanDeWeijer2005}
+{Van De Weijer}, J., \& Gevers, T. (2005).
+\newblock {Boosting saliency in color image features}.
+\newblock {\em Proceedings of the IEEE Computer Society Conference on Computer
+  Vision and Pattern Recognition}, {\em 1\/}(c), 2005, 365--372.
+
+\bibitem[\protect\citename{Van De~Weijer}{}{Gevers}{Van
+  De~Weijer-Gevers}{2005}{van2005color}]{van2005color}
+Van De~Weijer, J., \& Gevers, T. (2005).
+\newblock Color constancy based on the grey-edge hypothesis.
+\newblock {\em Image Processing, 2005. ICIP 2005. IEEE International Conference
+  on}, Vol.~2 (pp.\ II--722), IEEE, 2005.
+
+\bibitem[\protect\citename{\v{C}ehovin}{Kristan}{Leonardis}{\v{C}ehovinETAL}{2014}{Cehovin2014a}]{Cehovin2014a}
+\v{C}ehovin, L., Kristan, M., \& Leonardis, A. (2014).
+\newblock Is my new tracker really better than yours?
+\newblock {\em WACV 2014: IEEE Winter Conference on Applications of Computer
+  Vision}, Mar, 2014: IEEE.
+
+\bibitem[\protect\citename{\v{C}ehovin}{Leonardis}{Kristan}{\v{C}ehovinETAL}{2016}{Cehovin2016a}]{Cehovin2016a}
+\v{C}ehovin, L., Leonardis, A., \& Kristan, M. (2016).
+\newblock Visual object tracking performance measures revisited.
+
+\bibitem[\protect\citename{von Kries}{}{}{von
+  Kries}{1970}{von1970influence}]{von1970influence}
+von Kries, J. (1970).
+\newblock Influence of adaptation on the effects produced by luminous stimuli.
+\newblock {\em Sources of color vision}, , 1970, 109--119.
+
+\bibitem[\protect\citename{Walters}{Sauder, Nezvadovitz, Voight, Gray,
+  Schwartz}{{Walters, P and Sauder, N and Nezvadovitz, J and Voight, F and
+  Gray, A and Schwartz}}{WaltersETAL}{2014}{Walters2014}]{Walters2014}
+Walters, P., Sauder, N., Nezvadovitz, J., Voight, F., Gray, A., Schwartz,
+  E.~M., \& {Walters, P and Sauder, N and Nezvadovitz, J and Voight, F and
+  Gray, A and Schwartz}, E. (2014).
+\newblock {SubjuGator 2014: Design and Implementation of a Modular, Fault
+  Tolerant AUV}.
+\newblock {\em AUVSI Foundation's 17th Annual RoboSub Competition, San Diego,
+  CA}, , 2014, 1--8.
+
+\bibitem[\protect\citename{Winschel}{Lienhart}{Eggert}{WinschelETAL}{2016}{Winschel2016}]{Winschel2016}
+Winschel, A., Lienhart, R., \& Eggert, C. (2016).
+\newblock {Diversity in Object Proposals}.
+\newblock (C), 2016.
+
+\bibitem[\protect\citename{Yang}{Gao}{Li}{YangETAL}{2015}{yang2015efficient}]{yang2015efficient}
+Yang, K.-F., Gao, S.-B., \& Li, Y.-J. (2015).
+\newblock Efficient illuminant estimation for color constancy using grey
+  pixels.
+\newblock {\em Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition} (pp.\ 2254--2263), 2015.
+
+\bibitem[\protect\citename{Zhang}{Sclaroff, Lin, Shen,
+  Price}{Mech}{ZhangETAL}{2015}{zhang2015minimum}]{zhang2015minimum}
+Zhang, J., Sclaroff, S., Lin, Z., Shen, X., Price, B., \& Mech, R. (2015).
+\newblock Minimum barrier salient object detection at 80 fps.
+\newblock {\em Proceedings of the IEEE International Conference on Computer
+  Vision} (pp.\ 1404--1412), 2015.
+
+\bibitem[\protect\citename{Zhu}{Liang,
+  Wei}{Sun}{ZhuETAL}{2014}{zhu2014saliency}]{zhu2014saliency}
+Zhu, W., Liang, S., Wei, Y., \& Sun, J. (2014).
+\newblock Saliency optimization from robust background detection.
+\newblock {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition} (pp.\ 2814--2821), 2014.
+
+\bibitem[\protect\citename{Zitnick}{}{Doll{\'a}r}{Zitnick-Doll{\'a}r}{2014}{zitnick2014edge}]{zitnick2014edge}
+Zitnick, C.~L., \& Doll{\'a}r, P. (2014).
+\newblock Edge boxes: Locating object proposals from edges.
+\newblock {\em European Conference on Computer Vision} (pp.\ 391--405),
+  Springer, 2014.
+
+\end{thebibliography}
