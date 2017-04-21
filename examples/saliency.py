@@ -15,14 +15,18 @@ def pysaliency(im):
     minimum barrier
     """
     rbdMap = saliency.get_saliency_rbd(cv2.cvtColor(im, cv2.COLOR_BGR2RGB)).astype(np.uint8)
-    rbd = cv2.cvtColor(np.uint8(255 * binarise.binarise_saliency_map(rbdMap, method='adaptive')), cv2.COLOR_GRAY2BGR)
+    rbd = np.uint8(255 * binarise.binarise_saliency_map(rbdMap, method='adaptive'))
+    i_rbd, cnts_rbd, _ = cv2.findContours(rbd, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     ftMap = saliency.get_saliency_ft(cv2.cvtColor(im, cv2.COLOR_BGR2RGB)).astype(np.uint8)
-    ft = cv2.cvtColor(np.uint8(255 * binarise.binarise_saliency_map(ftMap, method='adaptive')), cv2.COLOR_GRAY2BGR)
+    ft = np.uint8(255 * binarise.binarise_saliency_map(ftMap, method='adaptive'))
+    i_ft, cnts_ft, _ = cv2.findContours(ft, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     mbdMap = saliency_mbd.get_saliency_mbd(cv2.cvtColor(im, cv2.COLOR_BGR2RGB)).astype(np.uint8)
-    mbd = cv2.cvtColor(np.uint8(255 * binarise.binarise_saliency_map(mbdMap, method='adaptive')), cv2.COLOR_GRAY2BGR)
-    out = np.hstack((im,  rbd, ft, mbd))
-    cv2.imshow('sal', cv2.resize(out, (1000, 300)))
+    mbd = np.uint8(255 * binarise.binarise_saliency_map(mbdMap, method='adaptive'))
+    i_mbd, cnts_mbd, _ = cv2.findContours(mbd, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    cv2.drawContours(im, cnts_ft, -1, (0, 255, 0), 2)
+    cv2.imshow('sal', im)
     cv2.waitKey(0)
+    return rbd, ft, mbd
 
 
 def archantaSaliency(im):
@@ -136,7 +140,7 @@ def fasa(im, sigmac=16, histogramSize1D=8):
 
 
 if __name__ == '__main__':
-    path = './examples/dataset/robosub16/buoy/9'
-    imgs = img.get_jpgs(path, resize=4)
+    path = './examples/dataset/robosub16/buoy/1'
+    imgs = img.get_jpgs(path, resize=2)
     for i in imgs:
         pysaliency(cc.shadegrey(i))

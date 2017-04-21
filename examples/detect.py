@@ -305,7 +305,9 @@ def computeHOG(im):
 
 
 if __name__ == '__main__':
-    path = './examples/dataset/robosub16/buoy/1'
+    path = './benchmark/datasets/torpedo/illumination_change'
     imgs = img.get_jpgs(path, resize=2)
     for i in imgs:
-        colorStructureDescriptor(i)
+        modified = cc.shadegrey(i)
+        akaze(i[..., 0], i)
+        akaze(modified[..., 0], modified)

@@ -163,9 +163,13 @@ def greyPixel(im, prc=0.0001):
     b_est = np.mean((b.flatten())[selected_indices])
     g_est = np.mean((g.flatten())[selected_indices])
     r_est = np.mean((r.flatten())[selected_indices])
-    b_corrected = np.uint8(b / (b_est * np.sqrt(3)) * 255)
-    g_corrected = np.uint8(g / (g_est * np.sqrt(3)) * 255)
-    r_corrected = np.uint8(r / (r_est * np.sqrt(3)) * 255)
+    b_corrected = b / b_est
+    g_corrected = g / g_est
+    r_corrected = r / r_est
+    sum = b_est + g_est + r_corrected
+    b_corrected = np.uint8(b_corrected / sum * 255)
+    g_corrected = np.uint8(g_corrected / sum * 255)
+    r_corrected = np.uint8(r_corrected / sum * 255)
     return cv2.merge((b_corrected, g_corrected, r_corrected))
 
 
@@ -181,7 +185,6 @@ def bgr2HSy(im):
     H = (R - 0.5*G - 0.5*B) / np.sqrt(R**2 + G**2 + B**2 - (R*G) - (R*B) - (B*G))
     H = H.clip(min=-1.0, max=1.0)
     H = np.uint8(np.arccos(H) / np.arccos(-1.0) * 255)
-    print(np.arccos(1))
     denom = B + G + R
     S = np.uint8(1 - (3*(np.min(im, axis=2)) / denom) * 255)
     Y = 0.2125 * R + 0.7154 * G + 0.0721 * R
@@ -418,9 +421,13 @@ def spatialColorConstancy(im):
     g = im[..., 1]
     r = im[..., 2]
     ei = illuminantEstimator(im)
-    b_corrected = np.uint8(b / ei[0] * 255.0)
-    g_corrected = np.uint8(g / ei[1] * 255.0)
-    r_corrected = np.uint8(r / ei[2] * 255.0)
+    b /= ei[0]
+    g /= ei[1]
+    r /= ei[2]
+    sum = b + g + r
+    b_corrected = np.uint8(b / sum * 255.0)
+    g_corrected = np.uint8(g / sum * 255.0)
+    r_corrected = np.uint8(r / sum * 255.0)
     corrected = cv2.merge((b_corrected, g_corrected, r_corrected))
     return ei, corrected
 

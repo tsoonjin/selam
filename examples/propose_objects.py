@@ -8,9 +8,30 @@ from selam import preprocess as pre
 from skimage.segmentation import slic
 from skimage.segmentation import mark_boundaries
 from skimage import img_as_float
+from lib.selectivesearch import selectivesearch as ss
+from examples import config
 
 
 """ Segmentation """
+
+
+def selectiveSearch(im, display=True):
+    i = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
+    row, col = i.shape[:-1]
+    img_lbl, regions = ss.selective_search(i, scale=500, sigma=0.9, min_size=10)
+
+    candidates = set()
+    for r in regions:
+        if r['rect'] in candidates:
+            continue
+        x, y, w, h = r['rect']
+        if w < col - 5 and h < row - 5:
+            cv2.rectangle(im, (int(x), int(y)), (int(x + w), int(y + h)), (0, 255, 0), 1)
+            candidates.add(r['rect'])
+
+    if display:
+        cv2.imshow('selective search', im)
+        cv2.waitKey(0)
 
 
 def superpixelSLIC(img, n_segments=200, sigma=4, compactness=6, max_iter=3):
@@ -37,6 +58,7 @@ def superpixelSLIC(img, n_segments=200, sigma=4, compactness=6, max_iter=3):
 
     out = mark_boundaries(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), segments)
     out = cv2.cvtColor(np.uint8(out * 255), cv2.COLOR_RGB2BGR)
+    cv2.imwrite('/home/batumon/github/selam/demo/figs/slic.png', out)
     return out, contours, segments
 
 
@@ -79,10 +101,10 @@ def superpixelSEED(im, n_superpixels=200, n_levels=8, prior=4, n_bins=5, seeds=N
 def mserSearch(img):
     """ Using different thresholds on grayscale image to detect different components """
     mser = cv2.MSER_create()
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)[..., 1]
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2HLS_FULL)[..., 2]
     regions, _ = mser.detectRegions(gray)
     hulls = [cv2.convexHull(p.reshape(-1, 1, 2)) for p in regions]
-    cv2.polylines(img, hulls, 3, (0, 255, 255))
+    cv2.polylines(img, hulls, 3, (0, 0, 255))
     cv2.imshow('img', img)
     cv2.waitKey(0)
 
@@ -98,11 +120,9 @@ def edgeBoxCustom(im, w_diff=1.5):
 
 
 def main():
-    path = './examples/dataset/robosub16/buoy/1'
+    path = './benchmark/datasets/buoy/size_change'
     imgs = img.get_jpgs(path)
-    for i in imgs:
-        chosen = cc.shadegrey(i)
-        superpixelSEED(chosen)
+    superpixelSLIC(imgs[0])
 
 
 if __name__ == '__main__':

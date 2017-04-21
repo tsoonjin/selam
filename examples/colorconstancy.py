@@ -3,6 +3,7 @@
 import cv2
 import numpy as np
 from selam.utils import img
+from selam import colorconstancy as cc
 from lib.intrinsic import intrinsic
 
 
@@ -19,7 +20,8 @@ def colorRetinex(im):
 
 
 if __name__ == '__main__':
-    path = './examples/dataset/robosub16/buoy/1'
+    path = './benchmark/datasets/bin/size_change'
     imgs = img.get_jpgs(path, resize=2)
     for i in imgs:
-        colorRetinex(i)
+        cv2.imshow('ill', np.hstack((i, cc.spatialColorConstancy(i)[1])))
+        cv2.waitKey(0)

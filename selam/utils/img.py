@@ -50,6 +50,7 @@ def write_jpgs(dirpath, jpgs):
 # Image Formatting
 
 def quantizeColor(img, K=8):
+    """ Return quantized image and centers """
     Z = img.reshape((-1, 3))
 
     # convert to np.float32
@@ -63,7 +64,7 @@ def quantizeColor(img, K=8):
     center = np.uint8(center)
     res = center[label.flatten()]
     res2 = res.reshape((img.shape))
-    return res2
+    return res2, label, center
 
 
 def cv2others(img):

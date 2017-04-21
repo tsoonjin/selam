@@ -10,6 +10,7 @@ from examples import config
 from selam.utils import img
 from selam import colorconstancy as cc
 from selam import enhancement as en
+from selam import preprocess as pre
 from lib.DCP import DarkChannelRecover as dcp
 
 
@@ -152,9 +153,9 @@ def enhanceFusion(im):
     input1 = cc.shadegrey(im)
     input2 = en.claheColor(cv2.cvtColor(input1, cv2.COLOR_BGR2Lab))
     input2 = cv2.cvtColor(input2, cv2.COLOR_Lab2BGR)
-    input1 = im
 
     maps1, out1 = generateMaps(input1)
+    cv2.imwrite('/home/batumon/Downloads/map1.png', out1)
     maps2, out2 = generateMaps(input2)
     sumCMap = maps1[0] + maps2[0] + 0.0001
     sumLMap = maps1[1] + maps2[1] + 0.0001
@@ -369,7 +370,6 @@ def anisodiff(img, niter=1, kappa=50, gamma=0.1, step=(1., 1.),
 
 
 if __name__ == '__main__':
-    path = './examples/dataset/robosub16/torpedo/2'
-    imgs = img.get_jpgs(path, resize=2)
-    for i in imgs:
-        darkChannelPrior(i)
+    path = './benchmark/datasets/buoy/size_change'
+    imgs = img.get_jpgs(path)
+    enhanceFusion(imgs[0])

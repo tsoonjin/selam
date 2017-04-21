@@ -133,33 +133,32 @@ def dark_channel(img):
     # return cv2.cvtColor(np.uint8(tMap*255),cv2.COLOR_GRAY2BGR)
 
 
-def redchannelprior(img):
-    img = cv2.resize(img, (img.shape[1] / 2, img.shape[0] / 2))
-    b, g, r = cv2.split(img)
+def redchannelprior(im):
+    b, g, r = cv2.split(im)
     waterEst = cv2.GaussianBlur(r, (5, 5), 0)
     minval, maxval, minloc, maxloc = cv2.minMaxLoc(waterEst)
-    A = img[maxloc[1], maxloc[0]]
+    A = im[maxloc[1], maxloc[0]]
     A = [i / 255.0 for i in A]
     b = np.float32(b) / 255.0
     g = np.float32(g) / 255.0
     r = np.float32(r) / 255.0
-    t_bound = np.full(img.shape[:2], 1)
+    t_bound = np.full(im.shape[:2], 1)
     r_min = img.blockiter(1 - r, np.min) / float(1 - A[2])
     g_min = img.blockiter(g, np.min) / float(A[1])
     b_min = img.blockiter(b, np.min) / float(A[0])
     tMap = t_bound - np.min([r_min, b_min, g_min], axis=0)
     tMap = cv2.GaussianBlur(tMap, (11, 11), 0)
     # return VUtil.toBGR(np.uint8(tMap*255), 'gray')
-    return redchannel_util(img, A, tMap)
+    return redchannel_util(im, A, tMap)
 
 
-def redchannel_util(img, A, t):
-    bgr = cv2.split(img)
+def redchannel_util(im, A, t):
+    bgr = cv2.split(im)
     bgr = [np.float32(i / 255.0) for i in bgr]
-    t_bound = np.full(img.shape[:2], 0.1)
+    t_bound = np.full(im.shape[:2], 0.1)
     additive = [(1 - i) * i for i in A]
     J = [(i - A[x]) / np.maximum(t, t_bound) + additive[x] for x, i in enumerate(bgr)]
-    J = [np.uint8(z_norm(j) * 255) for j in J]
+    J = [np.uint8(img.normUnity(j) * 255) for j in J]
     print(np.max(J[0]))
     print(np.max(J[1]))
     print(np.max(J[2]))
