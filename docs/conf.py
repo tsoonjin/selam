@@ -258,8 +258,8 @@ texinfo_documents = [
      u'Selam Documentation',
      u'Ray Tan',
      'selam',
-     'One line description of project.',
-     'Miscellaneous'),
+     'A computer vision framework for underwater image processing.',
+     'Computer Vision'),
 ]
 
 # Documents to append as an appendix to all manuals.
