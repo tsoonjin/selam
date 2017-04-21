@@ -8,7 +8,11 @@ Contents:
 
    readme
    installation
-   usage
+   preprocessing
+   objectproposal
+   feature
+   automl
+   objecttracking
 
 Indices and tables
 ==================
