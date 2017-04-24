@@ -1,8 +1,8 @@
 \beamer@endinputifotherversion {3.36pt}
 \beamer@sectionintoc {1}{Background}{2}{0}{1}
 \beamer@sectionintoc {2}{Motivation}{8}{0}{2}
-\beamer@sectionintoc {3}{Preprocessing}{14}{0}{3}
-\beamer@sectionintoc {4}{Object Proposals}{23}{0}{4}
-\beamer@sectionintoc {5}{Feature Design}{30}{0}{5}
-\beamer@sectionintoc {6}{Object Tracking}{41}{0}{6}
-\beamer@sectionintoc {7}{Experimental results}{45}{0}{7}
+\beamer@sectionintoc {3}{Preprocessing}{17}{0}{3}
+\beamer@sectionintoc {4}{Object Proposals}{31}{0}{4}
+\beamer@sectionintoc {5}{Feature Design}{38}{0}{5}
+\beamer@sectionintoc {6}{Object Tracking}{47}{0}{6}
+\beamer@sectionintoc {7}{Experimental results}{52}{0}{7}

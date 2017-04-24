@@ -1,4 +1,4 @@
-\documentclass[14pt]{beamer}
+\documentclass[13pt]{beamer}
 \usepackage{fontspec}
 \usepackage{mathtools}
 \usetheme[progressbar=head]{metropolis}          
@@ -66,14 +66,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[standout]{}
-  Design a robust underwater vision framework for AUV to complete visual tasks
+  Design a robust underwater vision framework for AUV to complete the visual tasks
   in Robosub
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Motivation}
 
-\begin{frame}{Problem 1: Underwater vision challenges}
+\begin{frame}{1: Robust underwater object recognition}
 
   \begin{figure}[ht]
       \centering
@@ -84,7 +84,7 @@
 
 \end{frame}
 
-\begin{frame}{Problem 1: Underwater vision challenges}
+\begin{frame}{1: Robust underwater object recognition}
 
   \begin{figure}[ht]
       \centering
@@ -95,7 +95,7 @@
 
 \end{frame}
 
-\begin{frame}{Problem 1: Underwater vision challenges}
+\begin{frame}{1: Robust underwater object recognition}
 
     \begin{figure}
         \centering
@@ -103,41 +103,119 @@
         \includegraphics[width=0.4\textwidth, height=0.3\textheight]{figs/problem1_2.jpg}
     \end{figure}
 
-  How do we \textbf{consistently} identify an object underwater ?
+  How do we \textbf{consistently} identify the object of interest under
+  different conditions ?
 
 \end{frame}
 
-\begin{frame}{Problem 2: Time constraint}
+\begin{frame}{1: Robust underwater object recognition}
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.9\textwidth, height=0.6\textwidth]{figs/data1.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{1: Robust underwater object recognition}
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.9\textwidth, height=0.6\textwidth]{figs/data2.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{2: Do more with less}
+
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=0.4\textwidth, height=0.3\textheight]{figs/problem2_1.png}\hspace{2em}
+        \includegraphics[width=0.4\textwidth, height=0.3\textheight]{figs/sonar.jpg}
+    \end{figure}
+
+  \begin{enumerate}
+    \item Limited amount of training data because data collection is expensive
+    \item Limited amount of time to complete all the designated tasks
+    \item \textbf{VISUAL} only approach without other sensors such as a sonar.
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}{3: Taking human out of the loop}
 
   \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.5\textwidth, height=0.3\textwidth]{figs/problem2_1.png}
+      \includegraphics[width=0.6\textwidth, height=0.3\textwidth]{figs/tuning.png}
   \end{figure}
 
   \begin{enumerate}
-    \item Low detection latency
-    \item Limited amount of data
+    \item Spend less time on tuning the algorithms for different conditions
+    \item A vision framework that is able to adapt to different situations
   \end{enumerate}
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[standout]{}
+\begin{frame}[standout]{Contributions}
   \begin{enumerate}
-    \item Preprocessing
-    \item Object Proposals
-    \item Feature Design
+    \item Optimal preprocessing pipeline for underwater object tracking
+    \item Integrating object proposals for faster tracking
+    \item Novel color spaces for feature extraction
   \end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Preprocessing}
 
-\begin{frame}{Color Correction: Methodology}
+\begin{frame}{Color Correction}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.4\textwidth, height=0.3\textheight]{figs/problem1_1.png}\hspace{2em}
+        \includegraphics[width=0.4\textwidth, height=0.3\textheight]{figs/problem1_2.jpg}
+    \end{figure}
+
+    Ability to correct colour of an object under the influence of different
+    light source.
+
+\end{frame}
+
+\begin{frame}{Color Correction: Estimate the true illuminant}
+
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.6\textwidth, height=0.3\textwidth]{figs/lambertian.png}
+  \end{figure}
+
+  \begin{gather*}
+    C(\lambda) = E(\lambda)S(\lambda) \\         \text{where~$C(\lambda)$:
+      color signal, $E(\lambda)$: illuminance, $S(\lambda)$: reflectance}
+  \end{gather*}
+
   \begin{enumerate}
-    \item Estimating the true illuminants based on certain assumptions i.e
-      (Grey-World, White Patch)
-    \item Image correction using von Kries transformation
+    \item Shades of Gray
+    \item Estimation using Grey Pixel
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Color Correction: Using Grey Pixel}
+
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.6\textwidth, height=0.2\textwidth]{figs/greypixel.png}
+  \end{figure}
+
+  \begin{enumerate}
+    \item With the assumption that most natural images have grey pixels under a
+      white light source, identify these grey pixels
+    \item Convert the image to logarithm space to remove the effect of illuminance
+      \[
+        I_{log}(x,y) = \log(E(x,y)) + \log(R(x,y))
+      \]
+    \item Find difference between the local standard deviation of 3 channels. A
+      grey pixel should have approximately \textit{zero} difference.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Color Correction: Diagonal transformation}
+      The corrected image is obtained by multiplying a diagonal matrix with
+      the input image
       \[
       \begin{pmatrix}
         R_c \\
@@ -156,15 +234,17 @@
         B_u \\
       \end{pmatrix}
       \]
-  \end{enumerate}
 \end{frame}
 
 \begin{frame}{Color Correction: Results}
 
   \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.9\textwidth, height=0.6\textwidth]{figs/color_constancy.png}
+      \includegraphics[width=0.6\textwidth, height=0.2\textwidth]{figs/colorcorrection.png}
+      \caption{Results: a) Input Image, b) Shade of Gray, c) Grey Pixel}
   \end{figure}
+
+  Combination of different color constancy algorithms produce the best result.
 
 \end{frame}
 
@@ -220,7 +300,8 @@
   \end{figure}
 
   \textbf{Homomorphic filter} removes multiplicative noise by applying high-pass
-  filter on the image.
+  filter on the image. This is the most effective way of removing the flickering
+  effect from the input image.
 
 \end{frame}
 
@@ -228,12 +309,45 @@
 
   \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.8\textwidth, height=0.3\textwidth]{figs/illumination_compensation.png}
+      \includegraphics[width=0.8\textwidth, height=0.3\textwidth]{figs/illumcompensation.png}
   \end{figure}
 
+  How do we account for change in illumination during the mission ?
+
   \begin{enumerate}
-    \item Gamma-based correction
-    \item Log-based correction
+    \item Changing the camera parameters before the start of every run
+    \item Use another sensor that is invariant to change in illumination i.e
+      acoustic based
+  \end{enumerate}
+  
+\end{frame}
+
+\begin{frame}{Illumination Compensation}
+
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.6\textwidth, height=0.3\textwidth]{figs/logcurve.png}
+  \end{figure}
+
+  \[
+    I'(x,y) = \frac{\log(I(x,y)) \cdot (\beta -1) + 1}{\log(\beta)}
+  \]
+  A logarithm curve is used to correct the camera's response based on the
+  parameter $\beta$.
+\end{frame}
+
+\begin{frame}{How to determine $\beta$ ?}
+  \[
+    \beta' = (\beta_{max}- \beta_{min}) \cdot (N_{darkpixels} / N_{totalpixels})
+    + \beta_{min}
+  \]
+  \begin{enumerate}
+    \item Choose the range for value of $\beta$. This will determine the degree
+      of enhancement allowed
+    \item Choose a threshold for dark pixels. Through empirical evaluations, a
+      value of \textit{0.2} is chosen
+    \item Illumination compensation is only triggered when the mean intensity of
+      image falls below a certain threshold.
   \end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -247,20 +361,28 @@
       \includegraphics[width=0.7\textwidth, height=0.4\textwidth]{figs/sliding_window.png}
   \end{figure}
 
-  High-detection latency if multiscale-detection is required and detection dependent solely
-  on object classifier.
+  Treat object recognition as \textit{classification} problem by classifying
+  each window with a trained classifier. There are several \textit{drawbacks}
+  with this approach:
+
+  \begin{enumerate}
+    \item Performance dependent on object classifier
+    \item Computationally expensive. approximately $10^6$ evaluations per image
+  \end{enumerate}
 \end{frame}
 
-\begin{frame}{New approach: Object proposals}
+\begin{frame}{Object proposal}
 
   \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.5\textwidth, height=0.3\textwidth]{figs/slic.png}
-      \caption{Superpixel-based segmentation}
+      \includegraphics[width=0.8\textwidth, height=0.4\textwidth]{figs/proposals_results.png}
   \end{figure}
 
-  Generates candidate window based on segmentation of the image. Group segments
-  with similar properties such as color cue.
+  \begin{enumerate}
+    \item Given an input image, generates a set of windows that has high
+      \textit{likelihood} of containing an object.
+    \item Definition of \textbf{\textit{objectness}} depends on what algorithms are used
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}{Role of object proposals}
@@ -271,7 +393,7 @@
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{Selective Search}
+\begin{frame}{1. Superpixel-based search}
 
   \begin{figure}[ht]
       \centering
@@ -279,49 +401,36 @@
   \end{figure}
 
   \begin{enumerate}
-    \item Perform graph-cut based segmentations
+    \item Superpixel segmentation by grouping pixels with similar colour
     \item Hierarchical grouping of similar segments
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{MSER (Maximally Stable Extremal Regions)}
+\begin{frame}{2. MSER (Maximally Stable Extremal Regions)}
 
   \begin{figure}[ht]
       \centering
       \includegraphics[width=0.8\textwidth, height=0.5\textwidth]{figs/mserproposal.png}
   \end{figure}
 
-  {\small Detects regions that remain stable over different thresholds applied
-    on the input image.}
+  Detects regions that remain stable over different thresholds applied
+  on the input image. Multiple colour spaces are used in order to generate more
+  segments.
 \end{frame}
 
-\begin{frame}{Saliency}
+\begin{frame}{3. Saliency}
 
   \begin{figure}[ht]
       \centering
       \includegraphics[width=0.7\textwidth, height=0.4\textwidth]{figs/saliency.png}
   \end{figure}
 
-  {\small This approach labels regions that pop-out in the human visual system.
-    Surprisingly powerful for detecting objects in the competition}
+  This approach labels regions that pop-out in the human visual system. Objects
+  that are partially occluded can also be detected using this method.
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Feature Design}
-
-\begin{frame}{Datasets: Part 1}
-  \begin{figure}[ht]
-      \centering
-      \includegraphics[width=0.9\textwidth, height=0.6\textwidth]{figs/data1.png}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{Datasets: Part 2}
-  \begin{figure}[ht]
-      \centering
-      \includegraphics[width=0.9\textwidth, height=0.6\textwidth]{figs/data2.png}
-  \end{figure}
-\end{frame}
 
 \begin{frame}{Requirements}
   To achieve a consistent object tracking under different sets of challenges,
@@ -425,8 +534,8 @@
   \end{figure}
 
   \begin{enumerate}
-    {\small \item Detection is performed on every single incoming frame}
-    {\small \item Tracker is reinitialized after losing track for at least 10 frames}
+    \item Detection is performed on every single incoming frame
+    \item Tracker is reinitialized after losing track for at least 10 frames
   \end{enumerate}
 \end{frame}
 
@@ -440,10 +549,28 @@
     score} is used to calculate the final score.
 \end{frame}
 
-\begin{frame}{Prior knowledge}
-  Non-visual sensor values such as absolute position of the vision obstacle with respect to
-  an origin can be used to generate confidence of detection of the object in
-  that region.
+\begin{frame}{Prior knowledge: Using Map}
+
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.8\textwidth, height=0.4\textwidth]{figs/map.jpg}
+  \end{figure}
+
+  Based on the current location of AUV, a confidence map can be generated based
+  on the given layout. This extra information can help to eliminate some false
+  positives.
+\end{frame}
+
+\begin{frame}{Prior knowledge: Geometric constraint}
+
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.6\textwidth, height=0.4\textwidth]{figs/geometric.png}
+  \end{figure}
+
+  Each object candidate will also be ranked according to \textit{geometric
+    properties} given by the event organizer to achieve higher accuracy of detection.
+
 \end{frame}
 
 \section{Experimental results}
@@ -455,7 +582,7 @@
 \centering
 \begin{tabular}{|l|l|l|l|}
 \hline
-Trackers                           & Accuracy & Robustness & Speed \\ \hline
+Trackers                           & Accuracy & Robustness & Speed (FPS) \\ \hline
 Baseline                           & 0.21     & 7.23       & 200   \\ \hline
 Baseline + preprocessing           & 0.34     & 6.11       & 50    \\ \hline
 Baseline + preprocessing +  automl & 0.53     & 2.53       & 50    \\ \hline
