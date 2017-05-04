@@ -20,8 +20,11 @@ def colorRetinex(im):
 
 
 if __name__ == '__main__':
-    path = './benchmark/datasets/bin/size_change'
+    path = './benchmark/datasets/buoy/size_change'
     imgs = img.get_jpgs(path, resize=2)
     for i in imgs:
-        cv2.imshow('ill', np.hstack((i, cc.spatialColorConstancy(i)[1])))
+        greyPixel = cc.greyPixel(i)
+        sog = cc.shadegrey(i)
+        res = np.hstack((i, sog, greyPixel))
+        cv2.imshow('mod', res)
         cv2.waitKey(0)

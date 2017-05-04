@@ -98,15 +98,14 @@ def superpixelSEED(im, n_superpixels=200, n_levels=8, prior=4, n_bins=5, seeds=N
     cv2.waitKey(0)
 
 
-def mserSearch(img):
+def mserSearch(im, canvas):
     """ Using different thresholds on grayscale image to detect different components """
     mser = cv2.MSER_create()
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2HLS_FULL)[..., 2]
+    gray = im
     regions, _ = mser.detectRegions(gray)
     hulls = [cv2.convexHull(p.reshape(-1, 1, 2)) for p in regions]
-    cv2.polylines(img, hulls, 3, (0, 0, 255))
-    cv2.imshow('img', img)
-    cv2.waitKey(0)
+    cv2.polylines(canvas, hulls, 3, (0, 0, 255))
+    return canvas
 
 
 def edgeBoxCustom(im, w_diff=1.5):
@@ -121,8 +120,18 @@ def edgeBoxCustom(im, w_diff=1.5):
 
 def main():
     path = './benchmark/datasets/buoy/size_change'
-    imgs = img.get_jpgs(path)
-    superpixelSLIC(imgs[0])
+    imgs = img.get_jpgs(path, resize=2)
+    for i in imgs:
+        i = cc.shadegrey(i)
+        Lab = cv2.cvtColor(i, cv2.COLOR_BGR2Lab)
+        YUV = cv2.cvtColor(i, cv2.COLOR_BGR2YUV)
+        r = mserSearch(i[..., 2], cv2.cvtColor(i[..., 2], cv2.COLOR_GRAY2BGR))
+        a = mserSearch(Lab[..., 1], cv2.cvtColor(Lab[..., 1], cv2.COLOR_GRAY2BGR))
+        u = mserSearch(YUV[..., 1], cv2.cvtColor(YUV[..., 1], cv2.COLOR_GRAY2BGR))
+        res = np.hstack((i, r, a, u))
+        cv2.imshow('final', res)
+        cv2.waitKey(0)
+
 
 
 if __name__ == '__main__':
