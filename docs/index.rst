@@ -8,6 +8,7 @@ Contents:
 
    readme
    installation
+   training_validation
    preprocessing
    objectproposal
    feature
