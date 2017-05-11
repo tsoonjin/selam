@@ -62,8 +62,5 @@ target/
 .python-version
 
 # resources
-benchmark
-examples/dataset
-examples/output
 media
 *.pdf
