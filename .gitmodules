@@ -1,0 +1,3 @@
+[submodule "3rdparty/icf-python"]
+	path = 3rdparty/icf-python
+	url = git@github.com:cngkaygusuz/icf-recognizer.git
