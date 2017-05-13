@@ -309,5 +309,3 @@ if __name__ == '__main__':
     imgs = img.get_jpgs(path, resize=2)
     for i in imgs:
         modified = cc.shadegrey(i)
-        akaze(i[..., 0], i)
-        akaze(modified[..., 0], modified)
