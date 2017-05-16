@@ -1,3 +1,21 @@
 [submodule "3rdparty/icf-python"]
 	path = 3rdparty/icf-python
 	url = git@github.com:cngkaygusuz/icf-recognizer.git
+[submodule "3rdparty/pdollar_toolbox"]
+	path = 3rdparty/pdollar_toolbox
+	url = git@github.com:pdollar/toolbox.git
+[submodule "3rdparty/samf_matlab"]
+	path = 3rdparty/samf_matlab
+	url = https://github.com/ihpdep/samf
+[submodule "3rdparty/edgebox_py"]
+	path = 3rdparty/edgebox_py
+	url = git@github.com:dculibrk/edge_boxes_with_python.git
+[submodule "3rdparty/votr"]
+	path = 3rdparty/votr
+	url = git@github.com:gnebehay/VOTR.git
+[submodule "3rdparty/staple"]
+	path = 3rdparty/staple
+	url = git@github.com:bertinetto/staple.git
+[submodule "3rdparty/DAT"]
+	path = 3rdparty/DAT
+	url = git@github.com:foolwood/DAT.git
