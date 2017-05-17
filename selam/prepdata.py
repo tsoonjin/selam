@@ -5,6 +5,7 @@ import random
 import cv2
 import numpy as np
 
+from sklearn.cross_validation import KFold
 from keras.preprocessing.image import ImageDataGenerator
 
 
@@ -109,6 +110,18 @@ def augment_data(imgs, augment_dir, prefix, n=20):
                                   save_format='jpeg')):
             if x > n:
                 break
+
+
+def kfold(x, y, eval_size=0.10):
+    """ Split dataset into training set and validation set
+        @param eval_size: percentage of data used for evaluation
+        @return X_train, Y_train, X_valid, Y_valid
+    """
+    kf = KFold(len(y), round(1. / eval_size))
+    train_indices, valid_indices = next(iter(kf))
+    X_train, Y_train = x[train_indices], y[train_indices]
+    X_valid, Y_valid = x[valid_indices], y[valid_indices]
+    return X_train, Y_train, X_valid, Y_valid
 
 
 if __name__ == '__main__':
