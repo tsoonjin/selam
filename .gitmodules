@@ -19,3 +19,6 @@
 [submodule "3rdparty/DAT"]
 	path = 3rdparty/DAT
 	url = git@github.com:foolwood/DAT.git
+[submodule "3rdparty/lyssandra"]
+	path = 3rdparty/lyssandra
+	url = git@github.com:ektormak/Lyssandra.git

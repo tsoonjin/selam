@@ -32,7 +32,6 @@ def get_jpgs(dirpath, skip=0, resize=None):
     frames = [cv2.imread('{}/{}'.format(dirpath, filename))
               for filename in filenames]
     out = frames[0::skip] if skip > 0 else frames
-    print('Read {} images from {}'.format(len(out), dirpath))
     if resize:
         new_size = (out[0].shape[1] / resize, out[0].shape[0] / resize)
         return map(lambda x: cv2.resize(x, new_size), out)
